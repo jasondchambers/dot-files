@@ -43,6 +43,14 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+-- Set indentation settings for HTML files
+vim.cmd([[
+  autocmd FileType html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+]])
+vim.cmd([[
+  autocmd FileType css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+]])
+
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
