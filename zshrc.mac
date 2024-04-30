@@ -3,6 +3,7 @@
 export NETORG_HOME=/Users/jasonchambers/hex
 export CNETORG_CONFIG_HOME=/Users/jasonchambers/home_network
 export PATH=/Users/jasonchambers/Library/Python/3.9/bin:$NETORG_HOME:$PATH
+export PATH=$PATH:/Users/jasonchambers/repos/deploytool
 
 alias meerkat='ssh jason@192.168.128.113'
 alias thelio='ssh jason@10.27.27.9'
@@ -35,3 +36,9 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 eval "$(starship init zsh)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc'; fi
