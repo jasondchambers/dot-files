@@ -407,6 +407,8 @@ vim.api.nvim_set_keymap('n', '<F1>', ':Telescope find_files<CR>', {noremap = tru
 vim.api.nvim_set_keymap('n', '<F2>', ':Telescope buffers<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F3>', ':Neotree filesystem reveal left<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F4>', ':Neotree close<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<F5>", ":Gitsigns preview_hunk<CR>", {})
+vim.api.nvim_set_keymap("n", "<F6>", ":Telescope live_grep<CR>", {noremap = true, silent = true})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
