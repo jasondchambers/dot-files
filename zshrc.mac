@@ -2,6 +2,8 @@ export PATH=$PATH:/Users/jasonchambers/repos/deploytool
 
 alias vim='nvim'
 alias vi='nvim'
+alias ls='ls -G'
+
 
 # Setup command line editing to vim
 bindkey -v
@@ -39,3 +41,7 @@ if [ -f '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/j
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#bindkey -r "^L"
