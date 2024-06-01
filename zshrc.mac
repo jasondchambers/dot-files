@@ -3,6 +3,9 @@ export PATH=$PATH:/Users/jasonchambers/repos/deploytool
 alias vim='nvim'
 alias vi='nvim'
 alias ls='ls -G'
+alias imacssh="ssh jasonchambers@jasons-imac.stratford"
+alias theliossh="ssh jason@thelio.stratford"
+alias meerkatssh="ssh jason@meerkat.stratford"
 
 
 # Setup command line editing to vim
@@ -53,3 +56,7 @@ if [ -f '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc' ]; then . '/U
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 #bindkey -r "^L"
+
+# Created by `pipx` on 2024-05-30 20:46:55
+export PATH="$PATH:/Users/jasonchambers/.local/bin"
+if [ -f "/Users/jasonchambers/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/jasonchambers/.config/fabric/fabric-bootstrap.inc"; fi
