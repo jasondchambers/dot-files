@@ -1,0 +1,5 @@
+[core]
+	editor = nvim
+[user]
+	name = Jason Chambers
+	email = jason.d.chambers@gmail.com
