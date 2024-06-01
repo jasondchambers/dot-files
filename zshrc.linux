@@ -3,6 +3,9 @@ export PATH=~/repos/deploytool:$PATH
 
 alias vim='nvim'
 alias vi='nvim'
+alias imacssh="ssh jasonchambers@jasons-imac.stratford"
+alias theliossh="ssh jason@thelio.stratford"
+alias meerkatssh="ssh jason@meerkat.stratford"
 
 # Setup command line editing to vim
 bindkey -v
