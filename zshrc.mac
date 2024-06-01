@@ -4,7 +4,7 @@ alias vim='nvim'
 alias vi='nvim'
 alias ls='ls -G'
 alias imacssh="ssh jasonchambers@jasons-imac.stratford"
-alias theliossh="ssh jason@thelio.stratford"
+alias theliossh='wakeonlan 04:7c:16:56:8c:f2; ssh jason@thelio.stratford'
 alias meerkatssh="ssh jason@meerkat.stratford"
 
 
