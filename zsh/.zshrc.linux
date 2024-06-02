@@ -31,6 +31,10 @@ source <(fzf --zsh)
 # Setup fzf for Git
 source ~/repos/fzf-git.sh/fzf-git.sh
 
+# See installing Rust and Cargo https://doc.rust-lang.org/cargo/getting-started/installation.html
+# I need Cargo so I can install a recent version of Alacritty (>= 0.13)
+. "$HOME/.cargo/env"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/jason/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
