@@ -1,0 +1,63 @@
+export PATH=/opt/nvim-linux64/bin:$PATH
+export PATH=~/repos/deploytool:$PATH
+
+alias vim='nvim'
+alias vi='nvim'
+alias imacssh="ssh jasonchambers@jasons-imac.stratford"
+alias theliossh="ssh jason@thelio.stratford"
+alias meerkatssh="ssh jason@meerkat.stratford"
+alias ls='ls --color'
+
+# Setup command line editing to vim
+bindkey -v
+bindkey ^R history-incremental-search-backward
+bindkey ^S history-incremental-search-forward
+# Save command history to a file
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt appendhistory
+
+BAT_THEME="Catppuccin Mocha"
+
+# I use Homebrew for a couple of things on Linux because they seem to be more
+# up to date e.g. fzf - make sure we therefore use the fzf installed via Homebrew
+# first
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Set up fzf key bindings for zsh
+source <(fzf --zsh)
+# Setup fzf for Git
+source ~/repos/fzf-git.sh/fzf-git.sh
+
+# See installing Rust and Cargo https://doc.rust-lang.org/cargo/getting-started/installation.html
+# I need Cargo so I can install a recent version of Alacritty (>= 0.13)
+. "$HOME/.cargo/env"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/jason/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/jason/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/jason/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/jason/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+eval "$(starship init zsh)"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
