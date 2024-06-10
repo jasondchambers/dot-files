@@ -20,4 +20,11 @@ startup_mode = "Fullscreen"
 
 [font]
 normal.family = "Hack Nerd Font"
-size = 14 
+size = 16 
+
+# For some reason, C-6 in neovim when using tmux was not switching
+# to the previous buffer. This fixes that.
+[[keyboard.bindings]]
+key = "Key6"
+mods = "Control"
+chars = "\u001E"
