@@ -1,3 +1,5 @@
+# Linux specific stuff
+alias ls='ls --color'
 # For stuff installed via pipx (e.g. ansible)
 export PATH=$HOME/.local/bin:$PATH
 export LC_ALL="C.UTF-8"
