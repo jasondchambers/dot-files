@@ -1,4 +1,9 @@
 # dot-files
 
-Clone this into $HOME, then simply use GNU stow from within $HOME/dot-files to setup the environment in the parent directory for each package (zsh, git, nvim, tmux)
+1. Ensure GNU Stow is installed
+2. Clone this repo into $HOME
+3. Run this command
 
+```sh
+./install.sh
+```
