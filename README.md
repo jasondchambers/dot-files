@@ -7,3 +7,5 @@
 ```sh
 ./install.sh
 ```
+
+Note the install.sh will automatically get run during provisioning of a Coder workspace so it doesn't need to be run manually.
