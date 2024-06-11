@@ -1,24 +1,3 @@
-# Load OS specific settings
-def load_os_specific_config() {
-   # What OS are we running?
-   if [[ $(uname) == "Darwin" ]]; then
-      echo "Mac detected: loading .zshrc.mac"
-      source ~/.zshrc.mac
-   else
-      echo "Linux detected: loading .zshrc.linux"
-      source ~/.zshrc.linux
-   fi
-}
-
-# Load host specific settings if they exist
-def load_host_specific_config() {
-   FILE=~/.zshrc.$(hostname) 
-   if [[ -f $FILE ]]; then
-       echo "Host specific config found: Loading $FILE"
-       source $FILE
-   fi
-}
-
 # Generic settings regardless of Mac or Linux
 def generic_config() {
 
@@ -43,9 +22,30 @@ def generic_config() {
    BAT_THEME="Catppuccin Mocha"
 }
 
+# Load OS specific settings
+def load_os_specific_config() {
+   # What OS are we running?
+   if [[ $(uname) == "Darwin" ]]; then
+      echo "Mac detected: loading .zshrc.mac"
+      source ~/.zshrc.mac
+   else
+      echo "Linux detected: loading .zshrc.linux"
+      source ~/.zshrc.linux
+   fi
+}
+
+# Load host specific settings if they exist
+def load_host_specific_config() {
+   FILE=~/.zshrc.$(hostname) 
+   if [[ -f $FILE ]]; then
+       echo "Host specific config found: Loading $FILE"
+       source $FILE
+   fi
+}
+
+generic_config
 load_os_specific_config
 load_host_specific_config
-generic_config
 
 ## Everything after here is added during provisioning of a new
 ## workspace
