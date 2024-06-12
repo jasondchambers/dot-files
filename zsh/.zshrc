@@ -19,7 +19,7 @@ def generic_config() {
    alias vi='nvim'
 
    # Make bat pretty and consistent with the shell colors
-   BAT_THEME="Catppuccin Mocha"
+   export BAT_THEME="Catppuccin Mocha"
 }
 
 # Load OS specific settings
