@@ -44,5 +44,10 @@ export NVM_DIR="$HOME/.nvm"
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+function cursor { 
+    ~/bin/cursor-0.44.11-build-250103fqxdt5u9z-x86_64.AppImage 
+}
+
+
 
 
