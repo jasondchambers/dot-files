@@ -6,6 +6,8 @@
 # - Catppuccin theme for bat https://github.com/catppuccin/bat
 # - zsh zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
 # - Neovim 
+# - python-pipx (needed for uv)
+# - nvm (needed to install node, which is needed by Gemini)
 
 # Setups up a very nice shell prompt from https://starship.rs/
 def configure_starship() { 
@@ -47,3 +49,7 @@ configure_zsh_autosuggestions
 configure_aliases
 # Created by `pipx` on 2025-07-31 21:09:32
 export PATH="$PATH:/home/jasonchambers/.local/bin"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
