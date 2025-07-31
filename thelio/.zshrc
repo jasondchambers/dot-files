@@ -45,3 +45,5 @@ configure_command_line_editing_to_vim
 configure_bat_theme
 configure_zsh_autosuggestions
 configure_aliases
+# Created by `pipx` on 2025-07-31 21:09:32
+export PATH="$PATH:/home/jasonchambers/.local/bin"
