@@ -1,3 +1,12 @@
+#
+# Pre-requisities
+# - zsh https://www.zsh.org/
+# - https://starship.rs/
+# - fzf https://github.com/junegunn/fzf
+# - Catppuccin theme for bat https://github.com/catppuccin/bat
+# - zsh zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+# - Neovim 
+
 # Setups up a very nice shell prompt from https://starship.rs/
 def configure_starship() { 
    eval "$(starship init zsh)"
