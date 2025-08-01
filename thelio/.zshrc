@@ -1,6 +1,6 @@
 #
 # Pre-requisities
-# - zsh https://www.zsh.org/
+# - zsh https://www.zsh.org/ (Omarchy default is bash - but use zsh instead)
 # - https://starship.rs/
 # - fzf https://github.com/junegunn/fzf
 # - Catppuccin theme for bat https://github.com/catppuccin/bat
