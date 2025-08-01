@@ -7,8 +7,15 @@
 # - zsh zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
 # - Neovim 
 # - python-pipx (needed for uv)
-# - nvm (needed to install node, which is needed by Gemini)
 
+def configure_history() {
+   # Save command history to a file
+   HISTFILE=~/.zsh_history
+   HISTSIZE=10000
+   SAVEHIST=10000
+   setopt SHARE_HISTORY
+   setopt appendhistory
+}
 # Setups up a very nice shell prompt from https://starship.rs/
 def configure_starship() { 
    eval "$(starship init zsh)"
@@ -41,6 +48,7 @@ def configure_aliases() {
    alias vi='nvim' # Too many years of typing vi and vim
 }
 
+configure_history
 configure_starship
 configure_fzf
 configure_command_line_editing_to_vim
