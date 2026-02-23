@@ -16,6 +16,11 @@ return {
       require("tokyonight").setup({
         style = "night",
         transparent = true,
+        on_highlights = function(highlights)
+          highlights.NvimTreeNormal = { bg = "NONE" }
+          highlights.NvimTreeNormalNC = { bg = "NONE" }
+          highlights.NvimTreeEndOfBuffer = { bg = "NONE" }
+        end,
         on_colors = function(colors)
           colors.bg = bg
           colors.bg_dark = bg_dark
