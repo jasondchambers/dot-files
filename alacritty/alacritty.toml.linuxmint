@@ -1,25 +1,18 @@
 general.import = [
-  # uncomment the flavour you want below:
-  #"~/.config/alacritty/catppuccin-latte.toml"
-  # "~/.config/alacritty/catppuccin-frappe.toml"
-  # "~/.config/alacritty/catppuccin-macchiato.toml"
-  #"~/.config/alacritty/catppuccin-mocha.toml"
-  "~/.config/alacritty/alacritty.theme.ristretto.toml"
+  "~/.config/alacritty/coolnight.toml"
 ]
 
 [env]
 TERM = "xterm-256color"
 
 [font]
-normal = { family = "Hack Nerd Font" }
-bold = { family = "Hack Nerd Font" }
-italic = { family = "Hack Nerd Font" }
-size = 13
+normal = { family = "MesloLGS Nerd Font Mono" }
+size = 12
 
 [window]
 padding.x = 14
 padding.y = 14
-#opacity = 0.8
+opacity = 0.7
 blur = true
 decorations = "Buttonless"
 dimensions = { columns = 120, lines = 40 }
