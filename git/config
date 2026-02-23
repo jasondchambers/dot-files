@@ -1,0 +1,14 @@
+[core]
+	editor = nvim
+	pager = delta
+[user]
+	name = Jason Chambers
+	email = jason.d.chambers@gmail.com
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+  dark = true
+  side-by-side = false
+[merge]
+	conflictStyle = zdiff3

@@ -1,0 +1,145 @@
+
+# Pre-requisities
+# - See README.md
+
+def configure_brew() { 
+  if [ -f /opt/homebrew/bin/brew ]; then 
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else 
+    eval "$(/usr/bin/env brew shellenv)"
+  fi
+  export PATH="$(brew --prefix openssh)/bin:$PATH"
+}
+
+def configure_history() {
+   # Save command history to a file
+   HISTFILE=~/.zsh_history
+   HISTSIZE=10000
+   SAVEHIST=10000
+   setopt SHARE_HISTORY
+   setopt appendhistory
+}
+# Setups up a very nice shell prompt from https://starship.rs/
+def configure_starship() { 
+   eval "$(starship init zsh)"
+}
+
+def configure_zsh_syntax_highlighting() { 
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+}
+
+# Integrates the power of fzf with the shell
+# https://github.com/junegunn/fzf?tab=readme-ov-file#key-bindings-for-command-line
+def configure_fzf() { 
+   source <(fzf --zsh) 
+   source ~/repos/fzf-git.sh/fzf-git.sh 
+   bindkey '^I' fzf-completion
+}
+
+# Enable command line editing to use vim
+def configure_command_line_editing_to_vim() {
+   bindkey -v
+   #bindkey ^R history-incremental-search-backward
+   #bindkey ^S history-incremental-search-forward
+}
+
+# Configure the theme for the bat command https://github.com/catppuccin/bat
+def configure_bat_theme() {
+   export BAT_THEME="Catppuccin Mocha"
+}
+
+def configure_zsh_autosuggestions() {
+   # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md 
+   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+}
+
+def configure_aliases() { 
+  source ~/repos/dot-files/zsh/aliases.sh
+  # Teleport to enable connections into the cloud
+  alias proxy_up_demo="tsh proxy db --tunnel --port 60003 --db-name webapi --db-user teleport-admin@cylera-demo-us1.iam cylera-demo-us1-customer-rr"
+  alias proxy_up="tsh proxy db --tunnel --port 60002 --db-name webapi --db-user teleport-admin@cylera-demo-us1.iam cylera-demo-us1-customer & \ 
+     tsh proxy db --tunnel --port 60003 --db-name webapi --db-user teleport-admin@cylera-demo-us1.iam cylera-demo-us1-customer-rr & \ 
+     tsh proxy db --tunnel --port 60005 --db-name webapi --db-user teleport-admin@cylera-dev-us.iam cylera-dev-us-customer & \ 
+     tsh proxy db --tunnel --port 60006 --db-name webapi --db-user teleport-admin@cylera-dev-us.iam cylera-dev-us-customer-rr & \ 
+     tsh proxy db --tunnel --port 60008 --db-name cylera --db-user teleport-admin@cylera-prod-infra.iam cylera-prod-infra-customer & \ 
+     tsh proxy db --tunnel --port 60012 --db-name cylera --db-user teleport-admin@cylera-prod-infra.iam cylera-prod-infra-customer-rr & \ 
+     tsh proxy db --tunnel --port 60010 --db-name webapi --db-user teleport-admin@cylera-prod-uk.iam cylera-prod-uk-customer & \ 
+     tsh proxy db --tunnel --port 60011 --db-name webapi --db-user teleport-admin@cylera-prod-uk.iam cylera-prod-uk-customer-rr" 
+  #function prox () { 
+    #tsh login --proxy=cylera.teleport.sh (trap 'kill 0' SIGINT; prox_up wait) 
+  #} 
+  alias prox_down="kill -9 \$(ps aux | grep \"tsh proxy\" | awk '{print \$2}')"
+  alias typora="open -a typora"
+  function doppler() {
+    command doppler "$@"
+    source ~/repos/utils/update-doppler-in-prompt
+  }
+}
+
+def configure_path() {
+  export PATH="$HOME/repos/utils:$PATH"
+  source $HOME/.local/bin/env
+}
+
+def configure_zoxide() { 
+  eval "$(zoxide init zsh)"
+}
+
+def python_hook() {
+  if [[ -f .venv/bin/activate ]]; then
+    echo "Auto activating venv"
+    source .venv/bin/activate
+  elif [[ -f venv/bin/activate ]]; then
+    echo "Auto activating venv"
+    source venv/bin/activate
+  elif [[ -n "$VIRTUAL_ENV" ]]; then
+    deactivate
+  fi
+}
+
+def doppler_hook() {
+  local config="$HOME/.doppler/.doppler.yaml"
+  [[ ! -f "$config" ]] && return
+  if grep -qF "$(pwd):" "$config"; then
+    local section project env
+    section=$(grep -A 7 -F "$(pwd):" "$config")
+    #project=$(echo "$section" | grep "enclave.project" | head -1 | awk '{print $2}')
+    env=$(echo "$section" | grep "enclave.config" | head -1 | awk '{print $2}')
+    export MY_DOPPLER_CONFIG="$env"
+    echo "Doppler: $MY_DOPPLER_CONFIG"
+  else
+    unset MY_DOPPLER_CONFIG
+  fi
+}
+
+def configure_zsh_chpwd_hooks() {
+  autoload -Uz add-zsh-hook
+  add-zsh-hook chpwd python_hook
+  add-zsh-hook chpwd doppler_hook
+}
+
+
+configure_brew
+configure_history
+configure_starship
+configure_command_line_editing_to_vim
+configure_bat_theme
+configure_zsh_autosuggestions
+configure_aliases
+configure_fzf
+configure_path
+configure_zoxide
+configure_zsh_chpwd_hooks
+configure_zsh_syntax_highlighting
+
+. "$HOME/.local/bin/env"
+
+# Run chpwd-style hooks on shell init
+python_hook
+doppler_hook
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jasonchambers/google-cloud-sdk/completion.zsh.inc'; fi

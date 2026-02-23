@@ -1,0 +1,22 @@
+general.import = [
+  "~/.config/alacritty/coolnight.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+normal = { family = "MesloLGS Nerd Font Mono" }
+size = 15
+
+[window]
+padding.x = 14
+padding.y = 14
+opacity = 0.8
+blur = true
+decorations = "Buttonless"
+dimensions = { columns = 120, lines = 40 }
+
+[[keyboard.bindings]]
+key = "F11"
+action = "ToggleFullscreen"

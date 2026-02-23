@@ -1,0 +1,74 @@
+#
+# Pre-requisities
+# - zsh https://www.zsh.org/ (Omarchy default is bash - but use zsh instead)
+# - https://starship.rs/
+# - fzf https://github.com/junegunn/fzf
+# - Catppuccin theme for bat https://github.com/catppuccin/bat
+# - zsh zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+# - Neovim 
+# - python-pipx (needed for uv)
+
+def configure_history() {
+   # Save command history to a file
+   HISTFILE=~/.zsh_history
+   HISTSIZE=10000
+   SAVEHIST=10000
+   setopt SHARE_HISTORY
+   setopt appendhistory
+}
+# Setups up a very nice shell prompt from https://starship.rs/
+def configure_starship() { 
+   eval "$(starship init zsh)"
+}
+
+# Integrates the power of fzf with the shell
+# https://github.com/junegunn/fzf?tab=readme-ov-file#key-bindings-for-command-line
+def configure_fzf() { 
+   #source <(fzf --zsh)
+   source /usr/share/doc/fzf/examples/key-bindings.zsh
+   source /usr/share/doc/fzf/examples/completion.zsh
+}
+
+# Enable command line editing to use vim
+def configure_command_line_editing_to_vim() {
+   bindkey -v
+}
+
+# Configure the theme for the bat command https://github.com/catppuccin/bat
+def configure_bat_theme() {
+   export BAT_THEME="Catppuccin Mocha"
+}
+
+def configure_zsh_autosuggestions() {
+   # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+   source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+}
+
+def configure_aliases() {
+  source ~/repos/config-zsh/aliases.sh
+}
+
+def configure_path() {
+  export PATH="$HOME/repos/utils:$PATH"
+}
+
+def configure_zoxide() { 
+  eval "$(zoxide init zsh)"
+}
+
+configure_history
+configure_starship
+configure_command_line_editing_to_vim
+configure_bat_theme
+configure_zsh_autosuggestions
+configure_aliases
+configure_fzf
+configure_path
+configure_zoxide
+
+# Created by `pipx` on 2025-07-31 21:09:32
+export PATH="$PATH:/home/jasonchambers/.local/bin"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
