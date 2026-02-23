@@ -43,7 +43,7 @@ def configure_zsh_autosuggestions() {
 }
 
 def configure_aliases() { 
-  source ~/repos/config-zsh/aliases.sh
+  source ~/repos/dot-files/zsh/aliases.sh
   alias tree='treex'
   function doppler() {
     command doppler "$@"
