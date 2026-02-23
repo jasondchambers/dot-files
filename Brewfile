@@ -14,7 +14,6 @@ brew "zoxide"
 brew "eza"
 brew "bat"
 brew "dysk"
-brew "gemini-cli"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "starship"
@@ -26,7 +25,7 @@ brew "gnupg"
 brew "dopplerhq/cli/doppler"
 
 # Fonts
-brew "font-meslo-lg-nerd-font"
+cask "font-meslo-lg-nerd-font"
 
 # Apps
 cask "alacritty"
