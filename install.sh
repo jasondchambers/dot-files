@@ -184,6 +184,16 @@ install_uv() {
   fi
 }
 
+# ── utils ─────────────────────────────────────────────────────────────────────
+install_utils() {
+  echo "==> utils"
+  if [ ! -d "$HOME/repos/utils" ]; then
+    git clone git@github.com:jasondchambers/utils.git "$HOME/repos/utils"
+  else
+    echo "  utils already present"
+  fi
+}
+
 # ── fzf-git ───────────────────────────────────────────────────────────────────
 install_fzf_git() {
   echo "==> fzf-git"
@@ -195,7 +205,7 @@ install_fzf_git() {
 }
 
 # ── Main ──────────────────────────────────────────────────────────────────────
-ALL_COMPONENTS="packages tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git"
+ALL_COMPONENTS="packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git"
 
 run() {
   case "$1" in
@@ -211,6 +221,7 @@ run() {
   hammerspoon) install_hammerspoon ;;
   karabiner) install_karabiner ;;
   uv) install_uv ;;
+  utils) install_utils ;;
   fzf_git) install_fzf_git ;;
   *)
     echo "Unknown component: $1"

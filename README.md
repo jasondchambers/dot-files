@@ -2,6 +2,13 @@
 
 Personal dotfiles for macOS, Omarchy (Arch), and Linux Mint.
 
+## Philosophy
+
+- Aesthetics (must look pretty)
+- Consistency across platforms (macOS, Omarchy, Linux Mint)
+- Efficiency and speed - use the keyboard as much as possible
+- Modern - e.g. [fd, rg, bat, zoxide, dysk, btop, eza] instead of/in addition to [find, grep, cat, cd, df, top, ls]
+
 ## Quick start
 
 ```sh
@@ -15,6 +22,7 @@ chmod +x install.sh
 
 | Component | Target | macOS | Omarchy | Linux Mint |
 |---|---|:---:|:---:|:---:|
+| [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ | ✓ |
 | tmux | `~/.tmux.conf` | ✓ | ✓ | ✓ |
 | alacritty | `~/.config/alacritty/` | ✓ | ✓ | ✓ |
 | zsh | `~/.zshrc` | ✓ | ✓ | ✓ |
@@ -66,5 +74,17 @@ dot-files/
 
 - All installs are idempotent — safe to re-run after changes
 - Existing configs are backed up with a `.bak` suffix before being replaced
-- `alacritty/alacritty.toml` and `nvim/.../theme.lua` are generated at install time and gitignored
-- The Thelio desktop uses `zshrc.omarchy`
+
+## Usage
+
+### Launching applications
+
+Keyboard shortcuts are used to launch commonly used applications. These should
+be consistent across both Omarchy and macOS. Hammerspoon is used to provide 
+this capability on macOS. Checkout the Hammerspoon configuration
+to learn of specific key mappings and note these should be identical to 
+the Hyprland key mappings. 
+
+### 
+
+
