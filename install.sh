@@ -115,7 +115,6 @@ install_starship() {
 install_nvim() {
   echo "==> nvim"
   theme_lua="$DOTFILES/nvim/lua/jasondchambers/plugins/theme.lua"
-  # Non-Omarchy: copy default if theme.lua is missing or is a dangling symlink
   if [ ! -f "$theme_lua" ] || [ -L "$theme_lua" ]; then
     cp "$DOTFILES/nvim/lua/jasondchambers/plugins/theme.lua.default" "$theme_lua"
     echo "  theme.lua <- default"
