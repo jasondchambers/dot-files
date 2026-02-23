@@ -23,6 +23,7 @@ brew "btop"
 brew "git-delta"
 brew "gnupg"
 brew "dopplerhq/cli/doppler"
+brew "taproom"
 
 # Fonts
 cask "font-meslo-lg-nerd-font"
