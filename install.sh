@@ -131,7 +131,14 @@ install_git() {
 # ── lazygit ───────────────────────────────────────────────────────────────────
 install_lazygit() {
   echo "==> lazygit"
-  symlink "$DOTFILES/lazygit" "$HOME/.config/lazygit"
+  case "$OS" in
+  macos)
+    symlink "$DOTFILES/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml"
+    ;;
+  *)
+    symlink "$DOTFILES/lazygit" "$HOME/.config/lazygit"
+    ;;
+  esac
 }
 
 # ── hypr (Linux only) ─────────────────────────────────────────────────────────
