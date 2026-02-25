@@ -87,6 +87,13 @@ cleanup() {
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+configure_component() {
+  local component=$1 src=$2 dst=$3
+  echo -ne "Configuring $component..."
+  symlink "$src" "$dst"
+  echo ""
+}
+
 symlink() {
   src="$1"
   dst="$2"
@@ -118,12 +125,6 @@ install_packages() {
 }
 
 # ── tmux ──────────────────────────────────────────────────────────────────────
-configure_tmux() {
-  echo -ne "Configuring tmux..."
-  symlink "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
-  echo ""
-}
-
 clone_tpm() {
   echo -ne "Cloning tpm..."
   if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
@@ -167,13 +168,6 @@ configure_zsh() {
   echo ""
 }
 
-# ── starship ──────────────────────────────────────────────────────────────────
-configure_starship() {
-  echo -ne "Configuring starship..."
-  symlink "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml"
-  echo ""
-}
-
 # ── nvim ──────────────────────────────────────────────────────────────────────
 configure_nvim() {
   echo -ne "Configuring nvim..."
@@ -183,13 +177,6 @@ configure_nvim() {
     echo "  theme.lua <- default"
   fi
   symlink "$DOTFILES/nvim" "$HOME/.config/nvim"
-  echo ""
-}
-
-# ── git ───────────────────────────────────────────────────────────────────────
-configure_git() {
-  echo -ne "Configuring git..."
-  symlink "$DOTFILES/git/config" "$HOME/.config/git/config"
   echo ""
 }
 
@@ -287,14 +274,14 @@ run() {
   case "$1" in
   packages) install_packages ;;
   tmux)
-    configure_tmux
+    configure_component "tmux" "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
     clone_tpm
     ;;
   alacritty) configure_alacritty ;;
   zsh) configure_zsh ;;
-  starship) configure_starship ;;
+  starship) configure_component "starship" "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml" ;;
   nvim) configure_nvim ;;
-  git) configure_git ;;
+  git) configure_component "git" "$DOTFILES/git/config" "$HOME/.config/git/config" ;;
   lazygit) configure_lazygit ;;
   hypr) configure_hypr ;;
   hammerspoon) configure_hammerspoon ;;
