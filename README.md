@@ -127,28 +127,61 @@ Based on [Josean's](https://www.josean.com/posts/how-to-setup-neovim-2024) setup
 
 ### Keybindings
 
-Leader key is C-b
+Leader key is `Space`
 
 | Key | Binding |
 |-----|---------|
 | **General** | |
-| \<leader> r | reload conf |
-| \<leader> [ | Enter copy mode, navigate with vim motions, v, then y to copy|
-| \<leader> g | Launch GitHub in the browser|
-| C-h,j,k,l | navigate panes (consistent with Neovim) |
-| **Panes** | |
-| \<leader> \| | new vertical pane |
-| \<leader> - | new horizontal pane |
-| \<leader> j,k,l,h | resize pane |
-| \<leader> m | toggle maximize pane |
-| \<leader> x | Kill pane |
-| **Windows** | |
-| \<Leader> c | created                  |
-| \<Leader> w | see all panes/sessions |
-| \<leader> x | Kill window |
-| **Sessions** | |
-| \<Leader> d | detach                   |
-| \<Leader> s | switch                   |
+| \<leader>nh | Clear search highlights |
+| \<leader>+ | Increment number |
+| \<leader>\| | Split window vertically |
+| \<leader>- | Split window horizontally |
+| \<leader>x | Close current split |
+| \<leader>m | Maximize/minimize split |
+| C-h/j/k/l | Navigate splits (consistent with tmux) |
+| **File Explorer** | |
+| \<leader>ee | Toggle file explorer |
+| \<leader>ef | Toggle file explorer on current file |
+| \<leader>ec | Collapse file explorer |
+| \<leader>er | Refresh file explorer |
+| **Telescope** | |
+| \<leader>ff | Find files |
+| \<leader>fb | Buffers |
+| \<leader>fr | Recent files |
+| \<leader>fg | Live grep |
+| \<leader>fc | Grep string under cursor |
+| **Navigation** | |
+| ]f | Next function |
+| [f | Previous function |
+| ]d | Next diagnostic |
+| [d | Previous diagnostic |
+| **Git** | |
+| ]h | Next git hunk |
+| [h | Previous git hunk |
+| \<leader>gp | Preview hunk |
+| \<leader>gs | Stage hunk |
+| \<leader>gr | Reset hunk |
+| \<leader>gb | Blame line |
+| \<leader>lg | Open LazyGit |
+| **LSP** | |
+| gd | Go to definition |
+| gD | Go to declaration |
+| gr | Go to references |
+| K | Hover docs |
+| \<leader>rn | Rename symbol |
+| \<leader>ca | Code action |
+| \<leader>d | Show diagnostics float |
+| \<leader>td | Toggle inline diagnostics |
+| **Debugging (DAP)** | |
+| \<leader>db | Toggle breakpoint |
+| \<leader>dB | Conditional breakpoint |
+| \<leader>dc | Start/Continue |
+| \<leader>do | Step over |
+| \<leader>di | Step into |
+| \<leader>dO | Step out |
+| \<leader>dr | Restart |
+| \<leader>dx | Terminate |
+| \<leader>du | Toggle debug UI |
 
 
 
