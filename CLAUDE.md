@@ -14,7 +14,7 @@ Personal dotfiles for macOS, Omarchy (Arch Linux), and Linux Mint. Everything is
 ./configure.sh                        # one-time macOS setup (SSH key, scroll direction)
 ```
 
-Valid component names: `packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git`
+Valid component names: `packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git eza`
 
 ## Architecture
 

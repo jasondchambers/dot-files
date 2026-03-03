@@ -6,7 +6,7 @@
 #   ./install.sh zsh nvim tmux   # install specific components
 #
 # Components: packages tmux alacritty zsh starship nvim git lazygit
-#             hypr hammerspoon karabiner uv fzf_git
+#             hypr hammerspoon karabiner uv fzf_git eza
 
 set -eu
 
@@ -258,6 +258,22 @@ install_utils() {
   echo ""
 }
 
+# ── eza ───────────────────────────────────────────────────────────────────────
+configure_eza() {
+  echo -ne "Configuring eza..."
+  # On macOS, dirs::config_dir() resolves to ~/Library/Application Support,
+  # so eza looks for themes there rather than ~/.config/eza
+  case "$OS" in
+  macos)
+    symlink "$DOTFILES/eza" "$HOME/Library/Application Support/eza"
+    ;;
+  *)
+    symlink "$DOTFILES/eza" "$HOME/.config/eza"
+    ;;
+  esac
+  echo ""
+}
+
 # ── fzf-git ───────────────────────────────────────────────────────────────────
 install_fzf_git() {
   echo -ne "Cloning fzf-git..."
@@ -289,6 +305,7 @@ run() {
   uv) install_uv ;;
   utils) install_utils ;;
   fzf_git) install_fzf_git ;;
+  eza) configure_eza ;;
   *)
     echo "Unknown component: $1"
     exit 1
@@ -297,7 +314,7 @@ run() {
 }
 
 main() {
-  local all="packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git"
+  local all="packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git eza"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)
