@@ -45,6 +45,29 @@ return {
         end,
       })
 
+      -- Launch with Doppler env vars injected
+      table.insert(dap.configurations.python, {
+        type = "python",
+        request = "launch",
+        name = "Launch with Doppler",
+        program = "${file}",
+        args = function()
+          local input = vim.fn.input("Arguments: ")
+          return vim.split(input, " ", { trimempty = true })
+        end,
+        env = function()
+          local output = vim.fn.system("doppler secrets download --no-file --format env-no-quotes 2>/dev/null")
+          local env = {}
+          for line in output:gmatch("[^\n]+") do
+            local key, value = line:match("^([^=]+)=(.*)$")
+            if key then
+              env[key] = value
+            end
+          end
+          return env
+        end,
+      })
+
       -- Keymaps
       vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
       vim.keymap.set("n", "<leader>dB", function()

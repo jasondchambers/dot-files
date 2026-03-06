@@ -2,7 +2,7 @@
 # Pre-requisities
 # - See README.md
 
-def configure_brew() { 
+configure_brew() { 
   if [ -f /opt/homebrew/bin/brew ]; then 
     eval "$(/opt/homebrew/bin/brew shellenv)"
   else 
@@ -11,7 +11,7 @@ def configure_brew() {
   export PATH="$(brew --prefix openssh)/bin:$PATH"
 }
 
-def configure_history() {
+configure_history() {
    # Save command history to a file
    HISTFILE=~/.zsh_history
    HISTSIZE=10000
@@ -20,40 +20,40 @@ def configure_history() {
    setopt appendhistory
 }
 # Setups up a very nice shell prompt from https://starship.rs/
-def configure_starship() { 
+configure_starship() { 
    eval "$(starship init zsh)"
 }
 
-def configure_zsh_syntax_highlighting() { 
+configure_zsh_syntax_highlighting() { 
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 }
 
 # Integrates the power of fzf with the shell
 # https://github.com/junegunn/fzf?tab=readme-ov-file#key-bindings-for-command-line
-def configure_fzf() { 
+configure_fzf() { 
    source <(fzf --zsh) 
    source ~/repos/fzf-git.sh/fzf-git.sh 
    bindkey '^I' fzf-completion
 }
 
 # Enable command line editing to use vim
-def configure_command_line_editing_to_vim() {
+configure_command_line_editing_to_vim() {
    bindkey -v
    #bindkey ^R history-incremental-search-backward
    #bindkey ^S history-incremental-search-forward
 }
 
 # Configure the theme for the bat command https://github.com/catppuccin/bat
-def configure_bat_theme() {
+configure_bat_theme() {
    export BAT_THEME="Catppuccin Mocha"
 }
 
-def configure_zsh_autosuggestions() {
+configure_zsh_autosuggestions() {
    # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md 
    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 }
 
-def configure_aliases() { 
+configure_aliases() { 
   source ~/repos/dot-files/zsh/aliases.sh
   # Teleport to enable connections into the cloud
   alias proxy_up_demo="tsh proxy db --tunnel --port 60003 --db-name webapi --db-user teleport-admin@cylera-demo-us1.iam cylera-demo-us1-customer-rr"
@@ -76,16 +76,16 @@ def configure_aliases() {
   }
 }
 
-def configure_path() {
+configure_path() {
   export PATH="$HOME/repos/utils:$PATH"
   source $HOME/.local/bin/env
 }
 
-def configure_zoxide() { 
+configure_zoxide() { 
   eval "$(zoxide init zsh)"
 }
 
-def python_hook() {
+python_hook() {
   if [[ -f .venv/bin/activate ]]; then
     echo "Auto activating venv"
     source .venv/bin/activate
@@ -97,7 +97,7 @@ def python_hook() {
   fi
 }
 
-def doppler_hook() {
+doppler_hook() {
   local config="$HOME/.doppler/.doppler.yaml"
   [[ ! -f "$config" ]] && return
   if grep -qF "$(pwd):" "$config"; then
@@ -106,13 +106,13 @@ def doppler_hook() {
     #project=$(echo "$section" | grep "enclave.project" | head -1 | awk '{print $2}')
     env=$(echo "$section" | grep "enclave.config" | head -1 | awk '{print $2}')
     export MY_DOPPLER_CONFIG="$env"
-    echo "Doppler: $MY_DOPPLER_CONFIG"
+    echo "YoYoYo"
   else
     unset MY_DOPPLER_CONFIG
   fi
 }
 
-def configure_zsh_chpwd_hooks() {
+configure_zsh_chpwd_hooks() {
   autoload -Uz add-zsh-hook
   add-zsh-hook chpwd python_hook
   add-zsh-hook chpwd doppler_hook

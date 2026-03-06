@@ -17,6 +17,13 @@ opt.autoindent = true -- copy indent from current line when starting new one
 -- line wrapping
 opt.wrap = false -- disable line wrapping
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
+})
+
 -- search settings
 opt.ignorecase = false -- Do not ignore case when searching
 
