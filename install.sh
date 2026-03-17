@@ -22,13 +22,11 @@ check_bash_version() {
 
 # ── OS Detection ──────────────────────────────────────────────────────────────
 detect_os() {
-  if [ -f /etc/arch-release ]; then
-    echo "omarchy"
-  elif [ -f /etc/os-release ]; then
+  if [ -f /etc/os-release ]; then
     ID=$(awk -F= '/^ID=/{gsub(/"/, "", $2); print $2}' /etc/os-release)
     case "$ID" in
-    linuxmint) echo "linuxmint" ;;
-    *) echo "linux" ;;
+    cachyos) echo "cachyos" ;;
+    arch) echo "arch" ;;
     esac
   elif [ "$(uname)" = "Darwin" ]; then
     echo "macos"
@@ -144,7 +142,7 @@ configure_alacritty() {
   # Point alacritty.toml at the right OS variant (file lives inside the repo dir)
   case "$OS" in
   omarchy) variant="alacritty.toml.omarchy" ;;
-  linuxmint) variant="alacritty.toml.linuxmint" ;;
+  cachyos) variant="alacritty.toml.cachyos" ;;
   *) variant="alacritty.toml.macos" ;;
   esac
   ln -sfn "$DOTFILES/alacritty/$variant" "$DOTFILES/alacritty/alacritty.toml"
@@ -157,7 +155,7 @@ configure_zsh() {
   echo -ne "Configuring zsh..."
   case "$OS" in
   omarchy) zshrc="zshrc.omarchy" ;;
-  linuxmint) zshrc="zshrc.linuxmint" ;;
+  cachyos) zshrc="zshrc.cachyos" ;;
   macos) zshrc="zshrc.macOS" ;;
   *)
     echo -ne "unsupported OS for zsh config (no matching zshrc variant)"
@@ -198,7 +196,7 @@ configure_lazygit() {
 configure_hypr() {
   echo -ne "Configuring hypr..."
   case "$OS" in
-  omarchy | linuxmint | linux)
+  omarchy | cachyos )
     symlink "$DOTFILES/hypr/bindings.conf" "$HOME/.config/hypr/bindings.conf"
     ;;
   *)
