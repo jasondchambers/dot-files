@@ -45,6 +45,7 @@ def configure_zsh_autosuggestions() {
 def configure_aliases() { 
   source ~/repos/dot-files/zsh/aliases.sh
   alias tree='treex'
+  alias open='xdg-open'
   function doppler() {
     command doppler "$@"
     source ~/repos/utils/update-doppler-in-prompt

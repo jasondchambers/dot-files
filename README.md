@@ -1,11 +1,11 @@
 # dot-files
 
-Personal dotfiles for macOS, Omarchy (Arch), and Linux Mint.
+Personal dotfiles for macOS, CachyOS and Omarchy 
 
 ## Philosophy
 
 - Aesthetics (must look pretty)
-- Consistency across platforms (macOS, Omarchy, Linux Mint)
+- Consistency across platforms (macOS, CachyOS and Omarchy)
 - Efficiency and speed - use the keyboard as much as possible
 - Modern - e.g. [fd, rg, bat, zoxide, dysk, btop, eza] instead of/in addition to [find, grep, cat, cd, df, top, ls]
 
