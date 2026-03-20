@@ -70,10 +70,6 @@ configure_aliases() {
   #} 
   alias prox_down="kill -9 \$(ps aux | grep \"tsh proxy\" | awk '{print \$2}')"
   alias typora="open -a typora"
-  function doppler() {
-    command doppler "$@"
-    source ~/repos/utils/update-doppler-in-prompt
-  }
 }
 
 configure_path() {
@@ -97,25 +93,9 @@ python_hook() {
   fi
 }
 
-doppler_hook() {
-  local config="$HOME/.doppler/.doppler.yaml"
-  [[ ! -f "$config" ]] && return
-  if grep -qF "$(pwd):" "$config"; then
-    local section project env
-    section=$(grep -A 7 -F "$(pwd):" "$config")
-    #project=$(echo "$section" | grep "enclave.project" | head -1 | awk '{print $2}')
-    env=$(echo "$section" | grep "enclave.config" | head -1 | awk '{print $2}')
-    export MY_DOPPLER_CONFIG="$env"
-    echo "YoYoYo"
-  else
-    unset MY_DOPPLER_CONFIG
-  fi
-}
-
 configure_zsh_chpwd_hooks() {
   autoload -Uz add-zsh-hook
   add-zsh-hook chpwd python_hook
-  add-zsh-hook chpwd doppler_hook
 }
 
 
@@ -132,11 +112,28 @@ configure_zoxide
 configure_zsh_chpwd_hooks
 configure_zsh_syntax_highlighting
 
+# Demo environment - using 1Password for secrets management
+# Secret environment IDs are stored in ~/.zshrc.secrets (not committed to git)
+[ -f ~/.zshrc.secrets ] && source ~/.zshrc.secrets
+export OP_ENVIRONMENT_ID=$OP_DEMO_ENVIRONMENT_ID
+export OP_CURRENT_ENV_NAME=Demo
+
+op-env() {
+  local env="${1:-$(printf 'Demo\nDemo_for_testing_switching\nProd_US1' | fzf --prompt='Select environment: ')}"
+  case "$env" in
+    Demo)      export OP_ENVIRONMENT_ID=$OP_DEMO_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env ;; 
+    Demo_for_testing_switching) export OP_ENVIRONMENT_ID=$OP_DEMO_FOR_TESTING_SWITCHING_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env ;;
+    Prod_US1)   export OP_ENVIRONMENT_ID=$OP_PROD_US_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env ;;
+    *)         echo "Usage: op-env [Demo|Demo_for_testing_switching|Prod_US1]" ; return 1 ;;
+  esac
+  echo "OP_CURRENT_ENV_NAME=$OP_CURRENT_ENV_NAME"
+  echo "OP_ENVIRONMENT_ID=$OP_ENVIRONMENT_ID"
+}
+
 . "$HOME/.local/bin/env"
 
 # Run chpwd-style hooks on shell init
 python_hook
-doppler_hook
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jasonchambers/google-cloud-sdk/path.zsh.inc'; fi
