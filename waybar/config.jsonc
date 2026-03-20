@@ -74,12 +74,15 @@
     },
 
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-wifi": "{essid} {signalStrength}% {icon}",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+        "format-linked": "{ifname} (No IP) 󰈀",
+        "format-disconnected": "Disconnected 󰖪",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid} {signalStrength}%\n{frequency} MHz\nvia {gwaddr}",
+        "tooltip-format-ethernet": "{ifname} via {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "~/.config/waybar/wifi-menu.sh"
     },
 
     "custom/power": {
