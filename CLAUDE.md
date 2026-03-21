@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Repo Is
 
-Personal dotfiles for macOS, Omarchy (Arch Linux), and Linux Mint. Everything is installed via symlinks — no files are copied. Re-running `install.sh` is always safe (idempotent; existing configs are backed up with `.bak`).
+Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks — no files are copied. Re-running `install.sh` is always safe (idempotent; existing configs are backed up with `.bak`).
 
 ## Install Commands
 
@@ -20,10 +20,10 @@ Valid component names: `packages utils tmux alacritty zsh starship nvim git lazy
 
 ### OS Detection & Per-OS Variants
 
-`install.sh` auto-detects the OS (`omarchy` / `linuxmint` / `macos`) and symlinks the correct variant file. Files with OS suffixes follow the pattern:
+`install.sh` auto-detects the OS (`cachyos` / `macos`) and symlinks the correct variant file. Files with OS suffixes follow the pattern:
 
-- `zsh/zshrc.omarchy`, `zsh/zshrc.linuxmint`, `zsh/zshrc.macOS`
-- `alacritty/alacritty.toml.omarchy`, `alacritty.toml.linuxmint`, `alacritty.toml.macos`
+- `zsh/zshrc.cachyos`, `zsh/zshrc.macOS`
+- `alacritty/alacritty.toml.cachyos`, `alacritty.toml.macos`
 
 The installer creates `alacritty/alacritty.toml` as a symlink inside the repo dir pointing to the correct variant.
 
@@ -61,7 +61,7 @@ nvim/lua/jasondchambers/
     └── ...
 ```
 
-**Theme management:** `theme.lua` is generated from `theme.lua.default` on first install (if absent). It is intentionally not overwritten on re-install, allowing per-machine theme customization without affecting git state. When Omarchy switches themes, it may write its own `theme.lua`.
+**Theme management:** `theme.lua` is generated from `theme.lua.default` on first install (if absent). It is intentionally not overwritten on re-install, allowing per-machine theme customization without affecting git state.
 
 **LSP servers** (auto-installed via Mason): `pyright` (Python types), `ruff` (Python linting/formatting), `bashls` (shell). Also installs `debugpy` for Python DAP debugging.
 
@@ -71,7 +71,7 @@ The zshrc files use zsh `def` functions (not `function` keyword) as a namespacin
 
 ### Hyprland Bindings
 
-`hypr/bindings.conf` is an *overlay* file — it only contains custom bindings that extend/override Omarchy's defaults. It does **not** replace the full Omarchy Hyprland config.
+`hypr/bindings.conf` is an *overlay* file — it only contains custom bindings that extend/override CachyOS's Hyprland defaults. It does **not** replace the full Hyprland config.
 
 ### Hammerspoon (macOS)
 
@@ -79,4 +79,4 @@ Provides app-launch keybindings on macOS that mirror the Hyprland bindings in `h
 
 ## Skills
 
-Use the `omarchy` skill when making any changes to Hyprland, Waybar, terminal, or other desktop/compositor config. This skill provides specialized knowledge about the Omarchy Linux desktop setup.
+Use the `omarchy` skill when making any changes to Hyprland, Waybar, terminal, or other desktop/compositor config on CachyOS. This skill provides specialized knowledge about the Hyprland desktop setup.

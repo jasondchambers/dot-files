@@ -26,7 +26,6 @@ detect_os() {
     ID=$(awk -F= '/^ID=/{gsub(/"/, "", $2); print $2}' /etc/os-release)
     case "$ID" in
     cachyos) echo "cachyos" ;;
-    arch) echo "arch" ;;
     esac
   elif [ "$(uname)" = "Darwin" ]; then
     echo "macos"
@@ -115,8 +114,22 @@ install_packages() {
     fi
     brew bundle --file="$DOTFILES/Brewfile"
     ;;
+  cachyos)
+    echo ""
+    # Install paru (AUR helper) if not present
+    if ! command -v paru >/dev/null 2>&1; then
+      echo "  Installing paru..."
+      sudo pacman -S --needed base-devel git
+      git clone https://aur.archlinux.org/paru.git /tmp/paru
+      (cd /tmp/paru && makepkg -si --noconfirm)
+    fi
+    echo "  Installing native packages from packages/pkglist.txt..."
+    paru -S --needed --noconfirm - < "$DOTFILES/packages/pkglist.txt"
+    echo "  Installing AUR packages from packages/aur.txt..."
+    paru -S --needed --noconfirm - < "$DOTFILES/packages/aur.txt"
+    ;;
   *)
-    echo -ne "skipping (not macOS — handled by OS setup)"
+    echo -ne "skipping (unsupported OS)"
     ;;
   esac
   echo ""
@@ -141,7 +154,6 @@ configure_alacritty() {
   symlink "$DOTFILES/alacritty" "$HOME/.config/alacritty"
   # Point alacritty.toml at the right OS variant (file lives inside the repo dir)
   case "$OS" in
-  omarchy) variant="alacritty.toml.omarchy" ;;
   cachyos) variant="alacritty.toml.cachyos" ;;
   *) variant="alacritty.toml.macos" ;;
   esac
@@ -154,7 +166,6 @@ configure_alacritty() {
 configure_zsh() {
   echo -ne "Configuring zsh..."
   case "$OS" in
-  omarchy) zshrc="zshrc.omarchy" ;;
   cachyos) zshrc="zshrc.cachyos" ;;
   macos) zshrc="zshrc.macOS" ;;
   *)
@@ -196,7 +207,7 @@ configure_lazygit() {
 configure_hypr() {
   echo -ne "Configuring hypr..."
   case "$OS" in
-  omarchy | cachyos )
+  cachyos)
     symlink "$DOTFILES/hypr/bindings.conf" "$HOME/.config/hypr/bindings.conf"
     ;;
   *)

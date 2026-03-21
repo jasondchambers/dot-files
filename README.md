@@ -1,11 +1,11 @@
 # dot-files
 
-Personal dotfiles for macOS, CachyOS and Omarchy 
+Personal dotfiles for macOS and CachyOS.
 
 ## Philosophy
 
 - Aesthetics (must look pretty)
-- Consistency across platforms (macOS, CachyOS and Omarchy)
+- Consistency across platforms (macOS and CachyOS)
 - Efficiency and speed - use the keyboard as much as possible
 - Modern - e.g. [fd, rg, bat, zoxide, dysk, btop, eza] instead of/in addition to [find, grep, cat, cd, df, top, ls]
 
@@ -20,20 +20,20 @@ chmod +x install.sh
 
 ## What gets installed
 
-| Component | Target | macOS | Omarchy | Linux Mint |
-|---|---|:---:|:---:|:---:|
-| [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ | ✓ |
-| tmux | `~/.tmux.conf` | ✓ | ✓ | ✓ |
-| alacritty | `~/.config/alacritty/` | ✓ | ✓ | ✓ |
-| zsh | `~/.zshrc` | ✓ | ✓ | ✓ |
-| starship | `~/.config/starship.toml` | ✓ | ✓ | ✓ |
-| nvim | `~/.config/nvim/` | ✓ | ✓ | ✓ |
-| git | `~/.config/git/config` | ✓ | ✓ | ✓ |
-| lazygit | `~/.config/lazygit/` | ✓ | ✓ | ✓ |
-| hypr | `~/.config/hypr/bindings.conf` | — | ✓ | ✓ |
-| hammerspoon | `~/.hammerspoon/` | ✓ | — | — |
-| karabiner | `~/.config/karabiner/karabiner.json` | ✓ | — | — |
-| packages | Homebrew (Brewfile) | ✓ | — | — |
+| Component | Target | macOS | CachyOS |
+|---|---|:---:|:---:|
+| [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ |
+| tmux | `~/.tmux.conf` | ✓ | ✓ |
+| alacritty | `~/.config/alacritty/` | ✓ | ✓ |
+| zsh | `~/.zshrc` | ✓ | ✓ |
+| starship | `~/.config/starship.toml` | ✓ | ✓ |
+| nvim | `~/.config/nvim/` | ✓ | ✓ |
+| git | `~/.config/git/config` | ✓ | ✓ |
+| lazygit | `~/.config/lazygit/` | ✓ | ✓ |
+| hypr | `~/.config/hypr/bindings.conf` | — | ✓ |
+| hammerspoon | `~/.hammerspoon/` | ✓ | — |
+| karabiner | `~/.config/karabiner/karabiner.json` | ✓ | — |
+| packages | Brewfile (macOS) / pkglist.txt + aur.txt (CachyOS) | ✓ | ✓ |
 
 ## Selective install
 
@@ -58,6 +58,9 @@ dot-files/
 ├── install.sh          # Symlinks all configs; detects OS automatically
 ├── configure.sh        # One-time system setup (SSH key, macOS defaults)
 ├── Brewfile            # Homebrew packages (macOS)
+├── packages/           # Package lists (CachyOS)
+│   ├── pkglist.txt     #   pacman native packages
+│   └── aur.txt         #   AUR packages
 ├── alacritty/          # ~/.config/alacritty/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
@@ -79,11 +82,9 @@ dot-files/
 
 ### Launching Applications
 
-Keyboard shortcuts are used to launch commonly used applications. These should
-be consistent across both Omarchy and macOS. Hammerspoon is used to provide 
-this capability on macOS. Checkout the Hammerspoon configuration
-to learn of specific key mappings and note these should be identical to 
-the Hyprland key mappings. 
+Keyboard shortcuts are used to launch commonly used applications. These are
+consistent across CachyOS and macOS. Hammerspoon provides this capability on
+macOS. The key mappings mirror the Hyprland bindings in `hypr/bindings.conf`.
 
 ### tmux
 

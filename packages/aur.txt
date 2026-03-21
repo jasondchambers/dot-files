@@ -1,0 +1,3 @@
+1password
+dropbox
+typora
