@@ -34,6 +34,8 @@ chmod +x install.sh
 | hammerspoon | `~/.hammerspoon/` | ✓ | — |
 | karabiner | `~/.config/karabiner/karabiner.json` | ✓ | — |
 | packages | Brewfile (macOS) / pkglist.txt + aur.txt (CachyOS) | ✓ | ✓ |
+| tv | [television](https://github.com/alexpasmantier/television) binary | ✓ | ✓ |
+| television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
 
 ## Selective install
 
@@ -69,6 +71,7 @@ dot-files/
 ├── lazygit/            # ~/.config/lazygit/
 ├── nvim/               # ~/.config/nvim/
 ├── starship/           # ~/.config/starship.toml
+├── television/         # ~/.config/television/cable/ (custom channels)
 ├── tmux/               # ~/.tmux.conf
 └── zsh/                # ~/.zshrc
 ```

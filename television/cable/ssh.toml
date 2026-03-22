@@ -1,0 +1,14 @@
+[metadata]
+name = "ssh"
+description = "Browse and connect to ssh servers"
+
+[source]
+command = "cat ~/.ssh_hosts | grep '^[A-z]' | cut -d'|' -f1"
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Connect"
+command = 'eval $(ssh-get-command {})'
+mode = "execute"

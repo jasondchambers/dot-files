@@ -6,7 +6,7 @@
 #   ./install.sh zsh nvim tmux   # install specific components
 #
 # Components: packages tmux alacritty zsh starship nvim git lazygit
-#             hypr hammerspoon karabiner uv fzf_git eza
+#             hypr hammerspoon karabiner uv tv fzf_git eza television
 
 set -eu
 
@@ -256,6 +256,17 @@ install_uv() {
   echo ""
 }
 
+# ── television ────────────────────────────────────────────────────────────────────────
+install_tv() {
+  echo -ne "Installing tv..."
+  if ! command -v tv >/dev/null 2>&1; then
+    curl -fsSL https://alexpasmantier.github.io/television/install.sh | bash
+  else
+    echo -ne "tv already installed"
+  fi
+  echo ""
+}
+
 # ── utils ─────────────────────────────────────────────────────────────────────
 install_utils() {
   echo -ne "Cloning utils..."
@@ -280,6 +291,34 @@ configure_eza() {
     symlink "$DOTFILES/eza" "$HOME/.config/eza"
     ;;
   esac
+  echo ""
+}
+
+# ── television ────────────────────────────────────────────────────────────────
+configure_television() {
+  echo -ne "Configuring television..."
+  if ! command -v tv >/dev/null 2>&1; then
+    echo -ne "skipping (tv not installed)"
+    echo ""
+    return
+  fi
+  local cable_dst="$HOME/.config/television/cable"
+  mkdir -p "$cable_dst"
+  for src in "$DOTFILES/television/cable"/*.toml; do
+    local file dst
+    file=$(basename "$src")
+    dst="$cable_dst/$file"
+    if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+      echo -ne " $file already linked"
+      continue
+    fi
+    if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+      echo -ne " backing up $file..."
+      mv "$dst" "$dst.bak"
+    fi
+    ln -sfn "$src" "$dst"
+    echo -ne " $file"
+  done
   echo ""
 }
 
@@ -312,9 +351,11 @@ run() {
   hammerspoon) configure_hammerspoon ;;
   karabiner) configure_karabiner ;;
   uv) install_uv ;;
+  tv) install_tv ;;
   utils) install_utils ;;
   fzf_git) install_fzf_git ;;
   eza) configure_eza ;;
+  television) configure_television ;;
   *)
     echo "Unknown component: $1"
     exit 1
@@ -323,7 +364,7 @@ run() {
 }
 
 main() {
-  local all="packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git eza"
+  local all="packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

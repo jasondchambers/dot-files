@@ -1,0 +1,14 @@
+[metadata]
+name = "sftp"
+description = "Browse and connect to sftp servers"
+
+[source]
+command = "cat ~/.ssh_hosts | grep '^[A-z]' | cut -d'|' -f1"
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Connect"
+command = 'eval $(sftp-get-command {})'
+mode = "execute"
