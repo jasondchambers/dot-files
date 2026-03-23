@@ -3,7 +3,8 @@ name = "sftp"
 description = "Browse and connect to sftp servers"
 
 [source]
-command = "cat ~/.ssh_hosts | grep '^[A-z]' | cut -d'|' -f1"
+command = "cat ~/.ssh_hosts | grep '^[A-z]' | sort | cut -d'|' -f1"
+no_sort = true
 
 [keybindings]
 enter = "actions:open"
