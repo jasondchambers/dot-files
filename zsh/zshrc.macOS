@@ -117,14 +117,38 @@ configure_zsh_syntax_highlighting
 [ -f ~/.zshrc.secrets ] && source ~/.zshrc.secrets
 export OP_ENVIRONMENT_ID=$OP_DEMO_ENVIRONMENT_ID
 export OP_CURRENT_ENV_NAME=Demo
+export OP_SERVICE_ACCOUNT_TOKEN=$OP_SERVICE_ACCOUNT_TOKEN_WINEBUDDY_SYNC_WITH_CELLARTRACKER
+export OP_CURRENT_SERVICE_ACCOUNT_NAME="winebuddy-sync-with-cellartracker"
+
+op-service-account-token() {
+  local env="${1:-$(printf 'winebuddy-sync-with-cellartracker' | fzf --prompt='Select environment: ')}"
+  case "$env" in 
+    winebuddy-sync-with-cellartracker) export OP_SERVICE_ACCOUNT_TOKEN=$OP_SERVICE_ACCOUNT_TOKEN_WINEBUDDY_SYNC_WITH_CELLARTRACKER && export OP_CURRENT_SERVICE_ACCOUNT_NAME=$env ;;
+    *) echo "Usage: op-service-account-token [winebuddy-sync-with-cellartracker]" ; return 1 ;;
+  esac
+  echo "OP_SERVICE_ACCOUNT_TOKEN=$OP_SERVICE_ACCOUNT_TOKEN"
+  echo "OP_CURRENT_SERVICE_ACCOUNT_NAME=$OP_CURRENT_SERVICE_ACCOUNT_NAME"
+}
 
 op-env() {
-  local env="${1:-$(printf 'Demo\nDemo_for_testing_switching\nProd_US1' | fzf --prompt='Select environment: ')}"
+  local env="${1:-$(printf 'Demo\nDemo_for_testing_switching\nProd_US1\nwinebuddy-sync-with-cellartracker' | fzf --prompt='Select environment: ')}"
   case "$env" in
-    Demo)      export OP_ENVIRONMENT_ID=$OP_DEMO_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env ;; 
-    Demo_for_testing_switching) export OP_ENVIRONMENT_ID=$OP_DEMO_FOR_TESTING_SWITCHING_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env ;;
-    Prod_US1)   export OP_ENVIRONMENT_ID=$OP_PROD_US_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env ;;
-    *)         echo "Usage: op-env [Demo|Demo_for_testing_switching|Prod_US1]" ; return 1 ;;
+    Demo) 
+      export OP_ENVIRONMENT_ID=$OP_DEMO_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env 
+      ;; 
+    Demo_for_testing_switching) 
+      export OP_ENVIRONMENT_ID=$OP_DEMO_FOR_TESTING_SWITCHING_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env 
+      ;;
+    Prod_US1)   
+      export OP_ENVIRONMENT_ID=$OP_PROD_US_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env 
+      ;;
+    winebuddy-sync-with-cellartracker)   
+      export OP_ENVIRONMENT_ID=$OP_WINEBUDDY_SYNC_WITH_CELLARTRACKER_ENVIRONMENT_ID && export OP_CURRENT_ENV_NAME=$env 
+      ;;
+    *)         
+      echo "Usage: op-env [Demo|Demo_for_testing_switching|Prod_US1|winebuddy-sync-with-cellartracker]" ; 
+      return 1 
+      ;;
   esac
   echo "OP_CURRENT_ENV_NAME=$OP_CURRENT_ENV_NAME"
   echo "OP_ENVIRONMENT_ID=$OP_ENVIRONMENT_ID"
