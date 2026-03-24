@@ -1,0 +1,15 @@
+[metadata]
+name = "dbproxy"
+description = "Browse and create proxies to remote database servers"
+
+[source]
+command = "cat ~/.databases | grep '^[[:alpha:]]' | sort | cut -d'|' -f1"
+no_sort = true
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Connect"
+command = 'eval $(dbproxy-get-command {})'
+mode = "execute"
