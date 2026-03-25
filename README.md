@@ -25,6 +25,7 @@ chmod +x install.sh
 | [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ |
 | tmux | `~/.tmux.conf` | ✓ | ✓ |
 | alacritty | `~/.config/alacritty/` | ✓ | ✓ |
+| wezterm | `~/.config/wezterm/` | ✓ | ✓ |
 | zsh | `~/.zshrc` | ✓ | ✓ |
 | starship | `~/.config/starship.toml` | ✓ | ✓ |
 | nvim | `~/.config/nvim/` | ✓ | ✓ |
@@ -64,6 +65,7 @@ dot-files/
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
 ├── alacritty/          # ~/.config/alacritty/
+├── wezterm/            # ~/.config/wezterm/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
 ├── hypr/               # ~/.config/hypr/
@@ -124,6 +126,33 @@ Be sure to checkout other tmux related utilities in In addition in [utils](https
 | **Sessions** | |
 | \<Leader> d | Detach                   |
 | \<Leader> s | Switch                   |
+
+## WezTerm
+
+> **Experimenting with WezTerm as a replacement for Alacritty + tmux.** WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes, tabs, workspaces), potentially eliminating the need for a separate tmux setup.
+
+**Leader key is C-b**
+
+| Key | Binding |
+|-----|---------|
+| **General** | |
+| \<leader> [ | Enter copy mode, navigate with vim motions |
+| F11 | Toggle fullscreen |
+| C-h,j,k,l | Navigate panes (seamless with Neovim) |
+| **Panes** | |
+| \<leader> \| | New pane (split right) |
+| \<leader> - | New pane (split down) |
+| \<leader> m | Toggle maximize pane |
+| \<leader> z | Toggle maximize pane |
+| \<leader> x | Close pane |
+| **Tabs** | |
+| \<leader> c | New tab |
+| \<leader> n | Next tab |
+| \<leader> p | Previous tab |
+| \<leader> 1-9 | Jump to tab by number |
+| **Workspaces** (sessions) | |
+| \<leader> s | Show workspace switcher |
+| \<leader> L | Switch to previous workspace |
 
 ## Neovim
 

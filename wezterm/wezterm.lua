@@ -53,8 +53,8 @@ end
 -- Term
 config.term = 'xterm-256color'
 
--- Seamless nvim/pane navigation (mirrors vim-tmux-navigator)
--- If nvim is the foreground process, forward the key; otherwise move the pane
+-- Ctrl+h/j/k/l: forward to nvim if it's in the foreground (smart-splits handles
+-- the nvim→WezTerm pane crossing), otherwise navigate WezTerm panes directly
 local function is_vim(pane)
   local proc = pane:get_foreground_process_info()
   local name = proc and proc.name or ''
@@ -84,7 +84,7 @@ config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
   { key = 'F11', mods = '', action = wezterm.action.ToggleFullScreen },
 
-  -- Pane navigation (seamless with nvim, like vim-tmux-navigator)
+  -- Pane navigation (forwards to nvim when active, smart-splits handles the rest)
   nav('h'), nav('j'), nav('k'), nav('l'),
 
   -- Panes
@@ -109,6 +109,10 @@ config.keys = {
   { key = '7', mods = 'LEADER', action = wezterm.action.ActivateTab(6) },
   { key = '8', mods = 'LEADER', action = wezterm.action.ActivateTab(7) },
   { key = '9', mods = 'LEADER', action = wezterm.action.ActivateTab(8) },
+
+  -- Workspaces
+  { key = 's', mods = 'LEADER', action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' } },
+  { key = 'L', mods = 'LEADER', action = wezterm.action.SwitchWorkspaceRelative(-1) },
 
   -- Copy mode
   { key = '[', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },

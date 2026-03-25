@@ -1,4 +1,5 @@
 return {
   "nvim-lua/plenary.nvim", -- lua functions that many plugins use
-  "christoomey/vim-tmux-navigator", -- tmux & split window navigation
+  -- vim-tmux-navigator replaced by smart-splits.nvim (see smart-splits.lua)
+  -- smart-splits supports WezTerm natively without tmux
 }
