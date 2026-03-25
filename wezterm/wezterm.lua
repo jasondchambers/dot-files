@@ -3,7 +3,7 @@ local config = wezterm.config_builder()
 
 -- Font
 config.font = wezterm.font('MesloLGS Nerd Font Mono')
-config.font_size = 15.0
+config.font_size = 12.0
 
 -- coolnight color scheme
 config.colors = {
@@ -35,13 +35,24 @@ config.colors = {
   },
 }
 
+-- Tab bar
+config.use_fancy_tab_bar = false
+config.colors.tab_bar = {
+  background = '#011423',
+  active_tab = { bg_color = '#0FC5ED', fg_color = '#011423' },
+  inactive_tab = { bg_color = '#011423', fg_color = '#CBE0F0' },
+  inactive_tab_hover = { bg_color = '#214969', fg_color = '#CBE0F0' },
+  new_tab = { bg_color = '#011423', fg_color = '#CBE0F0' },
+  new_tab_hover = { bg_color = '#214969', fg_color = '#CBE0F0' },
+}
+
 -- Dim inactive panes
 config.inactive_pane_hsb = { saturation = 0.6, brightness = 0.4 }
 
 -- Window
 config.window_padding = { left = 14, right = 14, top = 14, bottom = 14 }
 config.window_background_opacity = 0.8
-config.window_decorations = 'RESIZE'
+config.window_decorations = 'NONE'
 config.initial_cols = 120
 config.initial_rows = 40
 
@@ -88,7 +99,7 @@ config.keys = {
   nav('h'), nav('j'), nav('k'), nav('l'),
 
   -- Panes
-  { key = '|', mods = 'LEADER', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  { key = '|', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '-', mods = 'LEADER', action = wezterm.action.SplitVertical   { domain = 'CurrentPaneDomain' } },
   { key = 'z', mods = 'LEADER', action = wezterm.action.TogglePaneZoomState },
   { key = 'm', mods = 'LEADER', action = wezterm.action.TogglePaneZoomState },
