@@ -3,7 +3,7 @@
 
 --bindd = SUPER, RETURN, Terminal, exec, uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"
 hs.hotkey.bind({"alt"}, "return", function()
-    hs.application.launchOrFocus("Alacritty")
+    hs.application.launchOrFocus("wezterm")
 end)
 
 --bindd = SUPER SHIFT, F, File manager, exec, uwsm-app -- nautilus --new-window
