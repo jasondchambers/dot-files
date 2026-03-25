@@ -326,6 +326,12 @@ configure_television() {
 configure_wezterm() {
   echo -ne "Configuring wezterm..."
   symlink "$DOTFILES/wezterm" "$HOME/.config/wezterm"
+  case "$OS" in
+  cachyos) variant="wezterm.lua.cachyos" ;;
+  *) variant="wezterm.lua.macos" ;;
+  esac
+  ln -sfn "$DOTFILES/wezterm/$variant" "$DOTFILES/wezterm/wezterm.lua"
+  echo -ne "  wezterm.lua -> $variant"
   echo ""
 }
 
