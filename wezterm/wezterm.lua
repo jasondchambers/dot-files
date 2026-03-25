@@ -1,1 +1,0 @@
-/Users/jasonchambers/repos/dot-files/wezterm/wezterm.lua.macos
