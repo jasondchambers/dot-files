@@ -14,7 +14,7 @@ Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks â€
 ./configure.sh                        # one-time macOS setup (SSH key, scroll direction)
 ```
 
-Valid component names: `packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git eza`
+Valid component names: `packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv fzf_git eza`
 
 ## Architecture
 

@@ -5,7 +5,7 @@
 #   ./install.sh                 # install all components
 #   ./install.sh zsh nvim tmux   # install specific components
 #
-# Components: packages tmux alacritty zsh starship nvim git lazygit
+# Components: packages tmux alacritty wezterm zsh starship nvim git lazygit
 #             hypr hammerspoon karabiner uv tv fzf_git eza television
 
 set -eu
@@ -322,6 +322,13 @@ configure_television() {
   echo ""
 }
 
+# ── wezterm ───────────────────────────────────────────────────────────────────
+configure_wezterm() {
+  echo -ne "Configuring wezterm..."
+  symlink "$DOTFILES/wezterm" "$HOME/.config/wezterm"
+  echo ""
+}
+
 # ── fzf-git ───────────────────────────────────────────────────────────────────
 install_fzf_git() {
   echo -ne "Cloning fzf-git..."
@@ -356,6 +363,7 @@ run() {
   fzf_git) install_fzf_git ;;
   eza) configure_eza ;;
   television) configure_television ;;
+  wezterm) configure_wezterm ;;
   *)
     echo "Unknown component: $1"
     exit 1
@@ -364,7 +372,7 @@ run() {
 }
 
 main() {
-  local all="packages utils tmux alacritty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television"
+  local all="packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)
