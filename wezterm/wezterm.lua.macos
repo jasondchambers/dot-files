@@ -1,6 +1,15 @@
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
+-- Listener to switch workspaces via a custom signal
+wezterm.on('user-var-changed', function(window, pane, name, value)
+    if name == 'SWITCH_WORKSPACE' then
+        window:perform_action(wezterm.action.SwitchToWorkspace {
+            name = value,
+        }, pane)
+    end
+end)
+
 -- Font
 config.font = wezterm.font('MesloLGS Nerd Font Mono')
 config.font_size = 14.0
@@ -122,6 +131,9 @@ config.keys = {
   { key = '7', mods = 'LEADER', action = wezterm.action.ActivateTab(6) },
   { key = '8', mods = 'LEADER', action = wezterm.action.ActivateTab(7) },
   { key = '9', mods = 'LEADER', action = wezterm.action.ActivateTab(8) },
+
+  -- GitHub
+  { key = 'g', mods = 'LEADER', action = wezterm.action.SendString 'open-gh\n' },
 
   -- Workspaces
   { key = 's', mods = 'LEADER', action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' } },
