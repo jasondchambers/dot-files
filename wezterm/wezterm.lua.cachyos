@@ -1,6 +1,15 @@
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
+-- Show current workspace name in the right status bar
+wezterm.on('update-right-status', function(window, pane)
+  local workspace = window:active_workspace()
+  window:set_right_status(wezterm.format({
+    { Foreground = { Color = '#a277ff' } },
+    { Text = '  ' .. workspace .. '  ' },
+  }))
+end)
+
 -- Listener to switch workspaces via a custom signal
 wezterm.on('user-var-changed', function(window, pane, name, value)
     if name == 'SWITCH_WORKSPACE' then
