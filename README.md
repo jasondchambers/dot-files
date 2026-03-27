@@ -32,6 +32,7 @@ chmod +x install.sh
 | git | `~/.config/git/config` | ✓ | ✓ |
 | lazygit | `~/.config/lazygit/` | ✓ | ✓ |
 | hypr | `~/.config/hypr/bindings.conf` | — | ✓ |
+| rofi | `~/.config/rofi/` | — | ✓ |
 | hammerspoon | `~/.hammerspoon/` | ✓ | — |
 | karabiner | `~/.config/karabiner/karabiner.json` | ✓ | — |
 | packages | Brewfile (macOS) / pkglist.txt + aur.txt (CachyOS) | ✓ | ✓ |
@@ -73,6 +74,7 @@ dot-files/
 ├── lazygit/            # ~/.config/lazygit/
 ├── nvim/               # ~/.config/nvim/
 ├── starship/           # ~/.config/starship.toml
+├── rofi/               # ~/.config/rofi/
 ├── television/         # ~/.config/television/cable/ (custom channels)
 ├── tmux/               # ~/.tmux.conf
 └── zsh/                # ~/.zshrc

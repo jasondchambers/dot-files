@@ -6,7 +6,7 @@
 #   ./install.sh zsh nvim tmux   # install specific components
 #
 # Components: packages tmux alacritty wezterm zsh starship nvim git lazygit
-#             hypr hammerspoon karabiner uv tv fzf_git eza television
+#             hypr hammerspoon karabiner uv tv fzf_git eza television rofi
 
 set -eu
 
@@ -335,6 +335,20 @@ configure_wezterm() {
   echo ""
 }
 
+# ── rofi (Linux only) ─────────────────────────────────────────────────────────
+configure_rofi() {
+  echo -ne "Configuring rofi..."
+  case "$OS" in
+  cachyos)
+    symlink "$DOTFILES/rofi" "$HOME/.config/rofi"
+    ;;
+  *)
+    echo -ne "skipping (not Linux)"
+    ;;
+  esac
+  echo ""
+}
+
 # ── fzf-git ───────────────────────────────────────────────────────────────────
 install_fzf_git() {
   echo -ne "Cloning fzf-git..."
@@ -370,6 +384,7 @@ run() {
   eza) configure_eza ;;
   television) configure_television ;;
   wezterm) configure_wezterm ;;
+  rofi) configure_rofi ;;
   *)
     echo "Unknown component: $1"
     exit 1
@@ -378,7 +393,7 @@ run() {
 }
 
 main() {
-  local all="packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television"
+  local all="packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)
