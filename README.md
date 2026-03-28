@@ -93,45 +93,19 @@ Keyboard shortcuts are used to launch commonly used applications. These are
 consistent across CachyOS and macOS. Hammerspoon provides this capability on
 macOS. The key mappings mirror the Hyprland bindings in `hypr/bindings.conf`.
 
+It can take a while to get to know the keyboard shortcuts, so an application launcher
+is used - Rofi on Hyprland and Alfred on macOS. The keybinding is identical on both
+
+SUPER + SPACE. 
+
 ### tmux
 
-tmux is my preferred multiplexer. It looks pretty dull out of the box and so has
-been customized to my taste.
-
-My approach to session management is completely my own, using a tool (in my
-utils repo) called flip.
-
-It enables the creation and or switching of tmux sessions whether inside or 
-detached from tmux and is powered by fzf.
-
-Be sure to checkout other tmux related utilities in In addition in [utils](https://github.com/jasondchambers/utils).
-
-**Leader key is C-b**
-
-| Key | Binding |
-|-----|---------|
-| **General** | |
-| \<leader> r | Reload conf |
-| \<leader> [ | Enter copy mode, navigate with vim motions, v, then y to copy|
-| \<leader> g | Launch GitHub in the browser|
-| C-h,j,k,l | Navigate panes (consistent with Neovim) |
-| **Panes** | |
-| \<leader> \| | New vertical pane |
-| \<leader> - | New horizontal pane |
-| \<leader> j,k,l,h | Resize pane |
-| \<leader> m | Toggle maximize pane |
-| \<leader> x | Kill pane |
-| **Windows** | |
-| \<Leader> c | Create                  |
-| \<Leader> w | See all panes/sessions |
-| \<leader> x | Kill window |
-| **Sessions** | |
-| \<Leader> d | Detach                   |
-| \<Leader> s | Switch                   |
+tmux was my preferred multiplexer. However, it has been retired along with Alacritty
+by WezTerm - which has pretty much a built-in multiplexer that meets my needs.
 
 ## WezTerm
 
-> **Experimenting with WezTerm as a replacement for Alacritty + tmux.** WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes, tabs, workspaces), potentially eliminating the need for a separate tmux setup.
+WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes, tabs, workspaces), potentially eliminating the need for a separate tmux setup.
 
 **Leader key is C-b**
 
