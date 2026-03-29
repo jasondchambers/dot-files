@@ -1,11 +1,12 @@
 configuration {
-/*	modes: "window,drun,run,ssh";*/
+	modes: "window,drun,run,ssh";
+  font: "MesloLGS Nerd Font Mono 12";
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-/*	show-icons: false;*/
+	show-icons: true;
 /*	preview-cmd: ;*/
 /*	on-selection-changed: ;*/
 /*	on-mode-changed: ;*/
@@ -69,7 +70,7 @@ configuration {
 /*	imdkit: true;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/
-/*	display-run: ;*/
+	display-run: "";
 /*	display-ssh: ;*/
 /*	display-drun: ;*/
 /*	display-combi: ;*/
@@ -167,4 +168,4 @@ configuration {
   }
 }
 
-@theme "/usr/share/rofi/themes/purple.rasi"
+@theme "themes/JasonsRofiTheme.rasi"
