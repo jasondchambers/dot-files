@@ -1,2 +1,1 @@
-require("jasondchambers.core")
-require("jasondchambers.lazy")
+new-init.lua

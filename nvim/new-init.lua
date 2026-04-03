@@ -30,7 +30,6 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
   end,
 })
 vim.api.nvim_create_autocmd("BufReadPost", { -- Restore to the cursor position last time file was opened
-  group = augroup,
   desc = "Restore last cursor position",
   callback = function()
     if vim.o.diff then return end
@@ -245,4 +244,70 @@ vim.keymap.set('n', '<leader>m', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/
 --vim.lsp.enable('lua_ls')
 --vim.lsp.enable('ts_ls')
 -- 0.12 has a new native LSP config API
-vim.lsp.enable('basedpyright') -- ensure basedpyright is installed first
+-- Moving away from Mason - instead, the LSP servers must be installed manually
+-- using the chosen O/S package manager
+vim.lsp.enable('basedpyright') -- Python LSP - ensure basedpyright is installed first
+vim.lsp.enable('bashls') -- Bash LSP - ensure bash-language-server is installed first
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+})
+
+vim.lsp.config('basedpyright', {
+  cmd = { 'basedpyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
+  '.git' },
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local opts = { buffer = ev.buf, silent = true }
+
+    opts.desc = 'Go to definition'
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+
+    opts.desc = 'Go to declaration'
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+
+    opts.desc = 'Show references'
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
+    opts.desc = 'Show hover info'
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+
+    opts.desc = 'Rename symbol'
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+
+    opts.desc = 'Code action'
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+
+    opts.desc = 'Show diagnostics'
+    vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
+
+    opts.desc = 'Next diagnostic'
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
+    opts.desc = 'Previous diagnostic'
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+
+    opts.desc = 'Toggle inline diagnostics'
+    vim.keymap.set('n', '<leader>td', function()
+      vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+    end, opts)
+
+    -- Format on save for sh/bash files
+    local ft = vim.bo[ev.buf].filetype
+    if ft == 'sh' or ft == 'bash' then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = ev.buf,
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end,
+      })
+    end
+  end,
+})
+
