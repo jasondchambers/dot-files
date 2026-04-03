@@ -142,7 +142,25 @@ config.keys = {
   { key = '9', mods = 'LEADER', action = wezterm.action.ActivateTab(8) },
 
   -- GitHub
-  { key = 'g', mods = 'LEADER', action = wezterm.action.SendString 'open-gh\n' },
+  { key = 'g', mods = 'LEADER', action = wezterm.action_callback(function(win, pane)
+    if is_vim(pane) then
+      local cwd_url = pane:get_current_working_dir()
+      local cwd = cwd_url and cwd_url.file_path or '.'
+      local ok, stdout, _ = wezterm.run_child_process({
+        '/bin/zsh', '-c', 'cd "$1" && git remote get-url origin', '--', cwd
+      })
+      if ok and stdout then
+        local url = stdout:gsub('%s+$', '')
+        if url:match('^git@') then
+          url = url:gsub('^git@', ''):gsub(':', '/'):gsub('%.git$', '')
+          url = 'https://' .. url
+        end
+        wezterm.open_with(url)
+      end
+    else
+      win:perform_action(wezterm.action.SendString 'open-gh\n', pane)
+    end
+  end) },
 
   -- Workspaces
   { key = 's', mods = 'LEADER', action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' } },
