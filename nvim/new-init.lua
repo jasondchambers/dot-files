@@ -63,8 +63,8 @@ vim.api.nvim_create_autocmd("BufReadPost", { -- Restore to the cursor position l
 -- DONE vim-maximizer.lua
 -- DONE which-key.lua
 
-
 vim.pack.add { 
+  'https://github.com/neovim/nvim-lspconfig', -- Collection of LSP server configurations
   'https://github.com/folke/tokyonight.nvim', -- The color theme
   'https://github.com/nvim-lua/plenary.nvim', -- Dependency of lazygit, nvim-telescope
   'https://github.com/kdheepak/lazygit.nvim', -- lazygit integration
@@ -245,3 +245,4 @@ vim.keymap.set('n', '<leader>m', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/
 --vim.lsp.enable('lua_ls')
 --vim.lsp.enable('ts_ls')
 -- 0.12 has a new native LSP config API
+vim.lsp.enable('basedpyright') -- ensure basedpyright is installed first
