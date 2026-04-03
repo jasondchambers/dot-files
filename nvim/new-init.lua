@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd("BufReadPost", { -- Restore to the cursor position l
 -- NOT-NOW dap.lua
 -- IGNORE dressing.lua -- It's been archived
 -- DONE gitsigns.lua
---indent-blankline.lua
+-- DONE indent-blankline.lua
 -- DONE lazygit.lua
 --lsp.lua
 -- DONE lualine.lua
@@ -79,6 +79,7 @@ vim.pack.add {
   'https://github.com/nvim-telescope/telescope.nvim', -- Wonderful way to open files
   'https://github.com/szw/vim-maximizer', -- Maximize current split
   'https://github.com/nvim-lualine/lualine.nvim', -- Beautiful status line at the bottom
+  'https://github.com/lukas-reineke/indent-blankline.nvim', -- Add indentation guides
 }
 vim.cmd.colorscheme('tokyonight-night')
 
@@ -95,6 +96,7 @@ local which_key = require('which-key')
 local telescope = require('telescope')
 local telescope_actions = require('telescope.actions')
 local lualine = require('lualine')
+local indent_blankline = require('ibl')
 
 colorizer.setup({
   user_default_options = {
@@ -207,6 +209,9 @@ lualine.setup({
       { "filetype" },
     },
   },
+})
+indent_blankline.setup({
+  indent = { char = '┊' },
 })
 
 -- 4. Keymaps
