@@ -203,11 +203,6 @@ install_nvim() {
 
 configure_nvim() {
   echo -ne "Configuring nvim..."
-  theme_lua="$DOTFILES/nvim/lua/jasondchambers/plugins/theme.lua"
-  if [ ! -f "$theme_lua" ] || [ -L "$theme_lua" ]; then
-    cp "$DOTFILES/nvim/lua/jasondchambers/plugins/theme.lua.default" "$theme_lua"
-    echo "  theme.lua <- default"
-  fi
   symlink "$DOTFILES/nvim" "$HOME/.config/nvim"
   echo ""
 }
