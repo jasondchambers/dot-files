@@ -17,6 +17,7 @@ vim.opt.autoread = true -- External file change detection (useful for AI agent w
 vim.opt.autowrite = false -- Ditto
 vim.opt.updatetime = 1000 -- Ditto
 vim.opt.swapfile = false -- Ditto
+vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
 vim.g.mapleader = " "
 vim.g.loaded_perl_provider   = 0
 vim.g.loaded_ruby_provider   = 0
@@ -51,14 +52,14 @@ vim.api.nvim_create_autocmd("BufReadPost", { -- Restore to the cursor position l
 -- DONE gitsigns.lua
 -- DONE indent-blankline.lua
 -- DONE lazygit.lua
---lsp.lua
+-- IGNORE lsp.lua
 -- DONE lualine.lua
 -- DONE nvim-tree.lua
 -- DONE smart-splits.lua
 -- DONE telescope.lua
 -- IGNORE theme.lua
 -- IGNORE theme.lua.default
---treesitter.lua
+-- DONE treesitter.lua
 -- DONE vim-maximizer.lua
 -- DONE which-key.lua
 
@@ -79,12 +80,12 @@ vim.pack.add {
   'https://github.com/szw/vim-maximizer', -- Maximize current split
   'https://github.com/nvim-lualine/lualine.nvim', -- Beautiful status line at the bottom
   'https://github.com/lukas-reineke/indent-blankline.nvim', -- Add indentation guides
+  'https://github.com/nvim-treesitter/nvim-treesitter', -- indentation, highlighting for multiple languages
+  'https://github.com/MeanderingProgrammer/render-markdown.nvim', -- Does what it says in the tin
 }
 vim.cmd.colorscheme('tokyonight-night')
 
 -- 3. Configure each plugin
---require('which-key').setup({})
---require('fzf-lua').setup({})
 
 local colorizer = require('colorizer')
 local alpha = require('alpha')
@@ -96,6 +97,9 @@ local telescope = require('telescope')
 local telescope_actions = require('telescope.actions')
 local lualine = require('lualine')
 local indent_blankline = require('ibl')
+local nvim_treesitter = require('nvim-treesitter')
+local render_markdown = require('render-markdown')
+
 
 colorizer.setup({
   user_default_options = {
@@ -212,6 +216,40 @@ lualine.setup({
 indent_blankline.setup({
   indent = { char = '┊' },
 })
+-- Treesitter section
+nvim_treesitter.install({
+  'bash',
+  'python',
+  'javascript',
+  'typescript',
+  'tsx',
+  'lua',
+  'json',
+  'yaml',
+  'markdown',
+  'markdown_inline', -- needed for inline code in markdown
+  'vim',
+  'vimdoc',
+})
+
+-- Keep parsers up to date when plugin updates
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function()
+    require('nvim-treesitter').update()
+  end,
+})
+
+-- Enable highlighting, folding and indentation per filetype
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    local ok = pcall(vim.treesitter.start)
+    if not ok then return end
+
+    -- Indentation (provided by nvim-treesitter, experimental)
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+render_markdown.setup({})
 
 -- 4. Keymaps
 vim.keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
@@ -238,11 +276,12 @@ vim.keymap.set('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>',    { desc = 'Fu
 vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>',   { desc = 'Find string in cwd' }) -- telescope
 vim.keymap.set('n', '<leader>fc', '<cmd>Telescope grep_string<cr>', { desc = 'Find string under cursor in cwd' }) -- telescope
 vim.keymap.set('n', '<leader>m', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/minimize a split' }) -- vim-maximizer
+vim.keymap.set('i', '<CR>', function()
+  return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
+end, { expr = true })
 
 
 -- 5. LSP
---vim.lsp.enable('lua_ls')
---vim.lsp.enable('ts_ls')
 -- 0.12 has a new native LSP config API
 -- Moving away from Mason - instead, the LSP servers must be installed manually
 -- using the chosen O/S package manager
@@ -264,6 +303,8 @@ vim.lsp.config('basedpyright', {
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
+    vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
+
     local opts = { buffer = ev.buf, silent = true }
 
     opts.desc = 'Go to definition'
@@ -310,4 +351,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
 
