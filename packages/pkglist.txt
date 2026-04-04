@@ -164,6 +164,7 @@ sysfsutils
 texinfo
 thunar
 tmux
+tree-sitter-cli
 ttf-bitstream-vera
 ttf-dejavu
 ttf-liberation
