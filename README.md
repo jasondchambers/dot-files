@@ -23,8 +23,6 @@ chmod +x install.sh
 | Component | Target | macOS | CachyOS |
 |---|---|:---:|:---:|
 | [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ |
-| tmux | `~/.tmux.conf` | ✓ | ✓ |
-| alacritty | `~/.config/alacritty/` | ✓ | ✓ |
 | wezterm | `~/.config/wezterm/` | ✓ | ✓ |
 | zsh | `~/.zshrc` | ✓ | ✓ |
 | starship | `~/.config/starship.toml` | ✓ | ✓ |
@@ -44,7 +42,7 @@ chmod +x install.sh
 Install only specific components:
 
 ```sh
-./install.sh zsh nvim tmux
+./install.sh zsh nvim 
 ```
 
 ## First-time macOS setup
@@ -65,7 +63,6 @@ dot-files/
 ├── packages/           # Package lists (CachyOS)
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
-├── alacritty/          # ~/.config/alacritty/
 ├── wezterm/            # ~/.config/wezterm/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
@@ -76,7 +73,6 @@ dot-files/
 ├── starship/           # ~/.config/starship.toml
 ├── rofi/               # ~/.config/rofi/
 ├── television/         # ~/.config/television/cable/ (custom channels)
-├── tmux/               # ~/.tmux.conf
 └── zsh/                # ~/.zshrc
 ```
 
@@ -132,7 +128,8 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 
 ## Neovim
 
-Based on [Josean's](https://www.josean.com/posts/how-to-setup-neovim-2024) setup but modified to my taste and modernized (certain things weren't working in 2026 as Josean's blog post is from 2024).
+Rewritten for Neovim 0.12 using the new native plugin manager (`vim.pack`) and native LSP config API. No Mason — LSP servers are installed manually via the OS package manager.
+TODO - Add DAP
 
 ### Keybindings
 
@@ -142,15 +139,13 @@ Leader key is `Space`
 |-----|---------|
 | **General** | |
 | \<leader>nh | Clear search highlights |
-| \<leader>+ | Increment number |
 | \<leader>\| | Split window vertically |
 | \<leader>- | Split window horizontally |
 | \<leader>x | Close current split |
 | \<leader>m | Maximize/minimize split |
-| C-h/j/k/l | Navigate splits (consistent with tmux) |
+| C-h/j/k/l | Navigate splits (consistent with WezTerm) |
 | **File Explorer** | |
-| \<leader>ee | Toggle file explorer |
-| \<leader>ef | Toggle file explorer on current file |
+| \<leader>ee | Toggle file explorer on current file |
 | \<leader>ec | Collapse file explorer |
 | \<leader>er | Refresh file explorer |
 | **Telescope** | |
@@ -159,11 +154,6 @@ Leader key is `Space`
 | \<leader>fr | Recent files |
 | \<leader>fg | Live grep |
 | \<leader>fc | Grep string under cursor |
-| **Navigation** | |
-| ]f | Next function |
-| [f | Previous function |
-| ]d | Next diagnostic |
-| [d | Previous diagnostic |
 | **Git** | |
 | ]h | Next git hunk |
 | [h | Previous git hunk |
@@ -175,22 +165,16 @@ Leader key is `Space`
 | **LSP** | |
 | gd | Go to definition |
 | gD | Go to declaration |
-| gr | Go to references |
+| gr | Show references |
 | K | Hover docs |
 | \<leader>rn | Rename symbol |
 | \<leader>ca | Code action |
 | \<leader>d | Show diagnostics float |
+| ]d | Next diagnostic |
+| [d | Previous diagnostic |
 | \<leader>td | Toggle inline diagnostics |
-| **Debugging (DAP)** | |
-| \<leader>db | Toggle breakpoint |
-| \<leader>dB | Conditional breakpoint |
-| \<leader>dc | Start/Continue |
-| \<leader>do | Step over |
-| \<leader>di | Step into |
-| \<leader>dO | Step out |
-| \<leader>dr | Restart |
-| \<leader>dx | Terminate |
-| \<leader>du | Toggle debug UI |
+| **Completion** | |
+| \<CR> | Confirm completion (insert mode) |
 
 
 
