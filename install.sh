@@ -7,6 +7,7 @@
 #
 # Components: packages tmux alacritty wezterm zsh starship nvim git lazygit
 #             hypr hammerspoon karabiner uv tv fzf_git eza television rofi
+#             language_servers
 
 set -eu
 
@@ -178,6 +179,28 @@ configure_zsh() {
 }
 
 # ── nvim ──────────────────────────────────────────────────────────────────────
+install_nvim() {
+  case "$OS" in
+  cachyos)
+    if nvim --version 2>/dev/null | grep -q "^NVIM v0\.12"; then
+      echo -ne "nvim 0.12 already installed"
+      return
+    fi
+    echo -ne "Downloading nvim 0.12..."
+    local url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
+    local tmp
+    tmp=$(mktemp -t nvim-XXXXXX.tar.gz)
+    curl -fsSL "$url" -o "$tmp"
+    tar -xzf "$tmp" -C "$HOME"
+    rm -f "$tmp"
+    echo -ne " installed to ~/nvim-linux-x86_64/bin/nvim"
+    ;;
+  *)
+    echo -ne "skipping nvim binary install (not CachyOS)"
+    ;;
+  esac
+}
+
 configure_nvim() {
   echo -ne "Configuring nvim..."
   theme_lua="$DOTFILES/nvim/lua/jasondchambers/plugins/theme.lua"
@@ -349,6 +372,32 @@ configure_rofi() {
   echo ""
 }
 
+# ── language servers ──────────────────────────────────────────────────────────
+install_language_servers() {
+  echo -ne "Installing language servers..."
+  echo ""
+  case "$OS" in
+  cachyos)
+    if ! command -v bash-language-server >/dev/null 2>&1; then
+      echo "  Installing bash-language-server..."
+      sudo pacman -S --noconfirm bash-language-server
+    else
+      echo "  bash-language-server already installed"
+    fi
+    ;;
+  *)
+    echo "  skipping bash-language-server (unsupported OS)"
+    ;;
+  esac
+  if ! command -v basedpyright >/dev/null 2>&1; then
+    echo "  Installing basedpyright..."
+    uv tool install basedpyright
+  else
+    echo "  basedpyright already installed"
+  fi
+  echo ""
+}
+
 # ── fzf-git ───────────────────────────────────────────────────────────────────
 install_fzf_git() {
   echo -ne "Cloning fzf-git..."
@@ -371,7 +420,10 @@ run() {
   alacritty) configure_alacritty ;;
   zsh) configure_zsh ;;
   starship) configure_component "starship" "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml" ;;
-  nvim) configure_nvim ;;
+  nvim)
+    install_nvim
+    configure_nvim
+    ;;
   git) configure_component "git" "$DOTFILES/git/config" "$HOME/.config/git/config" ;;
   lazygit) configure_lazygit ;;
   hypr) configure_hypr ;;
@@ -385,6 +437,7 @@ run() {
   television) configure_television ;;
   wezterm) configure_wezterm ;;
   rofi) configure_rofi ;;
+  language_servers) install_language_servers ;;
   *)
     echo "Unknown component: $1"
     exit 1
@@ -393,7 +446,7 @@ run() {
 }
 
 main() {
-  local all="packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi"
+  local all="packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

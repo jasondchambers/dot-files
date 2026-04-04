@@ -53,7 +53,7 @@ def configure_aliases() {
 }
 
 def configure_path() {
-  export PATH="$HOME/repos/utils:$PATH"
+  export PATH="$HOME/nvim-linux-x86_64/bin:$HOME/repos/utils:$PATH"
 }
 
 def configure_zoxide() { 
