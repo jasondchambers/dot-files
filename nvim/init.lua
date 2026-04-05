@@ -65,7 +65,6 @@ vim.api.nvim_create_autocmd("BufReadPost", { -- Restore to the cursor position l
 
 vim.pack.add { 
   'https://github.com/neovim/nvim-lspconfig', -- Collection of LSP server configurations
-  'https://github.com/folke/tokyonight.nvim', -- The color theme
   'https://github.com/nvim-lua/plenary.nvim', -- Dependency of lazygit, nvim-telescope
   'https://github.com/kdheepak/lazygit.nvim', -- lazygit integration
   'https://github.com/NvChad/nvim-colorizer.lua', -- Colorize #aabbff 
@@ -83,7 +82,7 @@ vim.pack.add {
   'https://github.com/nvim-treesitter/nvim-treesitter', -- indentation, highlighting for multiple languages
   'https://github.com/MeanderingProgrammer/render-markdown.nvim', -- Does what it says in the tin
 }
-vim.cmd.colorscheme('tokyonight-night')
+vim.cmd.colorscheme('miniautumn')
 
 -- 3. Configure each plugin
 
