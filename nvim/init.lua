@@ -91,7 +91,7 @@ vim.cmd.colorscheme('miniautumn')
 -- 3. Configure each plugin
 
 local colorizer = require('colorizer')
-local alpha = require('alpha')
+local alpha_custom_greeter = require('jasonchambers.alpha-custom-greeter')
 local gitsigns = require('gitsigns')
 local nvim_tree = require('nvim-tree')
 local smart_splits = require('smart-splits')
@@ -115,7 +115,6 @@ colorizer.setup({
     hsl_fn = true,
   },
 })
-alpha.setup(require('alpha.themes.startify').config)
 gitsigns.setup()
 nvim_tree.setup({
   view = {
