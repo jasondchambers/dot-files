@@ -108,8 +108,6 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 | Key | Binding |
 |-----|---------|
 | **General** | |
-| \<leader> [ | Enter copy mode, navigate with vim motions |
-| F11 | Toggle fullscreen |
 | C-h,j,k,l | Navigate panes (seamless with Neovim) |
 | **Panes** | |
 | \<leader> \| | New pane (split right) |
@@ -175,6 +173,10 @@ Leader key is `Space`
 | \<leader>td | Toggle inline diagnostics |
 | **Completion** | |
 | \<CR> | Confirm completion (insert mode) |
+| **Undo** | |
+| \<leader>u | Toggle Undotree |
+| C-u | Undo|
+| C-r | Redo|
 
 
 
