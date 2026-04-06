@@ -1,5 +1,6 @@
 -- Brand new simplified modernized config for Neovim 0.12
 -- 1. Options (no plugins needed)
+vim.opt.termguicolors = true -- Needed by Colorizer
 vim.opt.relativenumber = true -- Show relative line numbers from current position 
 vim.opt.number = true -- show absolute line number for current line
 vim.opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
@@ -67,7 +68,7 @@ vim.pack.add {
   'https://github.com/neovim/nvim-lspconfig', -- Collection of LSP server configurations
   'https://github.com/nvim-lua/plenary.nvim', -- Dependency of lazygit, nvim-telescope
   'https://github.com/kdheepak/lazygit.nvim', -- lazygit integration
-  'https://github.com/NvChad/nvim-colorizer.lua', -- Colorize #aabbff 
+  'https://github.com/NvChad/nvim-colorizer.lua', -- Colorize #aa0000
   'https://github.com/nvim-mini/mini.nvim',  -- Dependency of alpha
   'https://github.com/goolord/alpha-nvim', -- Nice greeter
   'https://github.com/lewis6991/gitsigns.nvim', -- GitSigns 
@@ -82,6 +83,7 @@ vim.pack.add {
   'https://github.com/nvim-treesitter/nvim-treesitter', -- indentation, highlighting for multiple languages
   'https://github.com/MeanderingProgrammer/render-markdown.nvim', -- Does what it says in the tin
 }
+vim.cmd("packadd nvim.undotree")
 vim.cmd.colorscheme('miniautumn')
 
 -- 3. Configure each plugin
@@ -98,6 +100,7 @@ local lualine = require('lualine')
 local indent_blankline = require('ibl')
 local nvim_treesitter = require('nvim-treesitter')
 local render_markdown = require('render-markdown')
+local undotree = require('undotree')
 
 
 colorizer.setup({
@@ -278,6 +281,7 @@ vim.keymap.set('n', '<leader>m', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/
 vim.keymap.set('i', '<CR>', function()
   return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
 end, { expr = true })
+vim.keymap.set("n", "<leader>u", require("undotree").open)
 
 
 -- 5. LSP
