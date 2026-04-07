@@ -126,22 +126,54 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 
 ## Neovim
 
-Rewritten for Neovim 0.12 using the new native plugin manager (`vim.pack`) and native LSP config API. No Mason — LSP servers are installed manually via the OS package manager.
-TODO - Add DAP
+Rewritten for Neovim 0.12 using the new native plugin manager (`vim.pack`) and native LSP config API. No Mason — LSP servers are installed manually via the OS package manager. Colorscheme is `miniautumn` (from mini.nvim).
+
+### Plugins
+
+| Plugin | Purpose |
+|--------|---------|
+| **alpha-nvim** | Custom greeter screen |
+| **lualine.nvim** | Status line with mode-colored segments |
+| **indent-blankline.nvim** | Indentation guides (`┊`) |
+| **nvim-colorizer.lua** | Inline hex color highlighting |
+| **nvim-web-devicons** | File type icons |
+| **nvim-tree.lua** | File explorer |
+| **telescope.nvim** | Fuzzy finder (files, buffers, grep) |
+| **vim-maximizer** | Toggle-maximize current split |
+| **gitsigns.nvim** | Inline git hunks, blame, stage/reset |
+| **lazygit.nvim** | LazyGit TUI inside Neovim |
+| **nvim-treesitter** | Syntax highlighting + indentation (bash, python, JS/TS/TSX, lua, json, yaml, markdown, vim) |
+| **render-markdown.nvim** | Renders markdown visually in the buffer |
+| **nvim-lspconfig** | LSP client configuration |
+| **nvim-undotree** | Visual undo history browser |
+| **smart-splits.nvim** | Seamless split navigation across WezTerm panes |
+| **which-key.nvim** | Keybinding hints popup |
+
+### LSP Servers
+
+Installed manually via the OS package manager (not Mason).
+
+| Server | Language |
+|--------|---------|
+| `basedpyright` | Python |
+| `bashls` | Bash / sh |
+
+Completion uses Neovim's native LSP completion with `<CR>` to confirm. Format-on-save is enabled for shell files.
 
 ### Keybindings
 
 Leader key is `Space`
 
-| Key | Binding |
-|-----|---------|
+| Key | Action |
+|-----|--------|
 | **General** | |
 | \<leader>nh | Clear search highlights |
 | \<leader>\| | Split window vertically |
 | \<leader>- | Split window horizontally |
 | \<leader>x | Close current split |
 | \<leader>m | Maximize/minimize split |
-| C-h/j/k/l | Navigate splits (consistent with WezTerm) |
+| \<leader>u | Toggle Undotree |
+| C-h/j/k/l | Navigate splits (seamless with WezTerm) |
 | **File Explorer** | |
 | \<leader>ee | Toggle file explorer on current file |
 | \<leader>ec | Collapse file explorer |
@@ -153,30 +185,23 @@ Leader key is `Space`
 | \<leader>fg | Live grep |
 | \<leader>fc | Grep string under cursor |
 | **Git** | |
-| ]h | Next git hunk |
-| [h | Previous git hunk |
+| \<leader>lg | Open LazyGit |
+| ]h / [h | Next / previous git hunk |
 | \<leader>gp | Preview hunk |
 | \<leader>gs | Stage hunk |
 | \<leader>gr | Reset hunk |
 | \<leader>gb | Blame line |
-| \<leader>lg | Open LazyGit |
 | **LSP** | |
-| gd | Go to definition |
-| gD | Go to declaration |
+| gd / gD | Go to definition / declaration |
 | gr | Show references |
 | K | Hover docs |
 | \<leader>rn | Rename symbol |
 | \<leader>ca | Code action |
 | \<leader>d | Show diagnostics float |
-| ]d | Next diagnostic |
-| [d | Previous diagnostic |
+| ]d / [d | Next / previous diagnostic |
 | \<leader>td | Toggle inline diagnostics |
 | **Completion** | |
 | \<CR> | Confirm completion (insert mode) |
-| **Undo** | |
-| \<leader>u | Toggle Undotree |
-| C-u | Undo|
-| C-r | Redo|
 
 
 

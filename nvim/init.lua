@@ -87,6 +87,8 @@ vim.pack.add {
 }
 vim.cmd("packadd nvim.undotree")
 vim.cmd.colorscheme('miniautumn')
+vim.api.nvim_set_hl(0, "Normal",      { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- 3. Configure each plugin
 
