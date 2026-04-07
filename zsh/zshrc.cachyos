@@ -46,10 +46,6 @@ def configure_aliases() {
   source ~/repos/dot-files/zsh/aliases.sh
   alias tree='treex'
   alias open='xdg-open'
-  function doppler() {
-    command doppler "$@"
-    source ~/repos/utils/update-doppler-in-prompt
-  }
 }
 
 def configure_path() {
@@ -72,25 +68,9 @@ def python_hook() {
   fi
 }
 
-def doppler_hook() {
-  local config="$HOME/.doppler/.doppler.yaml"
-  [[ ! -f "$config" ]] && return
-  if grep -qF "$(pwd):" "$config"; then
-    local section project env
-    section=$(grep -A 7 -F "$(pwd):" "$config")
-    #project=$(echo "$section" | grep "enclave.project" | head -1 | awk '{print $2}')
-    env=$(echo "$section" | grep "enclave.config" | head -1 | awk '{print $2}')
-    export MY_DOPPLER_CONFIG="$env"
-    echo "Doppler: $MY_DOPPLER_CONFIG"
-  else
-    unset MY_DOPPLER_CONFIG
-  fi
-}
-
 def configure_zsh_chpwd_hooks() { 
   autoload -Uz add-zsh-hook 
   add-zsh-hook chpwd python_hook
-  add-zsh-hook chpwd doppler_hook
 }
 
 configure_history
@@ -106,7 +86,6 @@ configure_zsh_chpwd_hooks
 
 # Run chpwd-style hooks on shell init
 python_hook
-doppler_hook
 
 
 . "$HOME/.local/share/../bin/env"

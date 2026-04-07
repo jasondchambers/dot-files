@@ -76,6 +76,49 @@ dot-files/
 └── zsh/                # ~/.zshrc
 ```
 
+## Zsh
+
+Entry point is `zsh/zshrc.macOS` (macOS) or `zsh/zshrc.cachyos` (CachyOS), both sourcing a shared `zsh/aliases.sh`. Config is organized as named `configure_*` functions called at the bottom of the file — each concern is self-contained and easy to find.
+
+### Shell Features
+
+| Feature | Tool | Notes |
+|---------|------|-------|
+| Prompt | [Starship](https://starship.rs/) | Cross-platform, fast, git-aware |
+| Syntax highlighting | zsh-syntax-highlighting | Commands colorized as you type |
+| Autosuggestions | zsh-autosuggestions | Fish-style suggestions from history |
+| Fuzzy finder | [fzf](https://github.com/junegunn/fzf) | `Ctrl-R` history, `Ctrl-T` files, `Alt-C` cd; macOS also loads fzf-git.sh |
+| Directory jumping | [zoxide](https://github.com/ajeetdsouza/zoxide) | `z <partial-name>` jumps to frecent dirs |
+| Line editing | vi mode | `bindkey -v` — normal/insert mode in the shell |
+| History | Shared, 10k lines | Persisted to `~/.zsh_history`, shared across sessions |
+| `bat` theme | Catppuccin Mocha | Consistent with the rest of the color palette |
+| gcloud SDK | Google Cloud SDK | macOS only — PATH and shell completion auto-loaded if installed |
+| nvm | Node Version Manager | CachyOS only |
+
+### Directory Change Hooks (`chpwd`)
+
+Hooks fire automatically whenever you `cd` into a directory and once on shell startup:
+
+| Hook | Platforms | Behavior |
+|------|-----------|---------|
+| `python_hook` | both | Auto-activates `.venv/` or `venv/` if present; deactivates when leaving |
+
+### Aliases
+
+| Alias | Expands to | Notes |
+|-------|-----------|-------|
+| `ls` | `eza` | Modern `ls` with icons and git status |
+| `vi` / `vim` | `nvim` | Muscle memory redirected |
+| `s` | `tv ssh` | SSH via [television](https://github.com/alexpasmantier/television) fuzzy picker |
+| `sf` | `tv sftp` | SFTP via television fuzzy picker |
+| `tree` | `treex` | CachyOS only |
+| `open` | `xdg-open` | CachyOS only — macOS-style `open` |
+| `typora` | `open -a typora` | macOS only |
+
+### macOS-only: 1Password Environment Loader
+
+`op-env [name]` loads a 1Password-backed service account token and environment ID into the shell. If no name is given, fzf prompts for selection.
+
 ## Notes
 
 - All installs are idempotent — safe to re-run after changes
