@@ -33,6 +33,13 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
     end
   end,
 })
+vim.api.nvim_create_autocmd("FileType", { -- Enable line wrapping for markdown
+  pattern = { "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true -- wrap at word boundaries, not mid-word
+  end,
+})
 vim.api.nvim_create_autocmd("BufReadPost", { -- Restore to the cursor position last time file was opened
   desc = "Restore last cursor position",
   callback = function()
