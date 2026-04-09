@@ -287,6 +287,11 @@ vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>',     { desc = 'Te
 vim.keymap.set('n', '<leader>fr', '<cmd>Telescope oldfiles<cr>',    { desc = 'Fuzzy find recent files' }) -- telescope
 vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>',   { desc = 'Find string in cwd' }) -- telescope
 vim.keymap.set('n', '<leader>fc', '<cmd>Telescope grep_string<cr>', { desc = 'Find string under cursor in cwd' }) -- telescope
+vim.keymap.set('n', '<leader>fc', function()
+  require('telescope.builtin').find_files {
+    cwd = vim.fn.stdpath("config")
+  }
+end, { desc = 'Find in Neovim config' })
 vim.keymap.set('n', '<leader>m', '<cmd>MaximizerToggle<CR>', { desc = 'Maximize/minimize a split' }) -- vim-maximizer
 vim.keymap.set('i', '<CR>', function()
   return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
