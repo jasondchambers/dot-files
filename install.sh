@@ -125,9 +125,9 @@ install_packages() {
       (cd /tmp/paru && makepkg -si --noconfirm)
     fi
     echo "  Installing native packages from packages/pkglist.txt..."
-    paru -S --needed --noconfirm - < "$DOTFILES/packages/pkglist.txt"
+    paru -S --needed --noconfirm - <"$DOTFILES/packages/pkglist.txt"
     echo "  Installing AUR packages from packages/aur.txt..."
-    paru -S --needed --noconfirm - < "$DOTFILES/packages/aur.txt"
+    paru -S --needed --noconfirm - <"$DOTFILES/packages/aur.txt"
     ;;
   *)
     echo -ne "skipping (unsupported OS)"
