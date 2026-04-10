@@ -258,7 +258,11 @@ vim.api.nvim_create_autocmd('FileType', {
     if not ok then return end
 
     -- Indentation (provided by nvim-treesitter, experimental)
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    -- Excluded: sh/bash treesitter indent is unreliable (uses 4 spaces, ignores shiftwidth)
+    local ft = vim.bo.filetype
+    if ft ~= 'sh' and ft ~= 'bash' then
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
   end,
 })
 render_markdown.setup({})

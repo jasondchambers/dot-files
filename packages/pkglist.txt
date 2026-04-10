@@ -156,6 +156,7 @@ rsync
 s-nail
 sddm
 sg3_utils
+shfmt
 smartmontools
 snapper
 sof-firmware
