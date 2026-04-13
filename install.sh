@@ -226,7 +226,6 @@ configure_hypr() {
   echo -ne "Configuring hypr..."
   case "$OS" in
   cachyos)
-    symlink "$DOTFILES/hypr/bindings.conf" "$HOME/.config/hypr/bindings.conf"
     ;;
   *)
     echo -ne "skipping (not Linux)"

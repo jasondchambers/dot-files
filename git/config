@@ -12,3 +12,5 @@
   side-by-side = false
 [merge]
 	conflictStyle = zdiff3
+[init]
+	defaultBranch = main
