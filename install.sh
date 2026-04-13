@@ -201,6 +201,22 @@ install_nvim() {
   esac
 }
 
+install_hyprmod() {
+  case "$OS" in
+  cachyos)
+    if [ ! -d "$HOME/repos/hyprmod" ]; then
+      git clone git clone https://github.com/BlueManCZ/hyprmod.git "$HOME/repos/hyprmod"
+      (cd "$HOME/repos/hyprmod" && uv sync)
+    else
+      echo -ne "already present"
+    fi
+    ;;
+  *)
+    echo -ne "skipping install of hyprmod (not CachyOS)"
+    ;;
+  esac
+}
+
 configure_nvim() {
   echo -ne "Configuring nvim..."
   symlink "$DOTFILES/nvim" "$HOME/.config/nvim"
@@ -226,8 +242,7 @@ configure_hypr() {
   echo -ne "Configuring hypr..."
   case "$OS" in
   cachyos)
-    symlink "$DOTFILES/hypr/hyprland.cachyos.conf" "$HOME/.config/hypr/hyprland.conf"
-    symlink "$DOTFILES/hypr/hyprland-gui.conf" "$HOME/.config/hypr/hyprland-gui.conf"
+    symlink "$DOTFILES/hypr" "$HOME/.config/hypr"
     ;;
   *)
     echo -ne "skipping (not Linux)"
@@ -423,6 +438,7 @@ run() {
   git) configure_component "git" "$DOTFILES/git/config" "$HOME/.config/git/config" ;;
   lazygit) configure_lazygit ;;
   hypr) configure_hypr ;;
+  hyprmod) install_hyprmod ;;
   hammerspoon) configure_hammerspoon ;;
   karabiner) configure_karabiner ;;
   uv) install_uv ;;
