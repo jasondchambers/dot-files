@@ -226,6 +226,7 @@ configure_hypr() {
   echo -ne "Configuring hypr..."
   case "$OS" in
   cachyos)
+    symlink "$DOTFILES/hypr/hyprland.cachyos.conf" "$HOME/.config/hypr/hyprland.conf"
     ;;
   *)
     echo -ne "skipping (not Linux)"
