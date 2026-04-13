@@ -205,7 +205,7 @@ install_hyprmod() {
   case "$OS" in
   cachyos)
     if [ ! -d "$HOME/repos/hyprmod" ]; then
-      git clone git clone https://github.com/BlueManCZ/hyprmod.git "$HOME/repos/hyprmod"
+      git clone https://github.com/BlueManCZ/hyprmod.git "$HOME/repos/hyprmod"
       (cd "$HOME/repos/hyprmod" && uv sync)
     else
       echo -ne "already present"
