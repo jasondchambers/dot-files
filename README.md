@@ -229,8 +229,8 @@ Leader key is `Space`
 | \<leader>fc | Grep string under cursor |
 | C-q (in Telescope) | Send all filtered results to quickfix list |
 | **Quickfix** | |
-| \<M-n> | Next item in quickfix list |
-| \<M-p> | Previous item in quickfix list |
+| \<leader>n | Next item in quickfix list |
+| \<leader>p | Previous item in quickfix list |
 | **Git** | |
 | \<leader>lg | Open LazyGit |
 | ]h / [h | Next / previous git hunk |
