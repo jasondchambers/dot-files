@@ -166,7 +166,7 @@ telescope.setup({
       i = {
         ['<C-k>'] = telescope_actions.move_selection_previous,
         ['<C-j>'] = telescope_actions.move_selection_next,
-        ['<C-q>'] = telescope_actions.send_selected_to_qflist + telescope_actions.open_qflist,
+        ['<C-q>'] = telescope_actions.send_to_qflist + telescope_actions.open_qflist,
       },
     },
   },
@@ -302,6 +302,8 @@ vim.keymap.set('i', '<CR>', function()
 end, { expr = true })
 vim.keymap.set("n", "<leader>u", require("undotree").open)
 vim.keymap.set("n", "<leader>tm", '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle markdown render on/off' })
+vim.keymap.set("n", "<M-n>", "<cmd>cnext<CR>", { desc = 'Quickfix next in list' }) -- Quickfix
+vim.keymap.set("n", "<M-p>", "<cmd>cprev<CR>", { desc = 'Quickfix prev in list' }) -- Quickfix
 
 
 -- 5. LSP
