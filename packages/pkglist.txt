@@ -101,6 +101,7 @@ logrotate
 lsb-release
 lsscsi
 lvm2
+lua-language-server
 man-db
 man-pages
 mdadm
