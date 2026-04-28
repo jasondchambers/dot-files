@@ -34,6 +34,7 @@ configure_fzf() {
    source <(fzf --zsh) 
    source ~/repos/fzf-git.sh/fzf-git.sh 
    bindkey '^I' fzf-completion
+   export FZF_DEFAULT_COMMAND='fd' # To ensure it ignores hidden
 }
 
 # Enable command line editing to use vim

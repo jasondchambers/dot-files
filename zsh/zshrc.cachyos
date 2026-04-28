@@ -25,6 +25,8 @@ def configure_starship() {
 # https://github.com/junegunn/fzf?tab=readme-ov-file#key-bindings-for-command-line
 def configure_fzf() { 
    source <(fzf --zsh)
+   export FZF_DEFAULT_COMMAND='fd' # To ensure it ignores hidden
+
 }
 
 # Enable command line editing to use vim
