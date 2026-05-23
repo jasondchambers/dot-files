@@ -406,6 +406,12 @@ install_language_servers() {
   else
     echo "  basedpyright already installed"
   fi
+  if ! command -v typescript-language-server >/dev/null 2>&1; then
+    echo "  Installing typescript-language-server..."
+    npm install -g typescript-language-server typescript
+  else
+    echo "  typescript-language-server already installed"
+  fi
   echo ""
 }
 
