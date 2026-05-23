@@ -312,6 +312,7 @@ local function configure_lsp()
   vim.lsp.enable('basedpyright') -- Python LSP - ensure basedpyright is installed first
   vim.lsp.enable('bashls')       -- Bash LSP - ensure bash-language-server is installed first
   vim.lsp.enable('lua_ls')       -- Lua LSP - ensure lua-language-server is installed first
+  vim.lsp.enable('ts_ls')        -- JS/TS LSP - ensure typescript-language-server is installed first
 
   vim.diagnostic.config({
     virtual_text = true,
@@ -333,6 +334,12 @@ local function configure_lsp()
     settings = {
       Lua = { workspace = { library = vim.api.nvim_get_runtime_file('', true) } },
     },
+  })
+
+  vim.lsp.config('ts_ls', {
+    cmd = { 'typescript-language-server', '--stdio' },
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+    root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
   })
 
   vim.api.nvim_create_autocmd('LspAttach', {
@@ -373,9 +380,11 @@ local function configure_lsp()
         vim.diagnostic.enable(not vim.diagnostic.is_enabled())
       end, opts)
 
-      -- Format on save for sh/bash and lua files
+      -- Format on save for sh/bash, lua, and JS/TS files
       local ft = vim.bo[ev.buf].filetype
-      if ft == 'sh' or ft == 'bash' or ft == 'lua' then
+      if ft == 'sh' or ft == 'bash' or ft == 'lua'
+        or ft == 'javascript' or ft == 'javascriptreact'
+        or ft == 'typescript' or ft == 'typescriptreact' then
         vim.api.nvim_create_autocmd('BufWritePre', {
           buffer = ev.buf,
           callback = function()
