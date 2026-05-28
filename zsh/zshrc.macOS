@@ -106,6 +106,15 @@ op-env() {
   export OP_CURRENT_ENV_NAME=$envname
 }
 
+field () { 
+  awk -F "${2:- }" "{ print \$${1:-1} }" 
+
+}
+
+total() {
+    awk '{sum += $1} END {print sum}'
+}
+
 . "$HOME/.local/bin/env"
 
 # Run chpwd-style hooks on shell init
