@@ -13,7 +13,8 @@ local function set_options()
   vim.opt.cursorline = true               -- highlight the current cursor line
   vim.opt.clipboard:append("unnamedplus") -- yank to the system clipboard
   vim.opt.signcolumn  = "yes"             -- sign column is used for git signs, diagnostics, breakpoints
-  vim.opt.colorcolumn = "80"              -- Show where column 80 is
+  vim.opt.colorcolumn = "100"             -- Show where column 100 is
+  vim.opt.textwidth   = 100               -- gqq wraps at this column
   vim.opt.scrolloff   = 10                -- Keep 10 lines above/below cursor when scrolling
   vim.opt.autoread    = true              -- External file change detection (useful for AI agent workflows)
   vim.opt.autowrite   = false             -- Ditto
