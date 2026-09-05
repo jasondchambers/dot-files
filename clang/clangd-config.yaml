@@ -1,0 +1,13 @@
+CompileFlags:
+  Add: [-Wall, -Wextra]
+
+Diagnostics:
+  ClangTidy:
+    Add: [bugprone-*, performance-*, modernize-*]
+    Remove: [modernize-use-trailing-return-type]
+  UnusedIncludes: Strict
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true

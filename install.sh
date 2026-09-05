@@ -3,11 +3,11 @@
 #
 # Usage:
 #   ./install.sh                 # install all components
-#   ./install.sh zsh nvim tmux   # install specific components
+#   ./install.sh zsh nvim        # install specific components
 #
-# Components: packages tmux alacritty wezterm zsh starship nvim git lazygit
+# Components: packages utils wezterm zsh starship nvim git lazygit
 #             hypr hammerspoon karabiner uv tv fzf_git eza television rofi
-#             language_servers
+#             language_servers clang
 
 set -eu
 
@@ -133,33 +133,6 @@ install_packages() {
     echo -ne "skipping (unsupported OS)"
     ;;
   esac
-  echo ""
-}
-
-# ── tmux ──────────────────────────────────────────────────────────────────────
-clone_tpm() {
-  echo -ne "Cloning tpm..."
-  if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
-  else
-    echo -ne "already present"
-  fi
-  echo ""
-}
-
-# ── alacritty ─────────────────────────────────────────────────────────────────
-configure_alacritty() {
-  echo -ne "Configuring alacritty..."
-  # Symlink the whole alacritty dir so all theme files are accessible at
-  # ~/.config/alacritty/ (required by the import directive in alacritty.toml)
-  symlink "$DOTFILES/alacritty" "$HOME/.config/alacritty"
-  # Point alacritty.toml at the right OS variant (file lives inside the repo dir)
-  case "$OS" in
-  cachyos) variant="alacritty.toml.cachyos" ;;
-  *) variant="alacritty.toml.macos" ;;
-  esac
-  ln -sfn "$DOTFILES/alacritty/$variant" "$DOTFILES/alacritty/alacritty.toml"
-  echo -ne "  alacritty.toml -> $variant"
   echo ""
 }
 
@@ -369,6 +342,21 @@ configure_wezterm() {
   echo ""
 }
 
+# ── clang ─────────────────────────────────────────────────────────────────────
+configure_clang() {
+  echo -ne "Configuring clang..."
+  symlink "$DOTFILES/clang/clang-format" "$HOME/.clang-format"
+  case "$OS" in
+  macos)
+    symlink "$DOTFILES/clang/clangd-config.yaml" "$HOME/Library/Preferences/clangd/config.yaml"
+    ;;
+  *)
+    symlink "$DOTFILES/clang/clangd-config.yaml" "$HOME/.config/clangd/config.yaml"
+    ;;
+  esac
+  echo ""
+}
+
 # ── rofi (Linux only) ─────────────────────────────────────────────────────────
 configure_rofi() {
   echo -ne "Configuring rofi..."
@@ -430,11 +418,6 @@ install_fzf_git() {
 run() {
   case "$1" in
   packages) install_packages ;;
-  tmux)
-    configure_component "tmux" "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
-    clone_tpm
-    ;;
-  alacritty) configure_alacritty ;;
   zsh) configure_zsh ;;
   starship) configure_component "starship" "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml" ;;
   nvim)
@@ -456,6 +439,7 @@ run() {
   wezterm) configure_wezterm ;;
   rofi) configure_rofi ;;
   language_servers) install_language_servers ;;
+  clang) configure_clang ;;
   *)
     echo "Unknown component: $1"
     exit 1
@@ -464,7 +448,7 @@ run() {
 }
 
 main() {
-  local all="packages utils tmux alacritty wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers"
+  local all="packages utils wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

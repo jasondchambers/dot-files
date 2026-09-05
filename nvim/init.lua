@@ -257,8 +257,10 @@ local function configure_plugins(plugins)
 
       -- Indentation (provided by nvim-treesitter, experimental)
       -- Excluded: sh/bash treesitter indent is unreliable (uses 4 spaces, ignores shiftwidth)
+      -- Excluded: c/cpp treesitter indent computes 0 for every line (queries/c/indents.scm
+      -- match failure) - native cindent (built into Neovim's ftplugin) works correctly instead
       local ft = vim.bo.filetype
-      if ft ~= 'sh' and ft ~= 'bash' then
+      if ft ~= 'sh' and ft ~= 'bash' and ft ~= 'c' and ft ~= 'cpp' then
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end
     end,
@@ -314,6 +316,7 @@ local function configure_lsp()
   vim.lsp.enable('bashls')       -- Bash LSP - ensure bash-language-server is installed first
   vim.lsp.enable('lua_ls')       -- Lua LSP - ensure lua-language-server is installed first
   vim.lsp.enable('ts_ls')        -- JS/TS LSP - ensure typescript-language-server is installed first
+  vim.lsp.enable('clangd')       -- C/C++ LSP - ensure clangd is installed first
 
   vim.diagnostic.config({
     virtual_text = true,
@@ -341,6 +344,12 @@ local function configure_lsp()
     cmd = { 'typescript-language-server', '--stdio' },
     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  })
+
+  vim.lsp.config('clangd', {
+    cmd = { 'clangd' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+    root_markers = { 'compile_commands.json', 'compile_flags.txt', '.git' },
   })
 
   vim.api.nvim_create_autocmd('LspAttach', {
@@ -381,11 +390,12 @@ local function configure_lsp()
         vim.diagnostic.enable(not vim.diagnostic.is_enabled())
       end, opts)
 
-      -- Format on save for sh/bash, lua, and JS/TS files
+      -- Format on save for sh/bash, lua, JS/TS, and C/C++ files
       local ft = vim.bo[ev.buf].filetype
       if ft == 'sh' or ft == 'bash' or ft == 'lua'
         or ft == 'javascript' or ft == 'javascriptreact'
-        or ft == 'typescript' or ft == 'typescriptreact' then
+        or ft == 'typescript' or ft == 'typescriptreact'
+        or ft == 'c' or ft == 'cpp' then
         vim.api.nvim_create_autocmd('BufWritePre', {
           buffer = ev.buf,
           callback = function()
@@ -393,6 +403,31 @@ local function configure_lsp()
           end,
         })
       end
+    end,
+  })
+end
+
+local function configure_c_dev()
+  vim.api.nvim_create_autocmd('FileType', { -- match .clang-format's IndentWidth/IndentCaseLabels
+    pattern = { 'c', 'cpp' },
+    callback = function()
+      vim.opt_local.shiftwidth = 4
+      vim.opt_local.tabstop = 4
+      vim.opt_local.cinoptions:append(':0') -- don't indent case labels under switch
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'c',
+    callback = function(ev)
+      vim.keymap.set('n', '<leader>cr', function()
+        vim.cmd('write')
+        local file = vim.fn.expand('%')
+        local out = '/tmp/' .. vim.fn.expand('%:t:r')
+        vim.cmd(('split | terminal clang -Wall -Wextra -o %s %s && %s'):format(
+          vim.fn.shellescape(out), vim.fn.shellescape(file), vim.fn.shellescape(out)))
+        vim.cmd('startinsert')
+      end, { buffer = ev.buf, desc = 'Compile and run current C file' })
     end,
   })
 end
@@ -407,3 +442,4 @@ set_greeter()
 set_keymaps(plugins)
 set_colorscheme()
 configure_lsp()
+configure_c_dev()

@@ -1,5 +1,4 @@
 accountsservice
-alacritty
 alsa-firmware
 alsa-plugins
 alsa-utils
@@ -35,6 +34,7 @@ cachyos-wallpapers
 cachyos-zsh-config
 cantarell-fonts
 chwd
+clang
 cpupower
 cryptsetup
 device-mapper
@@ -165,7 +165,6 @@ sudo
 sysfsutils
 texinfo
 thunar
-tmux
 ttf-bitstream-vera
 ttf-dejavu
 ttf-liberation

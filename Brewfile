@@ -5,7 +5,6 @@ tap "dopplerhq/cli"
 
 # CLI tools
 brew "bash"
-brew "tmux"
 brew "tree"
 brew "fzf"
 brew "fd"
@@ -31,7 +30,6 @@ brew "taproom"
 cask "font-meslo-lg-nerd-font"
 
 # Apps
-cask "alacritty"
 cask "typora"
 cask "font-hack-nerd-font"
 cask "dropbox"

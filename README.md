@@ -22,20 +22,27 @@ chmod +x install.sh
 
 | Component | Target | macOS | CachyOS |
 |---|---|:---:|:---:|
+| packages | Brewfile via `brew bundle` (macOS) / `packages/pkglist.txt` + `packages/aur.txt` via `paru` (CachyOS) | ✓ | ✓ |
 | [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ |
 | wezterm | `~/.config/wezterm/` | ✓ | ✓ |
 | zsh | `~/.zshrc` | ✓ | ✓ |
 | starship | `~/.config/starship.toml` | ✓ | ✓ |
 | nvim | `~/.config/nvim/` | ✓ | ✓ |
 | git | `~/.config/git/config` | ✓ | ✓ |
-| lazygit | `~/.config/lazygit/` | ✓ | ✓ |
-| hypr | `~/.config/hypr/bindings.conf` | — | ✓ |
-| rofi | `~/.config/rofi/` | — | ✓ |
+| lazygit | `~/.config/lazygit/` (macOS: `~/Library/Application Support/lazygit/config.yml`) | ✓ | ✓ |
+| hypr | `~/.config/hypr/` | — | ✓ |
 | hammerspoon | `~/.hammerspoon/` | ✓ | — |
 | karabiner | `~/.config/karabiner/karabiner.json` | ✓ | — |
-| packages | Brewfile (macOS) / pkglist.txt + aur.txt (CachyOS) | ✓ | ✓ |
+| uv | installs the `uv` binary | ✓ | ✓ |
 | tv | [television](https://github.com/alexpasmantier/television) binary | ✓ | ✓ |
+| fzf_git | clones [fzf-git.sh](https://github.com/junegunn/fzf-git.sh) to `~/repos/fzf-git.sh` | ✓ | ✓ |
+| eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) | ✓ | ✓ |
 | television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
+| rofi | `~/.config/rofi/` | — | ✓ |
+| language_servers | `bash-language-server` (pacman, CachyOS only), `basedpyright`, `typescript-language-server` | ✓ | ✓ |
+| clang | `~/.clang-format` + clangd's global config | ✓ | ✓ |
+
+`hyprmod` is also a valid component (clones [BlueManCZ/hyprmod](https://github.com/BlueManCZ/hyprmod) to `~/repos/hyprmod`) but is not part of the default set installed when `install.sh` is run with no arguments — install it explicitly with `./install.sh hyprmod`.
 
 ## Selective install
 
@@ -137,11 +144,6 @@ is used - Rofi on Hyprland and Alfred on macOS. The keybinding is identical on b
 
 SUPER + SPACE. 
 
-### tmux
-
-tmux was my preferred multiplexer. However, it has been retired along with Alacritty
-by WezTerm - which has pretty much a built-in multiplexer that meets my needs.
-
 ## WezTerm
 
 WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes, tabs, workspaces), potentially eliminating the need for a separate tmux setup.
@@ -200,8 +202,11 @@ Installed manually via the OS package manager (not Mason).
 |--------|---------|
 | `basedpyright` | Python |
 | `bashls` | Bash / sh |
+| `lua_ls` | Lua |
+| `ts_ls` | JavaScript / TypeScript |
+| `clangd` | C / C++ |
 
-Completion uses Neovim's native LSP completion with `<CR>` to confirm. Format-on-save is enabled for shell files.
+Completion uses Neovim's native LSP completion with `<CR>` to confirm. Format-on-save is enabled for shell, Lua, JS/TS, and C/C++ files.
 
 ### Keybindings
 
@@ -249,6 +254,8 @@ Leader key is `Space`
 | \<leader>td | Toggle inline diagnostics |
 | **Completion** | |
 | \<CR> | Confirm completion (insert mode) |
+| **C** | |
+| \<leader>cr | Compile and run current C file (in a terminal split) |
 
 
 
