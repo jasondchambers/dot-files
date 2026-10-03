@@ -5,7 +5,7 @@
 #   ./install.sh                 # install all components
 #   ./install.sh zsh nvim        # install specific components
 #
-# Components: packages utils wezterm zsh starship nvim git lazygit
+# Components: packages utils wezterm ghostty zsh starship nvim git lazygit
 #             hypr hammerspoon karabiner uv tv fzf_git eza television rofi
 #             language_servers clang
 
@@ -357,6 +357,19 @@ configure_clang() {
   echo ""
 }
 
+# ── ghostty ───────────────────────────────────────────────────────────────────
+configure_ghostty() {
+  echo -ne "Configuring ghostty..."
+  symlink "$DOTFILES/ghostty" "$HOME/.config/ghostty"
+  case "$OS" in
+  cachyos) variant="config.cachyos" ;;
+  *) variant="config.macos" ;;
+  esac
+  ln -sfn "$DOTFILES/ghostty/$variant" "$DOTFILES/ghostty/config"
+  echo -ne "  config -> $variant"
+  echo ""
+}
+
 # ── rofi (Linux only) ─────────────────────────────────────────────────────────
 configure_rofi() {
   echo -ne "Configuring rofi..."
@@ -437,6 +450,7 @@ run() {
   eza) configure_eza ;;
   television) configure_television ;;
   wezterm) configure_wezterm ;;
+  ghostty) configure_ghostty ;;
   rofi) configure_rofi ;;
   language_servers) install_language_servers ;;
   clang) configure_clang ;;
@@ -448,7 +462,7 @@ run() {
 }
 
 main() {
-  local all="packages utils wezterm zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang"
+  local all="packages utils wezterm ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

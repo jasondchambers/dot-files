@@ -25,6 +25,7 @@ chmod +x install.sh
 | packages | Brewfile via `brew bundle` (macOS) / `packages/pkglist.txt` + `packages/aur.txt` via `paru` (CachyOS) | ✓ | ✓ |
 | [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ |
 | wezterm | `~/.config/wezterm/` | ✓ | ✓ |
+| ghostty | `~/.config/ghostty/` | ✓ | ✓ |
 | zsh | `~/.zshrc` | ✓ | ✓ |
 | starship | `~/.config/starship.toml` | ✓ | ✓ |
 | nvim | `~/.config/nvim/` | ✓ | ✓ |
@@ -71,6 +72,7 @@ dot-files/
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
 ├── wezterm/            # ~/.config/wezterm/
+├── ghostty/            # ~/.config/ghostty/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
 ├── hypr/               # ~/.config/hypr/
@@ -168,6 +170,38 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 | **Workspaces** (sessions) | |
 | \<leader> s | Show workspace switcher |
 | \<leader> L | Switch to previous workspace |
+
+## Ghostty
+
+[Ghostty](https://ghostty.org/) is a fast, native, GPU-accelerated terminal emulator. Currently being trialled on macOS as a replacement for WezTerm (Hammerspoon's `Alt+Return` launches it). The config in `ghostty/` mirrors the WezTerm setup — same coolnight colors, font, padding, opacity/blur and tmux-style leader bindings. `install.sh` symlinks `ghostty/config` to `config.macos` or `config.cachyos`.
+
+**Leader key is C-b** (implemented as Ghostty key sequences)
+
+| Key | Binding |
+|-----|---------|
+| **General** | |
+| C-h,j,k,l | Navigate panes (passed through to Neovim/shell when there is no pane in that direction) |
+| F11 / Alt-f | Toggle fullscreen (Alt-f macOS only) |
+| **Panes** | |
+| \<leader> \| | New pane (split right) |
+| \<leader> - | New pane (split down) |
+| \<leader> m | Toggle maximize pane |
+| \<leader> z | Toggle maximize pane |
+| \<leader> x | Close pane |
+| **Tabs** | |
+| \<leader> c | New tab |
+| \<leader> n | Next tab |
+| \<leader> p | Previous tab |
+| \<leader> 1-9 | Jump to tab by number |
+| **Other** | |
+| \<leader> g | Run `open-gh` |
+| \<leader> [ | Search scrollback |
+
+**Differences from WezTerm:**
+
+- No workspaces (sessions)
+- No vi-style copy mode
+- No seamless Neovim split navigation. smart-splits.nvim has no Ghostty integration, and Ghostty keybinds can't check whether Neovim is in the foreground. `C-h/j/k/l` always move to a Ghostty pane when one exists in that direction, skipping over any Neovim splits on the way. Neovim only receives the key when there's no Ghostty pane in that direction.
 
 ## Neovim
 
