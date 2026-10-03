@@ -2,6 +2,29 @@
 
 Personal dotfiles for macOS and CachyOS.
 
+## Table of contents
+
+- [Philosophy](#philosophy)
+- [Quick start](#quick-start)
+- [What gets installed](#what-gets-installed)
+- [Selective install](#selective-install)
+- [First-time macOS setup](#first-time-macos-setup)
+- [Structure](#structure)
+- [Zsh](#zsh)
+  - [Shell Features](#shell-features)
+  - [Directory Change Hooks (`chpwd`)](#directory-change-hooks-chpwd)
+  - [Aliases](#aliases)
+  - [macOS-only: 1Password Environment Loader](#macos-only-1password-environment-loader)
+- [Notes](#notes)
+- [Usage](#usage)
+  - [Launching Applications](#launching-applications)
+- [WezTerm](#wezterm)
+- [Ghostty](#ghostty)
+- [Neovim](#neovim)
+  - [Plugins](#plugins)
+  - [LSP Servers](#lsp-servers)
+  - [Keybindings](#keybindings)
+
 ## Philosophy
 
 - Aesthetics (must look pretty)
