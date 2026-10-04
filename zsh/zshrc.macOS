@@ -42,6 +42,16 @@ configure_command_line_editing_to_vim() {
    bindkey -v
    #bindkey ^R history-incremental-search-backward
    #bindkey ^S history-incremental-search-forward
+
+   # vi yanks (y in visual mode, yy, Y) only fill zsh's internal $CUTBUFFER;
+   # also send them to the macOS clipboard so Cmd+V works elsewhere
+   vi-yank-to-clipboard() {
+      zle .$WIDGET
+      print -rn -- "$CUTBUFFER" | pbcopy
+   }
+   zle -N vi-yank vi-yank-to-clipboard
+   zle -N vi-yank-whole-line vi-yank-to-clipboard
+   zle -N vi-yank-eol vi-yank-to-clipboard
 }
 
 # Configure the theme for the bat command https://github.com/catppuccin/bat

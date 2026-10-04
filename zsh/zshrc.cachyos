@@ -32,6 +32,16 @@ def configure_fzf() {
 # Enable command line editing to use vim
 def configure_command_line_editing_to_vim() {
    bindkey -v
+
+   # vi yanks (y in visual mode, yy, Y) only fill zsh's internal $CUTBUFFER;
+   # also send them to the Wayland clipboard so Ctrl+Shift+V works elsewhere
+   vi-yank-to-clipboard() {
+      zle .$WIDGET
+      print -rn -- "$CUTBUFFER" | wl-copy
+   }
+   zle -N vi-yank vi-yank-to-clipboard
+   zle -N vi-yank-whole-line vi-yank-to-clipboard
+   zle -N vi-yank-eol vi-yank-to-clipboard
 }
 
 # Configure the theme for the bat command https://github.com/catppuccin/bat
