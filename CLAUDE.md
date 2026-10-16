@@ -54,7 +54,7 @@ The installer symlinks `wezterm/wezterm.lua` inside the repo dir to the correct 
 | language_servers | installs `bash-language-server` (pacman, CachyOS only), `basedpyright` (`uv tool install`), `typescript-language-server` (`npm install -g`) |
 | clang | `~/.clang-format` + clangd's global config (`~/.config/clangd/config.yaml`, macOS: `~/Library/Preferences/clangd/config.yaml`) |
 
-`waybar/` also exists in the repo (`config.jsonc`, `style.css`, `power_menu.xml`, `wifi-menu.sh`) and is exec'd from `hypr/hyprland.conf`, but it is **not** currently a symlinked install.sh component.
+`waybar/` also exists in the repo (`config.jsonc`, `style.css`, `power_menu.xml`, `wifi-menu.sh`) and is exec'd from `hypr/hyprland.lua`, but it is **not** currently a symlinked install.sh component.
 
 ### Neovim Structure
 
@@ -78,11 +78,11 @@ nvim/
 
 ### Hyprland Config
 
-The whole `hypr/` directory is symlinked to `~/.config/hypr/` (not just bindings, as in older setups). `hypr/hyprland.conf` is the full config (CachyOS/omarchy-generated base, customized) and `source`s `hypr/tiling.conf`, `hypr/bindings.conf`, and a local untracked `hyprland-gui.conf`. `hypr/bindings.conf` is still the file to edit for custom keybindings — it's an overlay of the omarchy defaults, not a replacement.
+The whole `hypr/` directory is symlinked to `~/.config/hypr/` (not just bindings, as in older setups). The config is written in Hyprland's Lua format: `hypr/hyprland.lua` is the full config (CachyOS/omarchy-generated base, customized) and `require`s `hypr/tiling.lua`, `hypr/bindings.lua`, and `hypr/hyprland-gui.lua` (HyprMod-managed settings — note HyprMod may still write the old hyprlang format). `hypr/bindings.lua` is the file to edit for custom keybindings — it's an overlay of the omarchy defaults, not a replacement; window bindings (close, fullscreen, maximize) live in `hypr/tiling.lua`. `hypridle.conf` and `hyprlock.conf` remain in hyprlang format, and `hypr/old-conf/` keeps the pre-Lua `.conf` files for reference only.
 
 ### Hammerspoon (macOS)
 
-Provides app-launch keybindings on macOS that mirror the Hyprland bindings in `hypr/bindings.conf`, maintaining cross-platform consistency.
+Provides app-launch and window-management keybindings on macOS that mirror the Hyprland bindings in `hypr/bindings.lua` and `hypr/tiling.lua`, maintaining cross-platform consistency. Hammerspoon binds `alt` where Hyprland uses SUPER (and `alt`+`cmd` for SUPER + ALT). Karabiner swaps left Cmd/Option on the Razer Ornata Chroma only (`device_if` on vendor 5426 / product 542), so on that keyboard the physical SUPER key sends Option and the bindings are identical across CachyOS and macOS; on an Apple keyboard, Option stands in for SUPER.
 
 ## Skills
 

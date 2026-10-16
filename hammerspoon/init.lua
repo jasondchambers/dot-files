@@ -110,6 +110,22 @@ hs.hotkey.bind({"alt"}, "f", function()
         win:toggleFullScreen()
     end
 end)
+
+--bindd = SUPER ALT, F, Full width, fullscreen, 1
+local preMaximizeFrames = {}
+hs.hotkey.bind({"alt", "cmd"}, "f", function()
+    local win = hs.window.focusedWindow()
+    if win then
+        local id = win:id()
+        if preMaximizeFrames[id] then
+            win:setFrame(preMaximizeFrames[id])
+            preMaximizeFrames[id] = nil
+        else
+            preMaximizeFrames[id] = win:frame()
+            win:maximize()
+        end
+    end
+end)
   
 
   

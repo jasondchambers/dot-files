@@ -18,6 +18,7 @@ Personal dotfiles for macOS and CachyOS.
 - [Notes](#notes)
 - [Usage](#usage)
   - [Launching Applications](#launching-applications)
+  - [Window Management](#window-management)
 - [WezTerm](#wezterm)
 - [Ghostty](#ghostty)
 - [Neovim](#neovim)
@@ -162,12 +163,26 @@ Hooks fire automatically whenever you `cd` into a directory and once on shell st
 
 Keyboard shortcuts are used to launch commonly used applications. These are
 consistent across CachyOS and macOS. Hammerspoon provides this capability on
-macOS. The key mappings mirror the Hyprland bindings in `hypr/bindings.conf`.
+macOS. The key mappings mirror the Hyprland bindings in `hypr/bindings.lua`.
 
 It can take a while to get to know the keyboard shortcuts, so an application launcher
 is used - Rofi on Hyprland and Alfred on macOS. The keybinding is identical on both
 
 SUPER + SPACE. 
+
+### Window Management
+
+Hammerspoon also mirrors the Hyprland window bindings from `hypr/tiling.lua`.
+
+With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both CachyOS and macOS, so the bindings are identical. On the Mac's built-in/Apple keyboard, use **Option** in place of SUPER.
+
+(This works because Karabiner swaps left Cmd and left Option on the Razer only — a `device_if` condition matches its vendor/product ID, so nothing needs toggling when docking or undocking. The Razer's SUPER key then sends Option, which Hammerspoon binds as `alt`; its Alt key sends Cmd, so Alt + F is the normal macOS Find.)
+
+| Razer (CachyOS & macOS) | Apple keyboard (macOS) | Action |
+|-------------------------|------------------------|--------|
+| SUPER + W | Option + W | Close window |
+| SUPER + F | Option + F | Toggle fullscreen |
+| SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 
 ## WezTerm
 
@@ -196,7 +211,7 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 
 ## Ghostty
 
-[Ghostty](https://ghostty.org/) is a fast, native, GPU-accelerated terminal emulator. Currently being trialled on macOS as a replacement for WezTerm (Hammerspoon's `Alt+Return` launches it). The config in `ghostty/` mirrors the WezTerm setup — same coolnight colors, font, padding, opacity/blur and tmux-style leader bindings. `install.sh` symlinks `ghostty/config` to `config.macos` or `config.cachyos`.
+[Ghostty](https://ghostty.org/) is a fast, native, GPU-accelerated terminal emulator. Currently being trialled on macOS as a replacement for WezTerm (Hammerspoon's `SUPER+Return` launches it — `Option+Return` on an Apple keyboard; see [Window Management](#window-management)). The config in `ghostty/` mirrors the WezTerm setup — same coolnight colors, font, padding, opacity/blur and tmux-style leader bindings. `install.sh` symlinks `ghostty/config` to `config.macos` or `config.cachyos`.
 
 **Leader key is C-b** (implemented as Ghostty key sequences)
 
@@ -204,7 +219,7 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 |-----|---------|
 | **General** | |
 | C-h,j,k,l | Navigate panes (passed through to Neovim/shell when there is no pane in that direction) |
-| F11 / Alt-f | Toggle fullscreen (Alt-f macOS only) |
+| F11 / SUPER-f | Toggle fullscreen (SUPER-f macOS only, via Hammerspoon; Option-f on an Apple keyboard) |
 | **Panes** | |
 | \<leader> \| | New pane (split right) |
 | \<leader> - | New pane (split down) |
