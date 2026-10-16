@@ -5,3 +5,8 @@ ghostty/config
 
 # Contains secret environment IDs — never commit
 .zshrc.secrets
+
+# Karabiner runtime files (whole ~/.config/karabiner dir is symlinked)
+karabiner/automatic_backups/
+karabiner/assets/
+karabiner/*.bak

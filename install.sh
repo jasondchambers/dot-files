@@ -243,7 +243,9 @@ configure_karabiner() {
   echo -ne "Configuring karabiner..."
   case "$OS" in
   macos)
-    symlink "$DOTFILES/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
+    # Symlink the whole dir: Karabiner replaces karabiner.json on save, which
+    # would break a file-level symlink
+    symlink "$DOTFILES/karabiner" "$HOME/.config/karabiner"
     ;;
   *)
     echo -ne "skipping (not macOS)"

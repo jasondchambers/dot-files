@@ -57,7 +57,7 @@ chmod +x install.sh
 | lazygit | `~/.config/lazygit/` (macOS: `~/Library/Application Support/lazygit/config.yml`) | ✓ | ✓ |
 | hypr | `~/.config/hypr/` | — | ✓ |
 | hammerspoon | `~/.hammerspoon/` | ✓ | — |
-| karabiner | `~/.config/karabiner/karabiner.json` | ✓ | — |
+| karabiner | `~/.config/karabiner/` | ✓ | — |
 | uv | installs the `uv` binary | ✓ | ✓ |
 | tv | [television](https://github.com/alexpasmantier/television) binary | ✓ | ✓ |
 | fzf_git | clones [fzf-git.sh](https://github.com/junegunn/fzf-git.sh) to `~/repos/fzf-git.sh` | ✓ | ✓ |

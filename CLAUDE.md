@@ -45,7 +45,7 @@ The installer symlinks `wezterm/wezterm.lua` inside the repo dir to the correct 
 | hypr | `~/.config/hypr/` (whole dir — CachyOS only) |
 | rofi | `~/.config/rofi/` (CachyOS only) |
 | hammerspoon | `~/.hammerspoon/` (macOS only) |
-| karabiner | `~/.config/karabiner/karabiner.json` (macOS only) |
+| karabiner | `~/.config/karabiner/` (whole dir — Karabiner rewrites `karabiner.json` on save, which would break a file symlink; macOS only) |
 | uv | installs the `uv` binary (astral.sh installer) |
 | tv | installs the `television` binary |
 | fzf_git | clones fzf-git.sh to `~/repos/fzf-git.sh` |
