@@ -5,7 +5,7 @@
 #   ./install.sh                 # install all components
 #   ./install.sh zsh nvim        # install specific components
 #
-# Components: packages utils wezterm ghostty zsh starship nvim git lazygit
+# Components: packages utils ghostty zsh starship nvim git lazygit
 #             hypr hammerspoon karabiner uv tv fzf_git eza television rofi
 #             language_servers clang
 
@@ -331,19 +331,6 @@ configure_television() {
   echo ""
 }
 
-# ── wezterm ───────────────────────────────────────────────────────────────────
-configure_wezterm() {
-  echo -ne "Configuring wezterm..."
-  symlink "$DOTFILES/wezterm" "$HOME/.config/wezterm"
-  case "$OS" in
-  cachyos) variant="wezterm.lua.cachyos" ;;
-  *) variant="wezterm.lua.macos" ;;
-  esac
-  ln -sfn "$DOTFILES/wezterm/$variant" "$DOTFILES/wezterm/wezterm.lua"
-  echo -ne "  wezterm.lua -> $variant"
-  echo ""
-}
-
 # ── clang ─────────────────────────────────────────────────────────────────────
 configure_clang() {
   echo -ne "Configuring clang..."
@@ -451,7 +438,6 @@ run() {
   fzf_git) install_fzf_git ;;
   eza) configure_eza ;;
   television) configure_television ;;
-  wezterm) configure_wezterm ;;
   ghostty) configure_ghostty ;;
   rofi) configure_rofi ;;
   language_servers) install_language_servers ;;
@@ -464,7 +450,7 @@ run() {
 }
 
 main() {
-  local all="packages utils wezterm ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang"
+  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

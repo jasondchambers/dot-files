@@ -85,7 +85,7 @@ local function install_plugins()
     'https://github.com/lewis6991/gitsigns.nvim',                   -- GitSigns
     'https://github.com/nvim-tree/nvim-web-devicons',               -- Dependency of nvim-tree, nvim-telescope, lualine
     'https://github.com/nvim-tree/nvim-tree.lua',                   -- A nice file-explorer
-    'https://github.com/mrjones2014/smart-splits.nvim',             -- Ctrl-h,j,k,l across buffers and WezTerm splits
+    'https://github.com/mrjones2014/smart-splits.nvim',             -- Ctrl-h,j,k,l across buffers
     'https://github.com/folke/which-key.nvim',                      -- Handy helper to show keybindings
     'https://github.com/nvim-telescope/telescope.nvim',             -- Wonderful way to open files
     'https://github.com/szw/vim-maximizer',                         -- Maximize current split
@@ -393,9 +393,9 @@ local function configure_lsp()
       -- Format on save for sh/bash, lua, JS/TS, and C/C++ files
       local ft = vim.bo[ev.buf].filetype
       if ft == 'sh' or ft == 'bash' or ft == 'lua'
-        or ft == 'javascript' or ft == 'javascriptreact'
-        or ft == 'typescript' or ft == 'typescriptreact'
-        or ft == 'c' or ft == 'cpp' then
+          or ft == 'javascript' or ft == 'javascriptreact'
+          or ft == 'typescript' or ft == 'typescriptreact'
+          or ft == 'c' or ft == 'cpp' then
         vim.api.nvim_create_autocmd('BufWritePre', {
           buffer = ev.buf,
           callback = function()

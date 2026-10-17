@@ -14,7 +14,7 @@ Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks �
 ./configure.sh                        # one-time setup (SSH key, macOS scroll direction)
 ```
 
-Default components (run when no args are given, in this order): `packages utils wezterm ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang`
+Default components (run when no args are given, in this order): `packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang`
 
 `hyprmod` is also a valid component (clones [BlueManCZ/hyprmod](https://github.com/BlueManCZ/hyprmod) to `~/repos/hyprmod`) but is **not** part of the default set — install it explicitly with `./install.sh hyprmod`.
 
@@ -25,9 +25,9 @@ Default components (run when no args are given, in this order): `packages utils 
 `install.sh` auto-detects the OS from `/etc/os-release` (`cachyos`) or `uname` (`macos`, i.e. Darwin). Files with OS suffixes follow the pattern:
 
 - `zsh/zshrc.cachyos`, `zsh/zshrc.macOS`
-- `wezterm/wezterm.lua.cachyos`, `wezterm.lua.macos`
+- `ghostty/config.cachyos`, `config.macos`
 
-The installer symlinks `wezterm/wezterm.lua` inside the repo dir to the correct variant (gitignored, since it's machine-generated). `zshrc.linuxmint` also exists in the repo but is dead weight — `detect_os` has no `linuxmint` case, so the installer never selects it.
+The installer symlinks `ghostty/config` inside the repo dir to the correct variant (gitignored, since it's machine-generated). `zshrc.linuxmint` also exists in the repo but is dead weight — `detect_os` has no `linuxmint` case, so the installer never selects it.
 
 ### Component → Target Mapping
 
@@ -35,7 +35,6 @@ The installer symlinks `wezterm/wezterm.lua` inside the repo dir to the correct 
 |-----------|---------------|
 | packages | `Brewfile` via `brew bundle` (macOS) / `packages/pkglist.txt` + `packages/aur.txt` via `paru` (CachyOS) |
 | utils | `~/repos/utils` (git-cloned, not symlinked) |
-| wezterm | `~/.config/wezterm/` (whole dir) |
 | ghostty | `~/.config/ghostty/` (whole dir; `config` → OS variant) |
 | zsh | `~/.zshrc` |
 | starship | `~/.config/starship.toml` |

@@ -19,7 +19,6 @@ Personal dotfiles for macOS and CachyOS.
 - [Usage](#usage)
   - [Launching Applications](#launching-applications)
   - [Window Management](#window-management)
-- [WezTerm](#wezterm)
 - [Ghostty](#ghostty)
 - [Neovim](#neovim)
   - [Plugins](#plugins)
@@ -48,7 +47,6 @@ chmod +x install.sh
 |---|---|:---:|:---:|
 | packages | Brewfile via `brew bundle` (macOS) / `packages/pkglist.txt` + `packages/aur.txt` via `paru` (CachyOS) | ✓ | ✓ |
 | [utils](https://github.com/jasondchambers/utils) | `~/repos/utils` | ✓ | ✓ |
-| wezterm | `~/.config/wezterm/` | ✓ | ✓ |
 | ghostty | `~/.config/ghostty/` | ✓ | ✓ |
 | zsh | `~/.zshrc` | ✓ | ✓ |
 | starship | `~/.config/starship.toml` | ✓ | ✓ |
@@ -95,7 +93,6 @@ dot-files/
 ├── packages/           # Package lists (CachyOS)
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
-├── wezterm/            # ~/.config/wezterm/
 ├── ghostty/            # ~/.config/ghostty/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
@@ -184,34 +181,9 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 
-## WezTerm
-
-WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes, tabs, workspaces), potentially eliminating the need for a separate tmux setup.
-
-**Leader key is C-b**
-
-| Key | Binding |
-|-----|---------|
-| **General** | |
-| C-h,j,k,l | Navigate panes (seamless with Neovim) |
-| **Panes** | |
-| \<leader> \| | New pane (split right) |
-| \<leader> - | New pane (split down) |
-| \<leader> m | Toggle maximize pane |
-| \<leader> z | Toggle maximize pane |
-| \<leader> x | Close pane |
-| **Tabs** | |
-| \<leader> c | New tab |
-| \<leader> n | Next tab |
-| \<leader> p | Previous tab |
-| \<leader> 1-9 | Jump to tab by number |
-| **Workspaces** (sessions) | |
-| \<leader> s | Show workspace switcher |
-| \<leader> L | Switch to previous workspace |
-
 ## Ghostty
 
-[Ghostty](https://ghostty.org/) is a fast, native, GPU-accelerated terminal emulator. Currently being trialled on macOS as a replacement for WezTerm (Hammerspoon's `SUPER+Return` launches it — `Option+Return` on an Apple keyboard; see [Window Management](#window-management)). The config in `ghostty/` mirrors the WezTerm setup — same coolnight colors, font, padding, opacity/blur and tmux-style leader bindings. `install.sh` symlinks `ghostty/config` to `config.macos` or `config.cachyos`.
+[Ghostty](https://ghostty.org/) is a fast, native, GPU-accelerated terminal emulator. Hammerspoon's `SUPER+Return` launches it — `Option+Return` on an Apple keyboard; see [Window Management](#window-management).
 
 **Leader key is C-b** (implemented as Ghostty key sequences)
 
@@ -235,12 +207,6 @@ WezTerm is a GPU-accelerated terminal emulator with built-in multiplexing (panes
 | \<leader> g | Run `open-gh` |
 | \<leader> [ | Search scrollback |
 
-**Differences from WezTerm:**
-
-- No workspaces (sessions)
-- No vi-style copy mode
-- No seamless Neovim split navigation. smart-splits.nvim has no Ghostty integration, and Ghostty keybinds can't check whether Neovim is in the foreground. `C-h/j/k/l` always move to a Ghostty pane when one exists in that direction, skipping over any Neovim splits on the way. Neovim only receives the key when there's no Ghostty pane in that direction.
-
 ## Neovim
 
 Rewritten for Neovim 0.12 using the new native plugin manager (`vim.pack`) and native LSP config API. No Mason — LSP servers are installed manually via the OS package manager. Colorscheme is `miniautumn` (from mini.nvim).
@@ -263,7 +229,6 @@ Rewritten for Neovim 0.12 using the new native plugin manager (`vim.pack`) and n
 | **render-markdown.nvim** | Renders markdown visually in the buffer |
 | **nvim-lspconfig** | LSP client configuration |
 | **nvim-undotree** | Visual undo history browser |
-| **smart-splits.nvim** | Seamless split navigation across WezTerm panes |
 | **which-key.nvim** | Keybinding hints popup |
 
 ### LSP Servers
@@ -293,7 +258,7 @@ Leader key is `Space`
 | \<leader>x | Close current split |
 | \<leader>m | Maximize/minimize split |
 | \<leader>u | Toggle Undotree |
-| C-h/j/k/l | Navigate splits (seamless with WezTerm) |
+| C-h/j/k/l | Navigate splits |
 | **File Explorer** | |
 | \<leader>ee | Toggle file explorer on current file |
 | \<leader>ec | Collapse file explorer |
@@ -328,6 +293,4 @@ Leader key is `Space`
 | \<CR> | Confirm completion (insert mode) |
 | **C** | |
 | \<leader>cr | Compile and run current C file (in a terminal split) |
-
-
 

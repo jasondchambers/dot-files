@@ -56,6 +56,7 @@ fastfetch
 ffmpegthumbnailer
 firefox
 fsarchiver
+ghostty
 git
 git-delta
 glances
