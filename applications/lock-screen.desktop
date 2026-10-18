@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=Lock Screen
-Comment=Lock the session with hyprlock
-Exec=hyprlock
+Comment=Lock the session with DankMaterialShell
+Exec=dms ipc call lock lock
 Icon=system-lock-screen
 Keywords=lock;screen;
 Categories=System;

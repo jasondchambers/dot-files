@@ -13,7 +13,7 @@ hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd([[grim -g "$(slurp)" ~/Pictur
 hl.bind("ALT + SHIFT + 4", hl.dsp.exec_cmd([[geom=$(slurp) && f=~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png && grim -g "$geom" "$f" && wl-copy < "$f"]]), { description = "Capture area" })
 
 -- macOS-style lock: CTRL + ALT + Q (Ctrl + Cmd + Q on macOS, via the Karabiner swap)
-hl.bind("CTRL + ALT + Q", hl.dsp.exec_cmd("hyprlock"), { description = "Lock screen" })
+hl.bind("CTRL + ALT + Q", hl.dsp.exec_cmd("dms ipc call lock lock"), { description = "Lock screen" })
 
 -- Application bindings
 -- hl.bind("SUPER + ALT + RETURN", hl.dsp.exec_cmd([[uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" tmux new]]), { description = "Tmux" })

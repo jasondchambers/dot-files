@@ -26,7 +26,7 @@ hl.monitor({
 -- NOTE: kept as globals (not `local`) so tiling.lua / bindings.lua can reference them too.
 terminal    = "ghostty"
 fileManager = "thunar"
-menu        = "rofi -show drun"
+menu        = "dms ipc call spotlight toggle" -- DankMaterialShell Spotlight launcher
 
 
 -------------------
@@ -35,7 +35,8 @@ menu        = "rofi -show drun"
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function()
-  hl.exec_cmd("waybar")
+  hl.exec_cmd("dms run")
+  hl.exec_cmd("wl-paste --watch cliphist store")
 end)
 
 
@@ -313,11 +314,11 @@ hl.window_rule({
 
 hl.window_rule({
   -- The first window opened on an empty workspace is given the full monitor size, so as a float it
-  -- overlaps Waybar. Cap floats below the 30px bar, using the same 20px gaps_out as tiled windows.
+  -- overlaps the DMS bar. Cap floats below the 64px bar, using the same 20px gaps_out as tiled windows.
   name     = "fit-floats-workspace-1",
   match    = { workspace = "1", float = true },
 
-  max_size = { "monitor_w-40", "monitor_h-70" },
+  max_size = { "monitor_w-40", "monitor_h-104" },
 })
 
 hl.window_rule({
@@ -357,6 +358,15 @@ hl.window_rule({
 
   move  = { 20, "monitor_h-120" },
   float = true,
+})
+
+-- See https://wiki.hypr.land/Configuring/Basics/Layer-Rules/
+hl.layer_rule({
+  -- DankMaterialShell animates its own surfaces, so turn off Hyprland's layer animations for them.
+  name    = "dms-no-anim",
+  match   = { namespace = "^dms:.*" },
+
+  no_anim = true,
 })
 
 -- HyprMod managed settings

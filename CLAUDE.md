@@ -43,7 +43,7 @@ The installer symlinks `ghostty/config` inside the repo dir to the correct varia
 | lazygit | `~/.config/lazygit/` (macOS: `~/Library/Application Support/lazygit/config.yml`) |
 | hypr | `~/.config/hypr/` (whole dir — CachyOS only) |
 | rofi | `~/.config/rofi/` (CachyOS only) |
-| applications | `~/.local/share/applications/*.desktop` (launcher entries for Lock Screen / Logout / Restart / Shutdown, symlinked file-by-file so rofi's drun lists them — CachyOS only) |
+| applications | `~/.local/share/applications/*.desktop` (launcher entries for Lock Screen / Logout / Restart / Shutdown, symlinked file-by-file so the DMS Spotlight launcher (and rofi's drun) lists them — CachyOS only) |
 | sddm | `/etc/sddm.conf.d/theme.conf` — **copied with `sudo`, not symlinked** (the greeter runs as the `sddm` user and can't read `~`, which is mode 700); also installs the `sddm-astronaut-theme` AUR package (CachyOS only) |
 | hammerspoon | `~/.hammerspoon/` (macOS only) |
 | karabiner | `~/.config/karabiner/` (whole dir — Karabiner rewrites `karabiner.json` on save, which would break a file symlink; macOS only) |
@@ -55,7 +55,7 @@ The installer symlinks `ghostty/config` inside the repo dir to the correct varia
 | language_servers | installs `bash-language-server` (pacman, CachyOS only), `basedpyright` (`uv tool install`), `typescript-language-server` (`npm install -g`) |
 | clang | `~/.clang-format` + clangd's global config (`~/.config/clangd/config.yaml`, macOS: `~/Library/Preferences/clangd/config.yaml`) |
 
-`waybar/` also exists in the repo (`config.jsonc`, `style.css`, `power_menu.xml`, `wifi-menu.sh`) and is exec'd from `hypr/hyprland.lua`, but it is **not** currently a symlinked install.sh component.
+`waybar/` also exists in the repo (`config.jsonc`, `style.css`, `power_menu.xml`, `wifi-menu.sh`), but it is **not** a symlinked install.sh component and is no longer started — DankMaterialShell replaced it (see "Desktop Shell" below). `rofi/` is still installed but no longer bound to SUPER + SPACE.
 
 ### Neovim Structure
 
@@ -79,7 +79,19 @@ nvim/
 
 ### Hyprland Config
 
-The whole `hypr/` directory is symlinked to `~/.config/hypr/` (not just bindings, as in older setups). The config is written in Hyprland's Lua format: `hypr/hyprland.lua` is the full config (CachyOS/omarchy-generated base, customized) and `require`s `hypr/tiling.lua`, `hypr/bindings.lua`, and `hypr/hyprland-gui.lua` (HyprMod-managed settings — note HyprMod may still write the old hyprlang format). `hypr/bindings.lua` is the file to edit for custom keybindings — it's an overlay of the omarchy defaults, not a replacement; window bindings (close, fullscreen, maximize) live in `hypr/tiling.lua`. `hypridle.conf` and `hyprlock.conf` remain in hyprlang format, and `hypr/old-conf/` keeps the pre-Lua `.conf` files for reference only.
+The whole `hypr/` directory is symlinked to `~/.config/hypr/` (not just bindings, as in older setups). The config is written in Hyprland's Lua format: `hypr/hyprland.lua` is the full config (CachyOS/omarchy-generated base, customized) and `require`s `hypr/tiling.lua`, `hypr/bindings.lua`, and `hypr/hyprland-gui.lua` (HyprMod-managed settings — note HyprMod may still write the old hyprlang format). `hypr/bindings.lua` is the file to edit for custom keybindings — it's an overlay of the omarchy defaults, not a replacement; window bindings (close, fullscreen, maximize) live in `hypr/tiling.lua`. `hypridle.conf` and `hyprlock.conf` remain in hyprlang format (now unused — see below), and `hypr/old-conf/` keeps the pre-Lua `.conf` files for reference only.
+
+### Desktop Shell (DankMaterialShell)
+
+On CachyOS the bar, launcher, notifications, clipboard history, lock screen and idle handling all come from [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) (DMS, the `dms-shell` package, built on Quickshell). It replaced Waybar, Rofi, hyprlock and hypridle.
+
+- `hypr/hyprland.lua` autostarts `dms run` and `wl-paste --watch cliphist store`, sets `menu` to `dms ipc call spotlight toggle` (SUPER + SPACE), and has a `dms-no-anim` layer rule matching `^dms:.*` (the bar's namespace is `dms:bar`).
+- Locking goes through `dms ipc call lock lock` — both the `CTRL + ALT + Q` binding in `hypr/bindings.lua` and `applications/lock-screen.desktop`.
+- The `hypridle` systemd user service is **disabled**; idle lock / monitor-off / lock-before-suspend are set in the DMS settings GUI (Power & Sleep → Idle Settings), which stores them under `~/.config/DankMaterialShell/` — not in this repo.
+- DMS generates `hypr/dms/*.lua` and `ghostty/themes/dankcolors` (Matugen theming). They land in the repo because those dirs are symlinked, so they're gitignored; `hyprland.lua` deliberately does **not** `require("dms.*")`.
+- The `fit-floats-workspace-1` window rule's `monitor_h-104` assumes the 64px DMS bar.
+- Other actions are available via `dms ipc call <target> <fn>` (e.g. `audio increment 3`, `brightness increment 5`, `clipboard toggle`, `notifications toggle`).
+- To roll back: restore `waybar` / `rofi -show drun` / `hyprlock` in those places and `systemctl --user enable --now hypridle`; the old configs and packages are still in place.
 
 ### Hammerspoon (macOS)
 

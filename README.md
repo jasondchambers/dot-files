@@ -172,9 +172,13 @@ consistent across CachyOS and macOS. Hammerspoon provides this capability on
 macOS. The key mappings mirror the Hyprland bindings in `hypr/bindings.lua`.
 
 It can take a while to get to know the keyboard shortcuts, so an application launcher
-is used - Rofi on Hyprland and Alfred on macOS. The keybinding is identical on both
+is used - [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell)'s Spotlight on Hyprland and Alfred on macOS. The keybinding is identical on both
 
 SUPER + SPACE. 
+
+On CachyOS, DankMaterialShell (a [Quickshell](https://quickshell.org/)-based desktop shell) also provides the
+bar, notifications, clipboard history, lock screen and idle handling, replacing Waybar, Rofi, hyprlock and
+hypridle. Its idle/lock timeouts are set in its own settings GUI (Power & Sleep → Idle Settings), not in this repo.
 
 ### Window Management
 
@@ -194,7 +198,7 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 | ALT + C | Cmd + C | Copy (in Ghostty on CachyOS, sends Ctrl + Shift + C so it never interrupts a running process) |
 | ALT + V | Cmd + V | Paste (in Ghostty on CachyOS, sends Ctrl + Shift + V) |
 | ALT + SHIFT + 4 | Cmd + Shift + 4 | Capture an area of the screen (on CachyOS: `slurp` + `grim`, saved to `~/Pictures` and copied to the clipboard) |
-| CTRL + ALT + Q | Ctrl + Cmd + Q | Lock screen (on CachyOS: `hyprlock`; on macOS this is the native lock shortcut) |
+| CTRL + ALT + Q | Ctrl + Cmd + Q | Lock screen (on CachyOS: the DankMaterialShell lock screen; on macOS this is the native lock shortcut) |
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 
