@@ -373,6 +373,22 @@ configure_rofi() {
   echo ""
 }
 
+# ── dms (CachyOS only) ────────────────────────────────────────────────────────
+configure_dms() {
+  echo -ne "Configuring dms..."
+  case "$OS" in
+  cachyos)
+    # Symlink the whole dir: DankMaterialShell may replace settings.json on
+    # save, which would break a file-level symlink
+    symlink "$DOTFILES/dms" "$HOME/.config/DankMaterialShell"
+    ;;
+  *)
+    echo -ne "skipping (not Linux)"
+    ;;
+  esac
+  echo ""
+}
+
 # ── applications (CachyOS only) ───────────────────────────────────────────────
 configure_applications() {
   echo -ne "Configuring applications..."
@@ -491,6 +507,7 @@ run() {
   television) configure_television ;;
   ghostty) configure_ghostty ;;
   rofi) configure_rofi ;;
+  dms) configure_dms ;;
   applications) configure_applications ;;
   sddm) configure_sddm ;;
   language_servers) install_language_servers ;;
@@ -503,7 +520,7 @@ run() {
 }
 
 main() {
-  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi applications sddm language_servers clang"
+  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi dms applications sddm language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

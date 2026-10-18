@@ -14,7 +14,7 @@ Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks �
 ./configure.sh                        # one-time setup (SSH key, macOS scroll direction)
 ```
 
-Default components (run when no args are given, in this order): `packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi applications sddm language_servers clang`
+Default components (run when no args are given, in this order): `packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi dms applications sddm language_servers clang`
 
 `hyprmod` is also a valid component (clones [BlueManCZ/hyprmod](https://github.com/BlueManCZ/hyprmod) to `~/repos/hyprmod`) but is **not** part of the default set — install it explicitly with `./install.sh hyprmod`.
 
@@ -43,6 +43,7 @@ The installer symlinks `ghostty/config` inside the repo dir to the correct varia
 | lazygit | `~/.config/lazygit/` (macOS: `~/Library/Application Support/lazygit/config.yml`) |
 | hypr | `~/.config/hypr/` (whole dir — CachyOS only) |
 | rofi | `~/.config/rofi/` (CachyOS only) |
+| dms | `~/.config/DankMaterialShell/` (whole dir — DankMaterialShell may replace `settings.json` on save, which would break a file symlink; CachyOS only) |
 | applications | `~/.local/share/applications/*.desktop` (launcher entries for Lock Screen / Logout / Restart / Shutdown, symlinked file-by-file so the DMS Spotlight launcher (and rofi's drun) lists them — CachyOS only) |
 | sddm | `/etc/sddm.conf.d/theme.conf` — **copied with `sudo`, not symlinked** (the greeter runs as the `sddm` user and can't read `~`, which is mode 700); also installs the `sddm-astronaut-theme` AUR package (CachyOS only) |
 | hammerspoon | `~/.hammerspoon/` (macOS only) |
@@ -87,7 +88,8 @@ On CachyOS the bar, launcher, notifications, clipboard history, lock screen and 
 
 - `hypr/hyprland.lua` autostarts `dms run` and `wl-paste --watch cliphist store`, sets `menu` to `dms ipc call spotlight toggle` (SUPER + SPACE), and has a `dms-no-anim` layer rule matching `^dms:.*` (the bar's namespace is `dms:bar`).
 - Locking goes through `dms ipc call lock lock` — both the `CTRL + ALT + Q` binding in `hypr/bindings.lua` and `applications/lock-screen.desktop`.
-- The `hypridle` systemd user service is **disabled**; idle lock / monitor-off / lock-before-suspend are set in the DMS settings GUI (Power & Sleep → Idle Settings), which stores them under `~/.config/DankMaterialShell/` — not in this repo.
+- The `hypridle` systemd user service is **disabled**; idle lock / monitor-off / lock-before-suspend are set in the DMS settings GUI (Power & Sleep → Idle Settings).
+- DMS settings live in the repo's `dms/` dir (`settings.json`), which the `dms` component symlinks to `~/.config/DankMaterialShell/` — so changes made in the settings GUI show up as repo diffs. Runtime files there (`.firstlaunch`, `.changelog-*`, the Matugen-generated `firefox.css`) are gitignored. Session state (app usage, notepad, etc.) stays in `~/.local/state/DankMaterialShell/` and is not tracked.
 - DMS generates `hypr/dms/*.lua` and `ghostty/themes/dankcolors` (Matugen theming). They land in the repo because those dirs are symlinked, so they're gitignored; `hyprland.lua` deliberately does **not** `require("dms.*")`.
 - The `fit-floats-workspace-1` window rule's `monitor_h-104` assumes the 64px DMS bar.
 - Other actions are available via `dms ipc call <target> <fn>` (e.g. `audio increment 3`, `brightness increment 5`, `clipboard toggle`, `notifications toggle`).

@@ -62,6 +62,7 @@ chmod +x install.sh
 | eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) | ✓ | ✓ |
 | television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
 | rofi | `~/.config/rofi/` | — | ✓ |
+| dms | `~/.config/DankMaterialShell/` ([DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) settings) | — | ✓ |
 | applications | `~/.local/share/applications/` (Lock Screen, Logout, Restart, Shutdown launcher entries) | — | ✓ |
 | sddm | [Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) login theme via `/etc/sddm.conf.d/theme.conf` (copied with `sudo`) | — | ✓ |
 | language_servers | `bash-language-server` (pacman, CachyOS only), `basedpyright`, `typescript-language-server` | ✓ | ✓ |
@@ -96,6 +97,7 @@ dot-files/
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
 ├── applications/       # ~/.local/share/applications/ (launcher entries)
+├── dms/                # ~/.config/DankMaterialShell/
 ├── ghostty/            # ~/.config/ghostty/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
@@ -178,7 +180,8 @@ SUPER + SPACE.
 
 On CachyOS, DankMaterialShell (a [Quickshell](https://quickshell.org/)-based desktop shell) also provides the
 bar, notifications, clipboard history, lock screen and idle handling, replacing Waybar, Rofi, hyprlock and
-hypridle. Its idle/lock timeouts are set in its own settings GUI (Power & Sleep → Idle Settings), not in this repo.
+hypridle. Its idle/lock timeouts are set in its own settings GUI (Power & Sleep → Idle Settings); the settings are saved to
+`dms/settings.json` in this repo via the `dms` component's symlink.
 
 ### Window Management
 
