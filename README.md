@@ -189,6 +189,7 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 | ALT + Q | Cmd + Q | Close window (on macOS this is the native Cmd + Q, which quits the whole app) |
 | ALT + C | Cmd + C | Copy (in Ghostty on CachyOS, sends Ctrl + Shift + C so it never interrupts a running process) |
 | ALT + V | Cmd + V | Paste (in Ghostty on CachyOS, sends Ctrl + Shift + V) |
+| ALT + SHIFT + 4 | Cmd + Shift + 4 | Capture an area of the screen (on CachyOS: `slurp` + `grim`, saved to `~/Pictures` and copied to the clipboard) |
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 

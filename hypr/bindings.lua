@@ -8,6 +8,9 @@ hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" }
 
 -- Screenshot
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd([[grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png]]))
+-- macOS-style area capture: ALT + SHIFT + 4 (Cmd + Shift + 4 on macOS). Saves to ~/Pictures and copies
+-- to the clipboard; pressing Escape in slurp cancels without taking a screenshot.
+hl.bind("ALT + SHIFT + 4", hl.dsp.exec_cmd([[geom=$(slurp) && f=~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png && grim -g "$geom" "$f" && wl-copy < "$f"]]), { description = "Capture area" })
 
 -- Application bindings
 -- hl.bind("SUPER + ALT + RETURN", hl.dsp.exec_cmd([[uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" tmux new]]), { description = "Tmux" })
