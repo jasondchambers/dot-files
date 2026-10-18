@@ -48,3 +48,19 @@ hl.bind("ALT + SHIFT + TAB", function()
   hl.dispatch(hl.dsp.window.cycle_next({ next = false }))
   hl.dispatch(hl.dsp.window.alter_zorder({ mode = "top" }))
 end, { description = "Previous window" })
+
+-- macOS-style copy/paste: ALT + C / ALT + V (the physical Alt key is Cmd on macOS via the Karabiner swap).
+-- Sends CTRL + C / CTRL + V to the focused app, except in terminals, where CTRL + C would interrupt
+-- the running program, so they get CTRL + SHIFT + C / CTRL + SHIFT + V instead.
+local terminal_classes = { ["com.mitchellh.ghostty"] = true }
+
+local function mac_shortcut(key)
+  return function()
+    local win = hl.get_active_window()
+    local mods = (win and terminal_classes[win.class]) and "CTRL SHIFT" or "CTRL"
+    hl.dispatch(hl.dsp.send_shortcut({ mods = mods, key = key }))
+  end
+end
+
+hl.bind("ALT + C", mac_shortcut("C"), { description = "Copy" })
+hl.bind("ALT + V", mac_shortcut("V"), { description = "Paste" })
