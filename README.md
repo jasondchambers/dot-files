@@ -181,7 +181,7 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 
 | Razer (CachyOS & macOS) | Apple keyboard (macOS) | Action |
 |-------------------------|------------------------|--------|
-| SUPER + W | Option + W | Close window |
+| ALT + Q | Cmd + Q | Close window (on macOS this is the native Cmd + Q, which quits the whole app) |
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 

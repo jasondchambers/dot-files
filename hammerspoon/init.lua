@@ -98,12 +98,6 @@ end)
 
 
 
-hs.hotkey.bind({"alt"}, "w", function()    local win = hs.window.focusedWindow()
-    if win then
-        win:close()
-    end
-end)
-
 hs.hotkey.bind({"alt"}, "f", function()
     local win = hs.window.focusedWindow()
     if win then

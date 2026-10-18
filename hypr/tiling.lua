@@ -2,7 +2,8 @@
 -- Uses the `mainMod`, `terminal`, `fileManager` globals set in hyprland.lua before this is required.
 
 -- Close windows
-hl.bind(mainMod .. " + W", hl.dsp.window.close(), { description = "Close window" })
+-- ALT + Q matches macOS Cmd + Q (the physical Alt key sends Cmd there via the Karabiner swap)
+hl.bind("ALT + Q", hl.dsp.window.close(), { description = "Close window" })
 -- hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd("omarchy-hyprland-window-close-all"), { description = "Close all windows" })
 
 -- Control tiling
