@@ -38,3 +38,13 @@ hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd([[firefox "https://notion.so/
 -- Overwrite existing bindings, like putting Omarchy Menu on Super + Space
 -- hl.unbind("SUPER + SPACE")
 -- hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("omarchy-menu"), { description = "Omarchy menu" })
+
+-- Cycle focus through windows on any workspace, raising the focused one if it's floating
+hl.bind("ALT + TAB", function()
+  hl.dispatch(hl.dsp.window.cycle_next({ next = true }))
+  hl.dispatch(hl.dsp.window.alter_zorder({ mode = "top" }))
+end, { description = "Next window" })
+hl.bind("ALT + SHIFT + TAB", function()
+  hl.dispatch(hl.dsp.window.cycle_next({ next = false }))
+  hl.dispatch(hl.dsp.window.alter_zorder({ mode = "top" }))
+end, { description = "Previous window" })

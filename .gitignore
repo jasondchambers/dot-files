@@ -9,3 +9,6 @@ ghostty/config
 karabiner/automatic_backups/
 karabiner/assets/
 karabiner/*.bak
+
+# Local Claude Code session-resume helper
+hypr/resume.sh

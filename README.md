@@ -169,6 +169,10 @@ SUPER + SPACE.
 
 ### Window Management
 
+Hyprland is used on CachyOS. On workspace 1, it uses floating windows similar to a macOS. Windows
+can be cycled using Alt-Tab and moved using SUPER+drag. On the remaining workspaces, tiling is used
+by default.
+
 Hammerspoon also mirrors the Hyprland window bindings from `hypr/tiling.lua`.
 
 With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both CachyOS and macOS, so the bindings are identical. On the Mac's built-in/Apple keyboard, use **Option** in place of SUPER.

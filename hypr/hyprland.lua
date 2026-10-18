@@ -85,7 +85,7 @@ hl.config({
     },
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-    resize_on_border = false,
+    resize_on_border = true,
 
     -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
     allow_tearing    = false,
@@ -105,7 +105,7 @@ hl.config({
       enabled      = true,
       range        = 4,
       render_power = 3,
-      color        = 0xee1a1a1a,
+      color        = "rgba(1a1a1aee)",
     },
 
     blur             = {
@@ -301,6 +301,15 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+
+hl.window_rule({
+  -- Float every window opened on workspace 1, like a traditional (stacking) window manager.
+  -- Other workspaces keep tiling. mainMod + T still toggles an individual window.
+  name  = "float-workspace-1",
+  match = { workspace = "1" },
+
+  float = true,
+})
 
 hl.window_rule({
   name  = "float-1password",
