@@ -156,6 +156,11 @@ Hooks fire automatically whenever you `cd` into a directory and once on shell st
 
 ## Usage
 
+### Copy paste
+
+The copy/paste keys are identical between CachyOS and macOS. No more Ctrl+Shift+C to copy text in
+the terminal. This. Is. Huge.
+
 ### Launching Applications
 
 Keyboard shortcuts are used to launch commonly used applications. These are
@@ -182,6 +187,8 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 | Razer (CachyOS & macOS) | Apple keyboard (macOS) | Action |
 |-------------------------|------------------------|--------|
 | ALT + Q | Cmd + Q | Close window (on macOS this is the native Cmd + Q, which quits the whole app) |
+| ALT + C | Cmd + C | Copy (in Ghostty on CachyOS, sends Ctrl + Shift + C so it never interrupts a running process) |
+| ALT + V | Cmd + V | Paste (in Ghostty on CachyOS, sends Ctrl + Shift + V) |
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 
