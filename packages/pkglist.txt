@@ -72,9 +72,7 @@ gst-plugins-ugly
 hdparm
 hwdetect
 hwinfo
-hypridle
 hyprland
-hyprlock
 impala
 inetutils
 intel-media-sdk
@@ -156,7 +154,6 @@ python-packaging
 rebuild-detector
 reflector
 ripgrep
-rofi
 rsync
 s-nail
 sddm
@@ -186,12 +183,10 @@ vim
 vlc-plugins-all
 vulkan-icd-loader
 vulkan-intel
-waybar
 wget
 which
 wireplumber
 wl-clipboard
-wofi
 wpa_supplicant
 wtype
 xdg-desktop-portal-hyprland

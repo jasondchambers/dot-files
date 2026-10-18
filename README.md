@@ -61,7 +61,6 @@ chmod +x install.sh
 | fzf_git | clones [fzf-git.sh](https://github.com/junegunn/fzf-git.sh) to `~/repos/fzf-git.sh` | ✓ | ✓ |
 | eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) | ✓ | ✓ |
 | television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
-| rofi | `~/.config/rofi/` | — | ✓ |
 | dms | `~/.config/DankMaterialShell/` ([DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) settings) | — | ✓ |
 | applications | `~/.local/share/applications/` (Lock Screen, Logout, Restart, Shutdown launcher entries) | — | ✓ |
 | sddm | [Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) login theme via `/etc/sddm.conf.d/theme.conf` (copied with `sudo`) | — | ✓ |
@@ -106,7 +105,6 @@ dot-files/
 ├── lazygit/            # ~/.config/lazygit/
 ├── nvim/               # ~/.config/nvim/
 ├── starship/           # ~/.config/starship.toml
-├── rofi/               # ~/.config/rofi/
 ├── sddm/               # /etc/sddm.conf.d/ (copied, not symlinked)
 ├── television/         # ~/.config/television/cable/ (custom channels)
 └── zsh/                # ~/.zshrc
