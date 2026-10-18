@@ -1,3 +1,4 @@
 1password
 dropbox
 typora
+sddm-astronaut-theme

@@ -62,6 +62,7 @@ chmod +x install.sh
 | eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) | ✓ | ✓ |
 | television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
 | rofi | `~/.config/rofi/` | — | ✓ |
+| sddm | [Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) login theme via `/etc/sddm.conf.d/theme.conf` (copied with `sudo`) | — | ✓ |
 | language_servers | `bash-language-server` (pacman, CachyOS only), `basedpyright`, `typescript-language-server` | ✓ | ✓ |
 | clang | `~/.clang-format` + clangd's global config | ✓ | ✓ |
 
@@ -102,6 +103,7 @@ dot-files/
 ├── nvim/               # ~/.config/nvim/
 ├── starship/           # ~/.config/starship.toml
 ├── rofi/               # ~/.config/rofi/
+├── sddm/               # /etc/sddm.conf.d/ (copied, not symlinked)
 ├── television/         # ~/.config/television/cable/ (custom channels)
 └── zsh/                # ~/.zshrc
 ```

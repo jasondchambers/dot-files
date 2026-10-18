@@ -373,6 +373,27 @@ configure_rofi() {
   echo ""
 }
 
+# ── sddm (CachyOS only) ───────────────────────────────────────────────────────
+configure_sddm() {
+  echo -ne "Configuring sddm..."
+  case "$OS" in
+  cachyos)
+    echo ""
+    if [ ! -d /usr/share/sddm/themes/sddm-astronaut-theme ]; then
+      echo "  Installing sddm-astronaut-theme..."
+      paru -S --needed --noconfirm sddm-astronaut-theme
+    fi
+    # Copied, not symlinked: the greeter runs as the sddm user, which can't read ~ (mode 700)
+    echo "  Installing /etc/sddm.conf.d/theme.conf..."
+    sudo install -Dm644 "$DOTFILES/sddm/theme.conf" /etc/sddm.conf.d/theme.conf
+    ;;
+  *)
+    echo -ne "skipping (not Linux)"
+    ;;
+  esac
+  echo ""
+}
+
 # ── language servers ──────────────────────────────────────────────────────────
 install_language_servers() {
   echo -ne "Installing language servers..."
@@ -440,6 +461,7 @@ run() {
   television) configure_television ;;
   ghostty) configure_ghostty ;;
   rofi) configure_rofi ;;
+  sddm) configure_sddm ;;
   language_servers) install_language_servers ;;
   clang) configure_clang ;;
   *)
@@ -450,7 +472,7 @@ run() {
 }
 
 main() {
-  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang"
+  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi sddm language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

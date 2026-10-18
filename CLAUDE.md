@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Repo Is
 
-Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks — no files are copied. Re-running `install.sh` is always safe (idempotent; existing configs are backed up with `.bak`).
+Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks — no files are copied (sole exception: `sddm`, see below). Re-running `install.sh` is always safe (idempotent; existing configs are backed up with `.bak`).
 
 ## Install Commands
 
@@ -14,7 +14,7 @@ Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks �
 ./configure.sh                        # one-time setup (SSH key, macOS scroll direction)
 ```
 
-Default components (run when no args are given, in this order): `packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi language_servers clang`
+Default components (run when no args are given, in this order): `packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi sddm language_servers clang`
 
 `hyprmod` is also a valid component (clones [BlueManCZ/hyprmod](https://github.com/BlueManCZ/hyprmod) to `~/repos/hyprmod`) but is **not** part of the default set — install it explicitly with `./install.sh hyprmod`.
 
@@ -43,6 +43,7 @@ The installer symlinks `ghostty/config` inside the repo dir to the correct varia
 | lazygit | `~/.config/lazygit/` (macOS: `~/Library/Application Support/lazygit/config.yml`) |
 | hypr | `~/.config/hypr/` (whole dir — CachyOS only) |
 | rofi | `~/.config/rofi/` (CachyOS only) |
+| sddm | `/etc/sddm.conf.d/theme.conf` — **copied with `sudo`, not symlinked** (the greeter runs as the `sddm` user and can't read `~`, which is mode 700); also installs the `sddm-astronaut-theme` AUR package (CachyOS only) |
 | hammerspoon | `~/.hammerspoon/` (macOS only) |
 | karabiner | `~/.config/karabiner/` (whole dir — Karabiner rewrites `karabiner.json` on save, which would break a file symlink; macOS only) |
 | uv | installs the `uv` binary (astral.sh installer) |
