@@ -129,5 +129,9 @@
     "valid": true,
     "rgba": -1
   },
-  "configVersion": 18
+  "configVersion": 18,
+  "matugenTemplateAlacritty": false,
+  "matugenTemplateKitty": false,
+  "matugenTemplateFoot": false,
+  "matugenTemplateWezterm": false
 }
