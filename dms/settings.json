@@ -21,6 +21,10 @@
   "acMonitorTimeout": 600,
   "acLockTimeout": 300,
   "lockBeforeSuspend": true,
+  "matugenTemplateKitty": false,
+  "matugenTemplateFoot": false,
+  "matugenTemplateAlacritty": false,
+  "matugenTemplateWezterm": false,
   "osdPowerProfileEnabled": true,
   "barConfigs": [
     {
@@ -129,9 +133,5 @@
     "valid": true,
     "rgba": -1
   },
-  "configVersion": 18,
-  "matugenTemplateAlacritty": false,
-  "matugenTemplateKitty": false,
-  "matugenTemplateFoot": false,
-  "matugenTemplateWezterm": false
+  "configVersion": 18
 }
