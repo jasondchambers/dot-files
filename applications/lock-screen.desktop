@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Lock Screen
+Comment=Lock the session with hyprlock
+Exec=hyprlock
+Icon=system-lock-screen
+Keywords=lock;screen;
+Categories=System;

@@ -373,6 +373,36 @@ configure_rofi() {
   echo ""
 }
 
+# ── applications (CachyOS only) ───────────────────────────────────────────────
+configure_applications() {
+  echo -ne "Configuring applications..."
+  case "$OS" in
+  cachyos)
+    local apps_dst="$HOME/.local/share/applications"
+    mkdir -p "$apps_dst"
+    for src in "$DOTFILES/applications"/*.desktop; do
+      local file dst
+      file=$(basename "$src")
+      dst="$apps_dst/$file"
+      if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+        echo -ne " $file already linked"
+        continue
+      fi
+      if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+        echo -ne " backing up $file..."
+        mv "$dst" "$dst.bak"
+      fi
+      ln -sfn "$src" "$dst"
+      echo -ne " $file"
+    done
+    ;;
+  *)
+    echo -ne "skipping (not Linux)"
+    ;;
+  esac
+  echo ""
+}
+
 # ── sddm (CachyOS only) ───────────────────────────────────────────────────────
 configure_sddm() {
   echo -ne "Configuring sddm..."
@@ -461,6 +491,7 @@ run() {
   television) configure_television ;;
   ghostty) configure_ghostty ;;
   rofi) configure_rofi ;;
+  applications) configure_applications ;;
   sddm) configure_sddm ;;
   language_servers) install_language_servers ;;
   clang) configure_clang ;;
@@ -472,7 +503,7 @@ run() {
 }
 
 main() {
-  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi sddm language_servers clang"
+  local all="packages utils ghostty zsh starship nvim git lazygit hypr hammerspoon karabiner uv tv fzf_git eza television rofi applications sddm language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

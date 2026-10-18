@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Logout
+Comment=Exit Hyprland and return to the login screen
+Exec=hyprctl dispatch "hl.dsp.exit()"
+Icon=system-log-out
+Keywords=logout;log out;sign out;exit;
+Categories=System;

@@ -62,6 +62,7 @@ chmod +x install.sh
 | eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) | ✓ | ✓ |
 | television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
 | rofi | `~/.config/rofi/` | — | ✓ |
+| applications | `~/.local/share/applications/` (Lock Screen, Logout, Restart, Shutdown launcher entries) | — | ✓ |
 | sddm | [Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) login theme via `/etc/sddm.conf.d/theme.conf` (copied with `sudo`) | — | ✓ |
 | language_servers | `bash-language-server` (pacman, CachyOS only), `basedpyright`, `typescript-language-server` | ✓ | ✓ |
 | clang | `~/.clang-format` + clangd's global config | ✓ | ✓ |
@@ -94,6 +95,7 @@ dot-files/
 ├── packages/           # Package lists (CachyOS)
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
+├── applications/       # ~/.local/share/applications/ (launcher entries)
 ├── ghostty/            # ~/.config/ghostty/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
@@ -192,6 +194,7 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 | ALT + C | Cmd + C | Copy (in Ghostty on CachyOS, sends Ctrl + Shift + C so it never interrupts a running process) |
 | ALT + V | Cmd + V | Paste (in Ghostty on CachyOS, sends Ctrl + Shift + V) |
 | ALT + SHIFT + 4 | Cmd + Shift + 4 | Capture an area of the screen (on CachyOS: `slurp` + `grim`, saved to `~/Pictures` and copied to the clipboard) |
+| CTRL + ALT + Q | Ctrl + Cmd + Q | Lock screen (on CachyOS: `hyprlock`; on macOS this is the native lock shortcut) |
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 
