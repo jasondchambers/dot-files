@@ -312,6 +312,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  -- The first window opened on an empty workspace is given the full monitor size, so as a float it
+  -- overlaps Waybar. Cap floats below the 30px bar, using the same 20px gaps_out as tiled windows.
+  name     = "fit-floats-workspace-1",
+  match    = { workspace = "1", float = true },
+
+  max_size = { "monitor_w-40", "monitor_h-70" },
+})
+
+hl.window_rule({
   name  = "float-1password",
   match = { class = "^1password$" },
 
