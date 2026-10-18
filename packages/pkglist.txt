@@ -18,7 +18,6 @@ btrfs-assistant
 btrfs-progs
 cachyos-fish-config
 cachyos-grub-theme
-cachyos-hello
 cachyos-hooks
 cachyos-kernel-manager
 cachyos-keyring
