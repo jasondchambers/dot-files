@@ -2,6 +2,7 @@
   "cornerRadius": 12,
   "controlCenterShowMicPercent": true,
   "appIdSubstitutions": [],
+  "useAutoLocation": true,
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
