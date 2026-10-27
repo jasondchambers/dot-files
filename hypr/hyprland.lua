@@ -322,6 +322,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  -- Firefox floats open at a tiny 690x304. Matching on title skips its dialogs (Library, PiP, etc.).
+  name   = "size-firefox",
+  match  = { class = "^firefox$", title = ".*Mozilla Firefox.*" },
+
+  size   = { "monitor_w*0.7", "monitor_h*0.75" },
+  center = true,
+})
+
+hl.window_rule({
   name  = "float-1password",
   match = { class = "^1password$" },
 
