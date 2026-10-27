@@ -369,22 +369,22 @@ hl.window_rule({
   float = true,
 })
 
--- Floats open centered, so new Ghostty windows on workspace 1 land exactly on top of each other.
--- Cascade them instead: step down-right past any Ghostty float already sitting at that spot,
+-- Floats open centered, so new windows of the same app on workspace 1 land exactly on top of each
+-- other. Cascade them instead: step down-right past any float of that class already at that spot,
 -- wrapping to the top-left of the usable area when the next step would run off the monitor.
-local CASCADE_CLASS = "^com%.mitchellh%.ghostty$"
-local CASCADE_STEP  = 40
-local CASCADE_GAP   = 20 -- matches gaps_out
+local CASCADE_CLASSES = { ["com.mitchellh.ghostty"] = true, ["firefox"] = true }
+local CASCADE_STEP    = 40
+local CASCADE_GAP     = 20 -- matches gaps_out
 
 hl.on("window.open", function(win)
   if not win.floating or not win.workspace or win.workspace.name ~= "1"
-      or not win.class:match(CASCADE_CLASS) then
+      or not CASCADE_CLASSES[win.class] then
     return
   end
 
   local taken = {}
   for _, other in ipairs(hl.get_workspace_windows("1")) do
-    if other.address ~= win.address and other.floating and other.class:match(CASCADE_CLASS) then
+    if other.address ~= win.address and other.floating and other.class == win.class then
       taken[#taken + 1] = other.at
     end
   end
