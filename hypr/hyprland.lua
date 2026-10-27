@@ -369,6 +369,55 @@ hl.window_rule({
   float = true,
 })
 
+-- Floats open centered, so new Ghostty windows on workspace 1 land exactly on top of each other.
+-- Cascade them instead: step down-right past any Ghostty float already sitting at that spot,
+-- wrapping to the top-left of the usable area when the next step would run off the monitor.
+local CASCADE_CLASS = "^com%.mitchellh%.ghostty$"
+local CASCADE_STEP  = 40
+local CASCADE_GAP   = 20 -- matches gaps_out
+
+hl.on("window.open", function(win)
+  if not win.floating or not win.workspace or win.workspace.name ~= "1"
+      or not win.class:match(CASCADE_CLASS) then
+    return
+  end
+
+  local taken = {}
+  for _, other in ipairs(hl.get_workspace_windows("1")) do
+    if other.address ~= win.address and other.floating and other.class:match(CASCADE_CLASS) then
+      taken[#taken + 1] = other.at
+    end
+  end
+
+  local function is_taken(x, y)
+    for _, at in ipairs(taken) do
+      if math.abs(at.x - x) < 4 and math.abs(at.y - y) < 4 then return true end
+    end
+    return false
+  end
+
+  local mon    = win.monitor
+  local left   = mon.x + CASCADE_GAP
+  local top    = mon.y + mon.reserved.top + CASCADE_GAP
+  local right  = mon.x + mon.width / mon.scale - CASCADE_GAP
+  local bottom = mon.y + mon.height / mon.scale - CASCADE_GAP
+
+  local x, y = win.at.x, win.at.y
+  local moved = false
+  for _ = 1, 100 do
+    if not is_taken(x, y) then break end
+    x, y = x + CASCADE_STEP, y + CASCADE_STEP
+    if x + win.size.x > right or y + win.size.y > bottom then
+      x, y = left, top
+    end
+    moved = true
+  end
+
+  if moved then
+    hl.dispatch(hl.dsp.window.move({ x = x, y = y, window = "address:" .. win.address }))
+  end
+end)
+
 -- See https://wiki.hypr.land/Configuring/Basics/Layer-Rules/
 hl.layer_rule({
   -- DankMaterialShell animates its own surfaces, so turn off Hyprland's layer animations for them.
