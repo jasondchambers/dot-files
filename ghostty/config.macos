@@ -30,7 +30,7 @@ palette = 14=#24EAF7
 palette = 15=#24EAF7
 
 # Dim inactive panes
-unfocused-split-opacity = 0.4
+unfocused-split-opacity = 0.6
 unfocused-split-fill = #011423
 
 # macOS Option key as Alt (not compose)
