@@ -94,24 +94,5 @@
     "cmd-right": "send:\u0005",
     "cmd-backspace": "send:\u0015",
     "ctrl-b g": "send:open-gh\n"
-  },
-  "layout:orbit": {
-    "ctrl-shift-space": "orbit.switcher",
-    "ctrl-pagedown": "orbit.next",
-    "ctrl-pageup": "orbit.prev",
-    "alt-]": "orbit.next",
-    "alt-[": "orbit.prev",
-    "ctrl-shift-t": "orbit.new",
-    "ctrl-shift-o": "orbit.right",
-    "ctrl-shift-e": "orbit.right",
-    "ctrl-shift-w": "orbit.close",
-    "ctrl-shift-x": "orbit.close",
-    "alt-h": "orbit.left-pane",
-    "alt-left": "orbit.left-pane",
-    "alt-l": "orbit.right-pane",
-    "alt-right": "orbit.right-pane",
-    "alt-shift-h": "orbit.move",
-    "alt-shift-l": "orbit.move",
-    "ctrl-,": "orbit.settings"
   }
 }
