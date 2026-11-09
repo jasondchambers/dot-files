@@ -1,3 +1,7 @@
+-- Re-register the login item on every config load, so it always points at the
+-- real app path (a stale App Translocation path once broke launch-at-login).
+hs.autoLaunch(true)
+
 -- These bindings are taken from my Omarchy keybindings to ensure where
 -- possible, a consistent experience is maintained between my machines.
 
