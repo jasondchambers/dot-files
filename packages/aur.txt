@@ -2,3 +2,5 @@
 dropbox
 typora
 sddm-astronaut-theme
+herdr-core-bin
+herdr-app-bin
