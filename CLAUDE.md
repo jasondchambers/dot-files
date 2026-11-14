@@ -52,7 +52,7 @@ The installer symlinks `ghostty/config` inside the repo dir to the correct varia
 | karabiner | `~/.config/karabiner/` (whole dir — Karabiner rewrites `karabiner.json` on save, which would break a file symlink; macOS only) |
 | uv | installs the `uv` binary (astral.sh installer) |
 | nvm | installs nvm (pinned release) into `~/.config/nvm` plus the latest Node LTS as the default (CachyOS only) |
-| tv | installs the `television` binary |
+| tv | installs the `television` binary (CachyOS: `paru`, from `packages/pkglist.txt`; macOS: upstream install script) |
 | fzf_git | clones fzf-git.sh to `~/repos/fzf-git.sh` |
 | eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) |
 | television | `~/.config/television/cable/*.toml` (custom channels, symlinked file-by-file) |

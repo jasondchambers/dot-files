@@ -338,7 +338,16 @@ install_nvm() {
 install_tv() {
   echo -ne "Installing tv..."
   if ! command -v tv >/dev/null 2>&1; then
-    curl -fsSL https://alexpasmantier.github.io/television/install.sh | bash
+    case "$OS" in
+    cachyos)
+      # Listed in packages/pkglist.txt; install just this one here
+      echo ""
+      paru -S --needed --noconfirm television
+      ;;
+    *)
+      curl -fsSL https://alexpasmantier.github.io/television/install.sh | bash
+      ;;
+    esac
   else
     echo -ne "tv already installed"
   fi
@@ -374,9 +383,13 @@ configure_eza() {
 
 # ── television ────────────────────────────────────────────────────────────────
 configure_television() {
+  if ! command -v tv >/dev/null 2>&1; then
+    install_tv
+    hash -r
+  fi
   echo -ne "Configuring television..."
   if ! command -v tv >/dev/null 2>&1; then
-    echo -ne "skipping (tv not installed)"
+    echo -ne "skipping (tv install failed or not on PATH)"
     echo ""
     return
   fi

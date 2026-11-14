@@ -166,6 +166,7 @@ sof-firmware
 sudo
 swash
 sysfsutils
+television
 texinfo
 thunar
 tree-sitter-cli
