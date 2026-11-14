@@ -88,7 +88,7 @@ The whole `hypr/` directory is symlinked to `~/.config/hypr/` (not just bindings
 
 On CachyOS the bar, launcher, notifications, clipboard history, lock screen and idle handling all come from a desktop shell, which replaced Waybar, Rofi, hyprlock and hypridle (their configs and packages have been removed from the repo). Two are supported and the active one is picked by `DESKTOP_SHELL` near the top of `hypr/hyprland.lua` — currently `"noctalia"`:
 
-- [Noctalia](https://noctalia.dev) (the `noctalia` package; IPC via `noctalia msg <command>`, see `noctalia msg --help`). Settings are in the repo's `noctalia/config.toml`, symlinked by the `noctalia` component; runtime state (clipboard, notification history, `settings.toml`) stays in `~/.local/state/noctalia/` and is not tracked.
+- [Noctalia](https://noctalia.dev) (the `noctalia` package; IPC via `noctalia msg <command>`, see `noctalia msg --help`). Settings are in the repo's `noctalia/config.toml`, symlinked by the `noctalia` component; runtime state (clipboard, notification history, `settings.toml`) stays in `~/.local/state/noctalia/` and is not tracked. Idle handling is the `[idle]` section of `config.toml` (lock at 10 min, screen off at 11 min, 2s dim first); Noctalia's built-in idle behaviors ship **disabled**, so nothing happens on idle without it.
 - [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) (DMS, built on Quickshell). Note: the `dms-shell` name in `pkglist.txt` currently resolves to the `dux-shell` package, which provides `dms-shell` and ships the `dms` binary.
 
 Everything shell-specific lives in the `SHELLS` table in `hypr/hyprland.lua` and is exposed as the global `desktop_shell`:
