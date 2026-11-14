@@ -36,6 +36,9 @@ pre_action_fade_seconds = 2.0
     enabled = true
     timeout = 660
 
+[location]
+auto_locate = true
+
 [shell]
 clipboard_image_action_command = "swash --stdin --name \"swash-$(date +'%Y-%m-%d_%H:%M:%S').png\""
 launch_apps_as_systemd_services = true
@@ -101,6 +104,10 @@ wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "qt", "alacritty" ]
+
+[weather]
+enabled = true
+unit = "imperial"
 
 [widget.clock]
 color = "secondary"
