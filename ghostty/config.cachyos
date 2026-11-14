@@ -9,6 +9,10 @@ foreground = #CBE0F0
 background = #011423
 cursor-color = #47FF9C
 cursor-text = #011423
+
+# Kitty-style cursor trail (see shaders/cursor_trail.glsl for tuning knobs)
+custom-shader = shaders/cursor_trail.glsl
+
 selection-background = #214969
 selection-foreground = #CBE0F0
 split-divider-color = #24EAF7

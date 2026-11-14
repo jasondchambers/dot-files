@@ -121,6 +121,7 @@ networkmanager
 networkmanager-openvpn
 nfs-utils
 nilfs-utils
+noctalia
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -163,9 +164,11 @@ smartmontools
 snapper
 sof-firmware
 sudo
+swash
 sysfsutils
 texinfo
 thunar
+tree-sitter-cli
 ttf-bitstream-vera
 ttf-dejavu
 ttf-liberation
@@ -190,6 +193,7 @@ wl-clipboard
 wpa_supplicant
 wtype
 xdg-desktop-portal-hyprland
+xdg-terminal-exec
 xdg-user-dirs
 xfsprogs
 xl2tpd

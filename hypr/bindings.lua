@@ -1,4 +1,4 @@
--- Uses the `mainMod`, `terminal`, `fileManager` globals set in hyprland.lua before this is required.
+-- Uses the `mainMod`, `terminal`, `fileManager`, `desktop_shell` globals set in hyprland.lua before this is required.
 
 -- Move windows within tiling layout
 hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "left" }))
@@ -12,7 +12,7 @@ hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" }
 hl.bind("ALT + SHIFT + 4", hl.dsp.exec_cmd([[geom=$(slurp) && f=~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png && grim -g "$geom" "$f" && wl-copy < "$f"]]), { description = "Capture area" })
 
 -- macOS-style lock: CTRL + ALT + Q (Ctrl + Cmd + Q on macOS, via the Karabiner swap)
-hl.bind("CTRL + ALT + Q", hl.dsp.exec_cmd("dms ipc call lock lock"), { description = "Lock screen" })
+hl.bind("CTRL + ALT + Q", hl.dsp.exec_cmd(desktop_shell.lock), { description = "Lock screen" })
 
 -- Application bindings
 -- hl.bind("SUPER + ALT + RETURN", hl.dsp.exec_cmd([[uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" tmux new]]), { description = "Tmux" })

@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=Lock Screen
-Comment=Lock the session with DankMaterialShell
-Exec=dms ipc call lock lock
+Comment=Lock the session with the running desktop shell (Noctalia or DankMaterialShell)
+Exec=sh -c "if pgrep -x noctalia >/dev/null; then noctalia msg session lock; else dms ipc call lock lock; fi"
 Icon=system-lock-screen
 Keywords=lock;screen;
 Categories=System;

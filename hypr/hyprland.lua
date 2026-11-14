@@ -18,6 +18,44 @@ hl.monitor({
 })
 
 
+-----------------------
+---- DESKTOP SHELL ----
+-----------------------
+
+-- Which desktop shell (bar, launcher, notifications, lock screen) to run: "noctalia" or "dms"
+-- (DankMaterialShell). Everything shell-specific is in SHELLS below, so switching is a one-word
+-- change here plus a Hyprland restart (log out and back in) so the new shell is autostarted.
+local DESKTOP_SHELL = "noctalia"
+
+local SHELLS = {
+  noctalia = {
+    start       = { "noctalia" },
+    launcher    = "noctalia msg panel-toggle launcher",
+    lock        = "noctalia msg session lock",
+    bar_height  = 35, -- exclusive zone of the bar in noctalia/config.toml (bar.default.thickness)
+    layer_rule  = {
+      match        = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$" },
+      ignore_alpha = 0.5,
+      blur         = true,
+      blur_popups  = true,
+    },
+  },
+  dms = {
+    -- DMS's clipboard history reads from cliphist; Noctalia keeps its own
+    start       = { "dms run", "wl-paste --watch cliphist store" },
+    launcher    = "dms ipc call spotlight toggle",
+    lock        = "dms ipc call lock lock",
+    bar_height  = 64,
+    layer_rule  = {
+      match = { namespace = "^dms:.*" }, -- the bar's namespace is dms:bar
+    },
+  },
+}
+
+-- Global so bindings.lua can use it (e.g. desktop_shell.lock)
+desktop_shell = SHELLS[DESKTOP_SHELL]
+
+
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
@@ -26,7 +64,7 @@ hl.monitor({
 -- NOTE: kept as globals (not `local`) so tiling.lua / bindings.lua can reference them too.
 terminal    = "ghostty"
 fileManager = "thunar"
-menu        = "dms ipc call spotlight toggle" -- DankMaterialShell Spotlight launcher
+menu        = desktop_shell.launcher
 
 
 -------------------
@@ -35,8 +73,9 @@ menu        = "dms ipc call spotlight toggle" -- DankMaterialShell Spotlight lau
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function()
-  hl.exec_cmd("dms run")
-  hl.exec_cmd("wl-paste --watch cliphist store")
+  for _, cmd in ipairs(desktop_shell.start) do
+    hl.exec_cmd(cmd)
+  end
 end)
 
 
@@ -314,11 +353,11 @@ hl.window_rule({
 
 hl.window_rule({
   -- The first window opened on an empty workspace is given the full monitor size, so as a float it
-  -- overlaps the DMS bar. Cap floats below the 64px bar, using the same 20px gaps_out as tiled windows.
+  -- overlaps the bar. Cap floats below the bar, using the same 20px gaps_out as tiled windows.
   name     = "fit-floats-workspace-1",
   match    = { workspace = "1", float = true },
 
-  max_size = { "monitor_w-40", "monitor_h-104" },
+  max_size = { "monitor_w-40", "monitor_h-" .. (desktop_shell.bar_height + 40) },
 })
 
 hl.window_rule({
@@ -328,6 +367,14 @@ hl.window_rule({
 
   size   = { "monitor_w*0.7", "monitor_h*0.75" },
   center = true,
+})
+
+hl.window_rule({
+  name  = "float-noctalia-settings",
+  match = { class = "^(dev\\.)?(noctalia\\.Noctalia(\\.Settings)?)$" },
+
+  float = true,
+  size  = { "monitor_w*0.70", "monitor_h*0.70" },
 })
 
 hl.window_rule({
@@ -419,13 +466,12 @@ hl.on("window.open", function(win)
 end)
 
 -- See https://wiki.hypr.land/Configuring/Basics/Layer-Rules/
-hl.layer_rule({
-  -- DankMaterialShell animates its own surfaces, so turn off Hyprland's layer animations for them.
-  name    = "dms-no-anim",
-  match   = { namespace = "^dms:.*" },
-
-  no_anim = true,
-})
+do
+  -- The desktop shell animates its own surfaces, so turn off Hyprland's layer animations for them.
+  local rule = { name = "desktop-shell-layers", no_anim = true }
+  for k, v in pairs(desktop_shell.layer_rule) do rule[k] = v end
+  hl.layer_rule(rule)
+end
 
 -- HyprMod managed settings
 -- NOTE: hyprmod (https://github.com/BlueManCZ/hyprmod) currently writes hyprland-gui.conf in the

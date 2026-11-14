@@ -64,7 +64,9 @@ chmod +x install.sh
 | eza | `~/.config/eza/` (macOS: `~/Library/Application Support/eza/`) | ✓ | ✓ |
 | television | `~/.config/television/cable/` (custom channels) | ✓ | ✓ |
 | dms | `~/.config/DankMaterialShell/` ([DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) settings) | — | ✓ |
+| noctalia | `~/.config/noctalia/` ([Noctalia](https://noctalia.dev) settings) | — | ✓ |
 | applications | `~/.local/share/applications/` (Lock Screen, Logout, Restart, Shutdown launcher entries) | — | ✓ |
+| xdg_terminals | `~/.config/xdg-terminals.list` (Ghostty as default terminal for `xdg-terminal-exec`) | — | ✓ |
 | sddm | [Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) login theme via `/etc/sddm.conf.d/theme.conf` (copied with `sudo`) | — | ✓ |
 | language_servers | `bash-language-server` (pacman, CachyOS only), `basedpyright`, `typescript-language-server` | ✓ | ✓ |
 | clang | `~/.clang-format` + clangd's global config | ✓ | ✓ |
@@ -98,7 +100,9 @@ dot-files/
 │   ├── pkglist.txt     #   pacman native packages
 │   └── aur.txt         #   AUR packages
 ├── applications/       # ~/.local/share/applications/ (launcher entries)
+├── xdg/                # ~/.config/xdg-terminals.list
 ├── dms/                # ~/.config/DankMaterialShell/
+├── noctalia/           # ~/.config/noctalia/
 ├── ghostty/            # ~/.config/ghostty/
 ├── git/                # ~/.config/git/
 ├── hammerspoon/        # ~/.hammerspoon/
@@ -175,14 +179,19 @@ consistent across CachyOS and macOS. Hammerspoon provides this capability on
 macOS. The key mappings mirror the Hyprland bindings in `hypr/bindings.lua`.
 
 It can take a while to get to know the keyboard shortcuts, so an application launcher
-is used - [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell)'s Spotlight on Hyprland and Alfred on macOS. The keybinding is identical on both
+is used - the desktop shell's launcher on Hyprland and Alfred on macOS. The keybinding is identical on both
 
 SUPER + SPACE. 
 
-On CachyOS, DankMaterialShell (a [Quickshell](https://quickshell.org/)-based desktop shell) also provides the
-bar, notifications, clipboard history, lock screen and idle handling, replacing Waybar, Rofi, hyprlock and
-hypridle. Its idle/lock timeouts are set in its own settings GUI (Power & Sleep → Idle Settings); the settings are saved to
-`dms/settings.json` in this repo via the `dms` component's symlink.
+On CachyOS, a desktop shell provides the bar, launcher, notifications, clipboard history, lock screen and
+idle handling, replacing Waybar, Rofi, hyprlock and hypridle. Two are supported, chosen by `DESKTOP_SHELL`
+near the top of `hypr/hyprland.lua` (log out and back in after changing it):
+
+- [Noctalia](https://noctalia.dev) (`"noctalia"`, the current choice) — settings in `noctalia/config.toml`
+  via the `noctalia` component's symlink.
+- [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell) (`"dms"`) — idle/lock timeouts are
+  set in its settings GUI (Power & Sleep → Idle Settings) and saved to `dms/settings.json` via the `dms`
+  component's symlink.
 
 ### Window Management
 
@@ -202,7 +211,7 @@ With the Razer Ornata Chroma, the SUPER (Windows) key is the modifier on both Ca
 | ALT + C | Cmd + C | Copy (in Ghostty on CachyOS, sends Ctrl + Shift + C so it never interrupts a running process) |
 | ALT + V | Cmd + V | Paste (in Ghostty on CachyOS, sends Ctrl + Shift + V) |
 | ALT + SHIFT + 4 | Cmd + Shift + 4 | Capture an area of the screen (on CachyOS: `slurp` + `grim`, saved to `~/Pictures` and copied to the clipboard) |
-| CTRL + ALT + Q | Ctrl + Cmd + Q | Lock screen (on CachyOS: the DankMaterialShell lock screen; on macOS this is the native lock shortcut) |
+| CTRL + ALT + Q | Ctrl + Cmd + Q | Lock screen (on CachyOS: the desktop shell's lock screen; on macOS this is the native lock shortcut) |
 | SUPER + F | Option + F | Toggle fullscreen |
 | SUPER + ALT + F | Option + Cmd + F | Toggle maximize (fills the screen without leaving the current Space; pressing again restores the previous size) |
 

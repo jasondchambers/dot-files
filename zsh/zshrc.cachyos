@@ -100,7 +100,8 @@ configure_zsh_chpwd_hooks
 python_hook
 
 
-. "$HOME/.local/share/../bin/env"
+# uv installer PATH setup; path kept verbatim so the uv installer sees it and doesn't re-append
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/share/../bin/env"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
