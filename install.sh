@@ -7,7 +7,7 @@
 #
 # Components: packages utils ghostty zsh starship nvim git lazygit
 #             herdr hypr hammerspoon karabiner uv nvm tv fzf_git eza television
-#             dms noctalia applications xdg_terminals sddm language_servers clang
+#             dms noctalia applications xdg_terminals audio_player sddm language_servers clang
 
 set -eu
 
@@ -236,6 +236,34 @@ configure_xdg_terminals() {
   case "$OS" in
   cachyos)
     symlink "$DOTFILES/xdg/xdg-terminals.list" "$HOME/.config/xdg-terminals.list"
+    ;;
+  *)
+    echo -ne "skipping (not Linux)"
+    ;;
+  esac
+  echo ""
+}
+
+# ── audio_player (CachyOS only) ───────────────────────────────────────────────
+# Amberol as the default app for audio files (otherwise they open in Firefox).
+# Uses xdg-mime rather than symlinking ~/.config/mimeapps.list, which apps
+# rewrite and which holds unrelated defaults.
+AUDIO_MIME_TYPES=(
+  audio/flac audio/x-flac audio/mpeg audio/mp3 audio/ogg audio/x-vorbis+ogg
+  audio/opus audio/x-opus+ogg audio/wav audio/x-wav audio/aac audio/mp4
+  audio/x-m4a audio/webm audio/x-aiff
+)
+configure_audio_player() {
+  echo -ne "Configuring audio_player..."
+  case "$OS" in
+  cachyos)
+    if ! pacman -Q amberol >/dev/null 2>&1; then
+      echo ""
+      # Listed in packages/pkglist.txt; install just this one here
+      paru -S --needed --noconfirm amberol
+    fi
+    xdg-mime default io.bassi.Amberol.desktop "${AUDIO_MIME_TYPES[@]}"
+    echo -ne " Amberol is the default for audio files"
     ;;
   *)
     echo -ne "skipping (not Linux)"
@@ -603,6 +631,7 @@ run() {
   noctalia) configure_noctalia ;;
   applications) configure_applications ;;
   xdg_terminals) configure_xdg_terminals ;;
+  audio_player) configure_audio_player ;;
   sddm) configure_sddm ;;
   language_servers) install_language_servers ;;
   clang) configure_clang ;;
@@ -614,7 +643,7 @@ run() {
 }
 
 main() {
-  local all="packages utils ghostty herdr zsh starship nvim git lazygit hypr hammerspoon karabiner uv nvm tv fzf_git eza television dms noctalia applications xdg_terminals sddm language_servers clang"
+  local all="packages utils ghostty herdr zsh starship nvim git lazygit hypr hammerspoon karabiner uv nvm tv fzf_git eza television dms noctalia applications xdg_terminals audio_player sddm language_servers clang"
   local -a components
   if [ "$#" -eq 0 ]; then
     components=($all)

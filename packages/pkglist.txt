@@ -2,6 +2,7 @@ accountsservice
 alsa-firmware
 alsa-plugins
 alsa-utils
+amberol
 awesome-terminal-fonts
 base
 base-devel

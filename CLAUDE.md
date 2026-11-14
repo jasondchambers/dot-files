@@ -14,7 +14,7 @@ Personal dotfiles for macOS and CachyOS. Everything is installed via symlinks �
 ./configure.sh                        # one-time setup (SSH key, macOS scroll direction)
 ```
 
-Default components (run when no args are given, in this order): `packages utils ghostty herdr zsh starship nvim git lazygit hypr hammerspoon karabiner uv nvm tv fzf_git eza television dms noctalia applications xdg_terminals sddm language_servers clang`
+Default components (run when no args are given, in this order): `packages utils ghostty herdr zsh starship nvim git lazygit hypr hammerspoon karabiner uv nvm tv fzf_git eza television dms noctalia applications xdg_terminals audio_player sddm language_servers clang`
 
 `hyprmod` is also a valid component (clones [BlueManCZ/hyprmod](https://github.com/BlueManCZ/hyprmod) to `~/repos/hyprmod`) but is **not** part of the default set — install it explicitly with `./install.sh hyprmod`.
 
@@ -47,6 +47,7 @@ The installer symlinks `ghostty/config` inside the repo dir to the correct varia
 | noctalia | `~/.config/noctalia/` (whole dir, like `dms` — CachyOS only) |
 | applications | `~/.local/share/applications/*.desktop` (launcher entries for Lock Screen / Logout / Restart / Shutdown, symlinked file-by-file so the desktop shell's launcher lists them — CachyOS only) |
 | xdg_terminals | `~/.config/xdg-terminals.list` (sets Ghostty as the default terminal for `xdg-terminal-exec` — CachyOS only) |
+| audio_player | installs Amberol (`paru`, also in `packages/pkglist.txt`) and makes it the default for audio MIME types via `xdg-mime default` — not a symlinked `mimeapps.list`, since apps rewrite that file (CachyOS only) |
 | sddm | `/etc/sddm.conf.d/theme.conf` — **copied with `sudo`, not symlinked** (the greeter runs as the `sddm` user and can't read `~`, which is mode 700); also installs the `sddm-astronaut-theme` AUR package (CachyOS only) |
 | hammerspoon | `~/.hammerspoon/` (macOS only) |
 | karabiner | `~/.config/karabiner/` (whole dir — Karabiner rewrites `karabiner.json` on save, which would break a file symlink; macOS only) |

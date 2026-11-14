@@ -385,6 +385,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+  -- Amberol (audio player) is a small window; float it centered instead of tiling
+  name   = "float-amberol",
+  match  = { class = "^io\\.bassi\\.Amberol$" },
+
+  float  = true,
+  center = true,
+})
+
+hl.window_rule({
   -- Ignore maximize requests from all apps. You'll probably like this.
   name           = "suppress-maximize-events",
   match          = { class = ".*" },

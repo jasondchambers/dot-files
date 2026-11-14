@@ -67,6 +67,7 @@ chmod +x install.sh
 | noctalia | `~/.config/noctalia/` ([Noctalia](https://noctalia.dev) settings) | — | ✓ |
 | applications | `~/.local/share/applications/` (Lock Screen, Logout, Restart, Shutdown launcher entries) | — | ✓ |
 | xdg_terminals | `~/.config/xdg-terminals.list` (Ghostty as default terminal for `xdg-terminal-exec`) | — | ✓ |
+| audio_player | [Amberol](https://gitlab.gnome.org/World/amberol) as the default app for audio files (via `xdg-mime`) | — | ✓ |
 | sddm | [Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme) login theme via `/etc/sddm.conf.d/theme.conf` (copied with `sudo`) | — | ✓ |
 | language_servers | `bash-language-server` (pacman, CachyOS only), `basedpyright`, `typescript-language-server` | ✓ | ✓ |
 | clang | `~/.clang-format` + clangd's global config | ✓ | ✓ |
