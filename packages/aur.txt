@@ -1,5 +1,6 @@
 1password
 dropbox
+dropbox-cli
 typora
 sddm-astronaut-theme
 herdr-core-bin
